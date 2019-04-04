@@ -1,5 +1,6 @@
 /*
  * session使ってるのでctrl+Fで検索して
+ *
  */
 package com.internousdev.earth.action;
 
@@ -26,16 +27,12 @@ public class LoginAction extends ActionSupport implements SessionAware{
 	private String isNotUserInfoMessage;
 	private List<CartInfoDTO> cartInfoDTOList;
 	private Map<String, Object> session;
-
 	UserInfoDAO userInfoDAO = new UserInfoDAO();
+	InputChecker inputChecker = new InputChecker();
 
 //	ログインボタンを押下した場合は、自画面に推移。
 
-
-
-
 //	メッセージ一覧の対象のエラーメッセージを表示
-
 
 
 	//sessionを使用します。
@@ -46,14 +43,14 @@ public class LoginAction extends ActionSupport implements SessionAware{
 			return "sessionTimeout";
 		}
 
-		//strutsにresultを渡して画面推移を行う。
-		String result = ERROR; //ひとまずエラー扱いとする。
+		//strutsにresultを渡して画面推移を行う。ひとまずエラー扱いとする。
+		String result = ERROR;
 
-		if(savedUserIdFlag){ //boolean ユーザーフラグがtrueなら～
-			//session内でフラグの状態を他クラスと共有する。
+		if(savedUserIdFlag){
+			//session内でログイン中のユーザーIDを他クラスと共有する。
 			session.put("savedUserIdFlag", true);
 			session.put("savedUserId", userId);
-		}else{ //falseなら～
+		}else{
 			//session内に格納していた（かもしれない）いらない情報を削除する。
 			session.remove("savedUserIdFlag");
 			session.remove("savedUserId");
@@ -62,14 +59,11 @@ public class LoginAction extends ActionSupport implements SessionAware{
  * DBの会員情報テーブルにユーザーIDとパスワードが
  * 一致するユーザーが存在しているかを確認する。
  */
-		InputChecker inputChecker = new InputChecker();
 
-		//ユーザーIDは最低1文字、最大8文字です。
-//		userIdErrorMessageList = inputChecker.doCheck(propertyName, value, minLength, maxLength, availableAlphabeticCharacters, availableKanji, availableHiragana, availableHalfWidthDigit, availableHalfWidthSymbols, availableKatakana, availableHalfWidthSpace)
+		//ユーザーIDは最低1文字、最大8文字
 		userIdErrorMessageList = inputChecker.doCheck("ユーザーID", userId, 1, 8, true, false, false, true, false, false, false);
 
-		//パスワードは最低1文字、最大16文字です。
-//		passwordErrorMessageList = inputChecker.doCheck(propertyName, value, minLength, maxLength, availableAlphabeticCharacters, availableKanji, availableHiragana, availableHalfWidthDigit, availableHalfWidthSymbols, availableKatakana, availableHalfWidthSpace)
+		//パスワードは最低1文字、最大16文字
 		passwordErrorMessageList = inputChecker.doCheck("パスワード", password, 1, 16, true, false, false, true, false, false, false);
 /*
  * 		エラーがない場合は認証処理を行う。
@@ -77,12 +71,24 @@ public class LoginAction extends ActionSupport implements SessionAware{
 		//loginedはたぶんUserInfoクラスからsessionを介して持ってきます。
 		if(userIdErrorMessageList.size() > 0
 		|| passwordErrorMessageList.size() > 0) {
-			session.put("logined", 0); //logined情報を0
+			session.put("logined", 0);
 			return result;
 		}
 
-		//userInfoDAO userInfoDAO = new UserInfoDAO();
 		if(userInfoDAO.isExistsUserInfo(userId, password)) {
+
+			if(userInfoDAO.login(userId,password) > 0) {
+				//カートの情報をユーザーに紐付ける。
+				//sessionからカート情報を取得
+				//あとで
+				@SuppressWarnings("unchecked")
+				List<CartInfoDTO> cartInfoDTOListBySession = (List<CartInfoDTO> session.get("cartInfoDTOList");
+
+				if(cartInfoDTOListBySession != null) {
+					boolean cartresult = changeCartInfo(cartInfoDTOListBySession);
+				}
+			}
+		}
 
 		}
 
