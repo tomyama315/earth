@@ -16,7 +16,6 @@ public class HomeAction extends ActionSupport implements SessionAware {
 
 	public String execute() {
 		//未登録ユーザーも仮ユーザーで入場させます.
-		
 		if(!(session.containsKey("loginuserid")) && !(session.containsKey("tempuserid"))) {
 			CommonUtility cu = new CommonUtility();
 			session.put("tempuserid", cu.getRamdomValue());
