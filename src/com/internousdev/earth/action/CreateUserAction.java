@@ -13,11 +13,11 @@ public class CreateUserAction extends ActionSupport implements SessionAware{
 	private Map<String, Object> session;
 
 	public String execute() {
-		//sessionがタイムアウトのチェック
+//sessionがタイムアウトのチェック
 		if(session.isEmpty()) {
 			return "sessionTimeout";
 		}
-
+//１じゃなかったら削除する
 		if (backFlag != 1) {
 			session.remove("familyName");
 			session.remove("firstName");
@@ -30,7 +30,7 @@ public class CreateUserAction extends ActionSupport implements SessionAware{
 			session.remove("password");
 		}
 		List<String> sexList = new ArrayList<String>();
-		// 画面表示時に選択されている性別を作成
+// 画面表示時に選択されている性別を作成
 		if(!session.containsKey("sex")) {
 			session.put("sex", "男性");
 		}else {
