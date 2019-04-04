@@ -1,5 +1,6 @@
 package com.internousdev.earth.action;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -7,13 +8,13 @@ import java.util.Map;
 import org.apache.struts2.interceptor.SessionAware;
 
 import com.internousdev.earth.dao.CartInfoDAO;
-import com.internousdev.earth.dao.PurchaseHistoryInfoDAO;
+import com.internousdev.earth.dao.PurchaseHistoryInfoDAOA;
 import com.internousdev.earth.dto.CartInfoDTO;
-import com.internousdev.earth.dto.PurchaseHistoryInfoDTO;
+import com.internousdev.earth.dto.PurchaseHistoryInfoDTOA;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class SettlementCompleteAction extends ActionSupport implements SessionAware {
-	private List<PurchaseHistoryInfoDTO> purchaseHistoryInfoDTO = new ArrayList<PurchaseHistoryInfoDTO>();
+	private List<PurchaseHistoryInfoDTOA> purchaseHistoryInfoDTO = new ArrayList<PurchaseHistoryInfoDTOA>();
 	private Map<String, Object> session;
 	private String destinationid;
 
@@ -24,18 +25,20 @@ public class SettlementCompleteAction extends ActionSupport implements SessionAw
 	 * 			決済完了画面
 	 * 			}
 	 * 		}
+	 * @throws SQLException
+	 * @throws NumberFormatException
 	 */
 
 	@Override
-	public String execute() {
+	public String execute() throws NumberFormatException, SQLException {
 		//初期：エラー画面
 		String result = ERROR;
 
 		//商品情報を格納
 		@SuppressWarnings("unchecked")
-		List<CartInfoDTO> cartInfoDTOList = (List<CartInfoDTO>) session.get("cartInfoDTOList");
+		List<CartInfoDTO> cartInfoDTOList = (List<CartInfoDTO>) session.get("cartinfo");
 
-		PurchaseHistoryInfoDAO purchaseHistoryInfoDAO = new PurchaseHistoryInfoDAO();
+		PurchaseHistoryInfoDAOA purchaseHistoryInfoDAO = new PurchaseHistoryInfoDAOA();
 		//insertした商品数のカウント
 		int insertcount = 0;
 		//拡張for文でsessiongetしてきたListを取り出し
@@ -49,7 +52,7 @@ public class SettlementCompleteAction extends ActionSupport implements SessionAw
 				//購入個数
 				dto.getProductCount(),
 				//金額
-				dto.getSubtotal(),
+				dto.getPrice(),
 				//宛先情報ID(ラジオボタンでIDが飛んでくるのでvaluestackで受け取る)
 				Integer.parseInt(destinationid));
 		}
@@ -69,11 +72,11 @@ public class SettlementCompleteAction extends ActionSupport implements SessionAw
 		return result;
 	}
 
-	public List<PurchaseHistoryInfoDTO> getPurchaseHistoryInfoDTO() {
+	public List<PurchaseHistoryInfoDTOA> getPurchaseHistoryInfoDTO() {
 		return purchaseHistoryInfoDTO;
 	}
 
-	public void setPurchaseHistoryInfoDTO(List<PurchaseHistoryInfoDTO> purchaseHistoryInfoDTO) {
+	public void setPurchaseHistoryInfoDTO(List<PurchaseHistoryInfoDTOA> purchaseHistoryInfoDTO) {
 		this.purchaseHistoryInfoDTO = purchaseHistoryInfoDTO;
 	}
 

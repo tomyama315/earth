@@ -7,15 +7,15 @@ import java.util.Map;
 
 import org.apache.struts2.interceptor.SessionAware;
 
-import com.internousdev.earth.dao.DestinationInfoDAOA;
+import com.internousdev.earth.dao.DestinationInfoDAO;
+import com.internousdev.earth.dto.DestinationInfoDTO;
 //import com.internousdev.earth.dao.CartInfoDAO;
 //import com.internousdev.earth.dto.CartInfoDTO;
-import com.internousdev.earth.dto.DestinationInfoDTOA;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class SettlementConfirmAction extends ActionSupport implements SessionAware {
 //	private List<CartInfoDTO> cartInfoDTO = new ArrayList<CartInfoDTO>();
-	private List<DestinationInfoDTOA> destinationInfoDTO = new ArrayList<DestinationInfoDTOA>();
+	private List<DestinationInfoDTO> destinationInfoDTO = new ArrayList<DestinationInfoDTO>();
 	private Map<String, Object> session;
 
 	@Override
@@ -36,7 +36,7 @@ public class SettlementConfirmAction extends ActionSupport implements SessionAwa
 		}
 		// ログインしてたら宛先情報確認
 		else {
-			DestinationInfoDAOA destinationInfoDAO = new DestinationInfoDAOA();
+			DestinationInfoDAO destinationInfoDAO = new DestinationInfoDAO();
 			// getDestinationInfoメソッドを呼び出し、引数にString型のuserIdを渡す
 			// ユーザーIDごとの宛先情報をselectしてdestinationInfoDTOに格納
 			// jsp側でdestinationInfoDTOのnull判定をする(宛先情報判定)
@@ -56,11 +56,11 @@ public class SettlementConfirmAction extends ActionSupport implements SessionAwa
 	// this.cartInfoDTO = cartInfoDTO;
 	// }
 
-	public List<DestinationInfoDTOA> getDestinationInfoDTO() {
+	public List<DestinationInfoDTO> getDestinationInfoDTO() {
 		return destinationInfoDTO;
 	}
 
-	public void setDestinationInfoDTO(List<DestinationInfoDTOA> destinationInfoDTO) {
+	public void setDestinationInfoDTO(List<DestinationInfoDTO> destinationInfoDTO) {
 		this.destinationInfoDTO = destinationInfoDTO;
 	}
 
