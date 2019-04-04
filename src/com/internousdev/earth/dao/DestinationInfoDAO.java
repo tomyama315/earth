@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.internousdev.earth.dto.DestinationInfoDTOA;
+import com.internousdev.earth.dto.DestinationInfoDTO;
 import com.internousdev.earth.util.DBConnector;
 
 public class DestinationInfoDAO {
@@ -47,10 +47,10 @@ public class DestinationInfoDAO {
 		return count;
 	}
 
-	public List<DestinationInfoDTOA> destinationInfo(String userId) throws SQLException {
+	public List<DestinationInfoDTO> destinationInfo(String userId) throws SQLException {
 		DBConnector db = new DBConnector();
 		Connection con = db.getConnection();
-		List<DestinationInfoDTOA> destinationInfoDTO = new ArrayList<DestinationInfoDTOA>();
+		List<DestinationInfoDTO> destinationInfoDTO = new ArrayList<DestinationInfoDTO>();
 
 		String sql = "SELECT id, family_name, first_name, family_name_kana, first_name_kana, user_address, tel_number, email FROM destination_info WHERE user_id = ?";
 
@@ -60,7 +60,7 @@ public class DestinationInfoDAO {
 			ResultSet rs = ps.executeQuery();
 
 			while (rs.next()) {
-				DestinationInfoDTOA dto = new DestinationInfoDTOA();
+				DestinationInfoDTO dto = new DestinationInfoDTO();
 				dto.setId(rs.getInt("id"));
 				dto.setFamilyName(rs.getString("family_name"));
 				dto.setFirstName(rs.getString("first_name"));
