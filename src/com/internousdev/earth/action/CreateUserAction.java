@@ -1,4 +1,4 @@
-package src.com.internousdev.earth.action;
+package com.internousdev.earth.action;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,15 +10,15 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class CreateUserAction extends ActionSupport implements SessionAware{
 	private int backFlag;
-	private Map<String, Object>session;
+	private Map<String, Object> session;
 
 	public String execute() {
-//タイムアウトのチェック
+		//sessionがタイムアウトのチェック
 		if(session.isEmpty()) {
 			return "sessionTimeout";
 		}
 
-		if(backFlag !=1) {
+		if (backFlag != 1) {
 			session.remove("familyName");
 			session.remove("firstName");
 			session.remove("familyNameKana");
@@ -29,9 +29,8 @@ public class CreateUserAction extends ActionSupport implements SessionAware{
 			session.remove("userIdForCreateUser");
 			session.remove("password");
 		}
-		List<String> sexList=new ArrayList<String>();
-
-//		画面表示時に選択されている性別を作成
+		List<String> sexList = new ArrayList<String>();
+		// 画面表示時に選択されている性別を作成
 		if(!session.containsKey("sex")) {
 			session.put("sex", "男性");
 		}else {
@@ -42,20 +41,20 @@ public class CreateUserAction extends ActionSupport implements SessionAware{
 		session.put("sexList", sexList);
 
 		return SUCCESS;
-
 	}
+
 	public int getBackFlag() {
 		return backFlag;
 	}
+
 	public void setBackFlag(int backFlag) {
-		this.backFlag=backFlag;
+		this.backFlag = backFlag;
 	}
 
-	public Map<String, Object>getSession(){
+	public Map<String, Object> getSession() {
 		return session;
 	}
 	public void setSession(Map<String, Object> session) {
-		this.session=session;
+		this.session = session;
 	}
-
 }
