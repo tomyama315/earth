@@ -1,4 +1,4 @@
-package src.com.internousdev.earth.dao;
+package com.internousdev.earth.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -6,8 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.internousdev.earth.dto.UserInfoDTO;
-
-import src.com.internousdev.earth.util.DBConnector;
+import com.internousdev.earth.util.DBConnector;
 
 
 public class UserInfoDAO {
