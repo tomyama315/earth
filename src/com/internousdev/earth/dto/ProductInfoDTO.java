@@ -33,6 +33,8 @@ public class ProductInfoDTO {
 	// 更新日
 	private Date upDate;
 
+	private int ProductCount;
+
 	// ID
 	public int getId() {
 		return id;
@@ -158,5 +160,14 @@ public class ProductInfoDTO {
 	public void setUpDate(Date upDate) {
 		this.upDate = upDate;
 	}
+
+	public int getProductCount() {
+		return ProductCount;
+	}
+
+	public void setProductCount(int productCount) {
+		ProductCount = productCount;
+	}
+
 
 }

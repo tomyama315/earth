@@ -1,5 +1,6 @@
 package com.internousdev.earth.action;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -7,6 +8,7 @@ import org.apache.struts2.interceptor.SessionAware;
 
 import com.internousdev.earth.dao.CartInfoDAO;
 import com.internousdev.earth.dto.CartInfoDTO;
+import com.internousdev.earth.dto.ProductInfoDTO;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class AddCartAction extends ActionSupport implements SessionAware {
@@ -16,15 +18,14 @@ public class AddCartAction extends ActionSupport implements SessionAware {
 	private String message;
 	private int totalprice;
 
-	public String execute() {
+	public String execute() throws SQLException{
 		ProductInfoDTO productdto = (ProductInfoDTO) session.get("additem");
 		CartInfoDAO dao = new CartInfoDAO();
 		cartlist = dao.getCartContents(session.get("loginuserid").toString());
-		int result;
-		String resultname;
+		int result=0;
 		if (!cartlist.isEmpty()) {
 			for (CartInfoDTO dto : cartlist) {
-				if (productdto.getProductId == dto.getProductId()) {
+				if (productdto.getProductId() == dto.getProductId()) {
 					CartInfoDAO updatedao = new CartInfoDAO();
 					int totalcount = dto.getProductCount() + productdto.getProductCount();
 					result = updatedao.update(totalcount, session.get("loginuserid").toString(), dto.getProductId());
@@ -80,6 +81,14 @@ public class AddCartAction extends ActionSupport implements SessionAware {
 
 	public void setMessage(String message) {
 		this.message = message;
+	}
+
+	public int getTotalprice() {
+		return totalprice;
+	}
+
+	public void setTotalprice(int totalprice) {
+		this.totalprice = totalprice;
 	}
 
 

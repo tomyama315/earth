@@ -8,6 +8,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 import com.internousdev.earth.dto.CartInfoDTO;
+import com.internousdev.earth.dto.ProductInfoDTO;
 import com.internousdev.earth.util.DBConnector;
 
 public class CartInfoDAO {
@@ -20,7 +21,7 @@ public class CartInfoDAO {
 		Connection connection = dbConnector.getConnection();
 		CartInfoDTO dto = new CartInfoDTO();
 
-		String sql = "SELECT * FROM cart_info where user_id=? left outer join product_info on cart_info.product_id=product_info.product_id";
+		String sql = "SELECT * FROM cart_info where user_id=? left outer join product_info on cart_info.product_id=product_info.product_id by resist_date desc , update_date desc ";
 		try {
 			PreparedStatement ps = connection.prepareStatement(sql);
 			ps.setString(1, UserId);
@@ -58,15 +59,14 @@ public class CartInfoDAO {
 		DBConnector dbConnector = new DBConnector();
 		Connection connection = dbConnector.getConnection();
 		int result=0;
-		String sql = "insert into cart_info(user_id,temp_user_id,product_id,product_count,price,resist_date) values(?,?,?,?,?,?)";
+		String sql = "insert into cart_info(user_id,product_id,product_count,price,resist_date) values(?,?,?,?,?,?)";
 		try {
 			PreparedStatement ps = connection.prepareStatement(sql);
 			ps.setString(1, UserId);
-			ps.setString(2,dto.getTempId() );
-			ps.setInt(3,dto.getProductId() );
-			ps.setInt(4, dto.getProductCount());
-			ps.setInt(5, dto.getPrice());
-			ps.setString(6,LocalDate.now().toString());
+			ps.setInt(2,dto.getProductId() );
+			ps.setInt(3, dto.getProductCount());
+			ps.setInt(4, dto.getPrice());
+			ps.setString(5,"now()");
 			result=ps.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -81,7 +81,7 @@ public class CartInfoDAO {
 		DBConnector dbConnector = new DBConnector();
 		Connection connection = dbConnector.getConnection();
 		int result=0;
-		String sql = "update cart_info set product_count=? update_date=? where user_id=? product_id=?";
+		String sql = "update cart_info set product_count=? update_date=now() where user_id=? product_id=?";
 		try {
 			PreparedStatement ps = connection.prepareStatement(sql);
 			ps.setInt(1,TotalCount );
