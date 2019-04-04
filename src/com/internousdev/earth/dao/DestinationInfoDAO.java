@@ -2,8 +2,12 @@ package com.internousdev.earth.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
+import com.internousdev.earth.dto.DestinationInfoDTOA;
 import com.internousdev.earth.util.DBConnector;
 
 public class DestinationInfoDAO {
@@ -41,5 +45,37 @@ public class DestinationInfoDAO {
 			}
 		}
 		return count;
+	}
+
+	public List<DestinationInfoDTOA> destinationInfo(String userId) throws SQLException {
+		DBConnector db = new DBConnector();
+		Connection con = db.getConnection();
+		List<DestinationInfoDTOA> destinationInfoDTO = new ArrayList<DestinationInfoDTOA>();
+
+		String sql = "SELECT id, family_name, first_name, family_name_kana, first_name_kana, user_address, tel_number, email FROM destination_info WHERE user_id = ?";
+
+		try {
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, userId);
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+				DestinationInfoDTOA dto = new DestinationInfoDTOA();
+				dto.setId(rs.getInt("id"));
+				dto.setFamilyName(rs.getString("family_name"));
+				dto.setFirstName(rs.getString("first_name"));
+				dto.setFamilyNameKana(rs.getString("family_name_kana"));
+				dto.setFirstNameKana(rs.getString("first_name_kana"));
+				dto.setUserAddress(rs.getString("user_address"));
+				dto.setEmail(rs.getString("email"));
+				dto.setTelNumber(rs.getString("tel_number"));
+				destinationInfoDTO.add(dto);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			con.close();
+		}
+		return destinationInfoDTO;
 	}
 }
