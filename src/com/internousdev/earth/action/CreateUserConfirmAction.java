@@ -46,9 +46,12 @@ public class CreateUserConfirmAction extends ActionSupport implements SessionAwa
 		session.put("email", email);
 		session.put("userIdForCreateUser", userId);
 		session.put("password", password);
-
+//インプットチェッカーのインスタンス化
 		InputChecker inputChecker=new InputChecker();
 
+//（項目名、値、最小文字数、最大文字数、 半角英字を許容するか、漢字を許容するか、ひらがなを許容するか、半角数字を許容するか、
+//半角記号を許容するか、カタカナを許容するか、スペースを許容するか）
+//渡された値が正規表現にマッチしているかチェックするためのもの。
 		familyNameErrorMessageList=inputChecker.doCheck("姓", familyName, 1, 16, true, true, true, false, false, false, false);
 		firstNameErrorMessageList=inputChecker.doCheck("名", firstName, 1, 16, true, true, true, false, false, false, false);
 		familyNameKanaErrorMessageList=inputChecker.doCheck("姓ふりがな", familyName, 1, 16, false, false, true, false, false, false, false);
@@ -57,6 +60,7 @@ public class CreateUserConfirmAction extends ActionSupport implements SessionAwa
 		userIdErrorMessageList=inputChecker.doCheck("ユーザーID", userId, 1, 8, true, false, false, true, false, false, false);
 		passwordErrorMessageList=inputChecker.doCheck("パスワード", password, 1, 16, true,false, false, true, false, false, false);
 
+//0だったらエラーメッセージを表示する。かつ、または〜
 		if(familyNameErrorMessageList.size()>0
 		|| firstNameErrorMessageList.size()>0
 		|| familyNameKanaErrorMessageList.size()>0
@@ -68,20 +72,23 @@ public class CreateUserConfirmAction extends ActionSupport implements SessionAwa
 		}
 
 		UserInfoDAO userInfoDAO=new UserInfoDAO();
-//		ユーザーIDがすでに使われているかチェック
-
+//ユーザーIDがすでに使われているかチェック
+//もし存在するユーザーIDだったらエラーメッセージを表示する。
 		if(userInfoDAO.isExistsUserInfo(userId)) {
 			isExistsUserErrorMessage="使用できないユーザーIDです。";
+//それ以外ならサクセス
 		}else {
 			result=SUCCESS;
 		}
+//結果を返す
 		return result;
 	}
 
-
+//ゲットして、
 	public String getFamilyName() {
 		return familyName;
 	}
+//登録する
 	public void setFamilyName(String familyName) {
 		this.familyName = familyName;
 	}
