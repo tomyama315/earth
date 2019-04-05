@@ -3,6 +3,7 @@
  */
 package com.internousdev.earth.action;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
@@ -28,7 +29,7 @@ public class LoginAction extends ActionSupport implements SessionAware{
 
 
 
-	public String execute(){
+	public String execute()throws SQLException{
 
 		//session内に何も情報が入っていない場合、タイムアウト（接続不可）と扱う。
 		if(session.isEmpty()) {
@@ -107,7 +108,7 @@ public class LoginAction extends ActionSupport implements SessionAware{
 	 * DBのカート情報を更新/作成する。
 	 * @param cartInfoDTOListBySession
 	 */
-	private boolean changeCartInfo(List<CartInfoDTO> cartInfoDTOListBySession) {
+	private boolean changeCartInfo(List<CartInfoDTO> cartInfoDTOListBySession)throws SQLException {
 		int count=0;
 		boolean result = false;
 		String tempUserId = session.get("tempuserid").toString();
@@ -120,8 +121,8 @@ public class LoginAction extends ActionSupport implements SessionAware{
 
 			if(cartInfoDAO.isExistsCartInfo(userId, dto.getProductId())) {
 				//存在する場合は、カート情報テーブルの購入個数を更新し、tempUserIdのデータは削除する。
-				count += cartInfoDAO.updateProductCount(userId, dto.getProductId(), dto.getProductCount());
-				cartInfoDAO.delete(String.valueOf(dto.getProductId()), tempUserId);
+				count += cartInfoDAO.updateFromLogin(dto.getProductCount(),userId, dto.getProductId());
+				cartInfoDAO.delete(tempUserId,dto.getProductId());
 
 			} else {
 				//存在しない場合は、ユーザーIDをtempUserIdからuserIdに変更する。
@@ -130,7 +131,7 @@ public class LoginAction extends ActionSupport implements SessionAware{
 		}
 
 		if(count == cartInfoDTOListBySession.size()) {
-			cartInfoDTOList = cartInfoDAO.getCartInfoDTOList(userId);
+			cartInfoDTOList = cartInfoDAO.getCartContents(userId);
 			result = true;
 		}
 		return result;
