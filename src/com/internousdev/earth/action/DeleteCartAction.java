@@ -19,6 +19,7 @@ public class DeleteCartAction extends ActionSupport implements SessionAware {
 
 	public String execute() throws SQLException {
 		int result = 0;
+		System.out.println("ID:"+ProductId);
 		if (ProductId.length != 0) { //チェックされたものがある場合true
 			for (int i : ProductId) {  //配列から取り出して削除
 				CartInfoDAO dao = new CartInfoDAO();
