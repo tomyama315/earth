@@ -14,24 +14,29 @@ import com.internousdev.earth.dto.DestinationInfoDTO;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class SettlementConfirmAction extends ActionSupport implements SessionAware {
-//	private List<CartInfoDTO> cartInfoDTO = new ArrayList<CartInfoDTO>();
+	// private List<CartInfoDTO> cartInfoDTO = new ArrayList<CartInfoDTO>();
 	private List<DestinationInfoDTO> destinationInfoDTO = new ArrayList<DestinationInfoDTO>();
 	private Map<String, Object> session;
 
 	@Override
 	public String execute() throws SQLException {
-		String result = ERROR;
-		// 決済ボタン押下(カート画面)
-		// ユーザーID、宛先情報ID、商品ID、個数、金額を送る
-		// CartInfoDAO cartInfoDAO = new CartInfoDAO();
-		// cartInfoDTO = cartInfoDAO.getCartInfoDTOList(session.get("userid").toString());
-		// session.put("cartInfoDTO", cartInfoDTO);
+		if (session.isEmpty()) {
+			return "sessionTimeout";
+		}
+
+		String result;
+
+		// 動作確認用
+		// session.put("logined", 1);
+		// session.put("loginuserid", 12);
 
 		/**
 		 * 決済ボタン押下(カート画面) ログイン判定
 		 */
 		// 未ログインだったらログイン画面へ
-		if (session.get("loginFlg").equals(0)) {
+		if (session.get("logined").equals(0)) {
+			// ログイン機能でカート画面から遷移してきた場合、認証成功でカート画面に戻るのでflgを渡す。
+			session.put("cartlag", "1");
 			result = "login";
 		}
 		// ログインしてたら宛先情報確認
@@ -42,9 +47,16 @@ public class SettlementConfirmAction extends ActionSupport implements SessionAwa
 			// jsp側でdestinationInfoDTOのnull判定をする(宛先情報判定)
 			// null:宛先情報はありません。
 			// !null:宛先情報を選択して下さい。
-			destinationInfoDTO = destinationInfoDAO.destinationInfo(session.get("userid").toString());
-			result = "SUCCESS";
+			destinationInfoDTO = destinationInfoDAO.destinationInfo(session.get("loginuserid").toString());
+
+			// 動作確認用
+			// System.out.println(destinationInfoDTO);
+			// System.out.println(destinationInfoDTO == null);
+			// System.out.println(destinationInfoDTO.size());
+			// System.out.println(destinationInfoDTO.isEmpty());
+			result = SUCCESS;
 		}
+		System.out.println(result);
 		return result;
 	}
 

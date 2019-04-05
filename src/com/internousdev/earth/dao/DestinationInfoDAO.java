@@ -52,7 +52,7 @@ public class DestinationInfoDAO {
 		Connection con = db.getConnection();
 		List<DestinationInfoDTO> destinationInfoDTO = new ArrayList<DestinationInfoDTO>();
 
-		String sql = "SELECT id, family_name, first_name, family_name_kana, first_name_kana, user_address, tel_number, email FROM destination_info WHERE user_id = ?";
+		String sql = "SELECT id, family_name, first_name, family_name_kana, first_name_kana, user_address, tel_number, email FROM destination_info WHERE user_id = ? ORDER BY regist_date ASC;";
 
 		try {
 			PreparedStatement ps = con.prepareStatement(sql);
