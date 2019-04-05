@@ -16,7 +16,7 @@ public class ProductInfoDAO {
 	public ArrayList<ProductInfoDTO> selectAll() {
 		DBConnector db = new DBConnector();
 		Connection ct = db.getConnection();
-		String sql = "SELECT * FROM product_info";
+		String sql = "SELECT * FROM product_info order by id asc";
 		try {
 			PreparedStatement preparedStatement = ct.prepareStatement(sql);
 			ResultSet resultSet = preparedStatement.executeQuery();
@@ -34,7 +34,7 @@ public class ProductInfoDAO {
 				productInfoDTO.setReleaseDate(resultSet.getDate("release_date"));
 				productInfoDTO.setReleaseCompany(resultSet.getString("release_company"));
 				productInfoDTO.setStatus(resultSet.getInt("status"));
-				productInfoDTO.setRegistDate(resultSet.getDate("regist_Date"));
+				productInfoDTO.setRegistDate(resultSet.getDate("resist_date"));
 				productInfoDTO.setUpDate(resultSet.getDate("update_date"));
 				productInfoDTOList.add(productInfoDTO);
 			}

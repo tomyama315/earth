@@ -12,7 +12,7 @@
 <ul style="list-style-type: none">
 <li><img src="./images/earth.jpg" width="200px" height="40px"/></li>
 <li><s:form action="SearchItemAction">
-商品検索 <input type="text" name="keyword" value=""/>
+<input type="text" name="keyword" value="" placeholder="検索ワード"/>
 <input type="submit" value="検索"/>
 </s:form></li>
 
