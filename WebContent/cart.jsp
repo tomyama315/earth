@@ -5,6 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript" src= "./js/cart.js"></script>
 <title>カート画面</title>
 </head>
 <body>
@@ -28,7 +29,7 @@
 </tr>
 </table>
 </s:else>
-<s:form action="DeleteCartAction">
+<s:form action="DeleteCartAction" id="cartForm">
 <s:iterator value="cartlist">
 <table class="carttable" border="1">
 <tr><td><img src='<s:property value="ImagePath"/>/<s:property value="ImageName"/>' width="100px" height="50px" /></td>
@@ -39,16 +40,16 @@
 <td><s:property value="ReleaseDate"/></td>
 <td><s:property value="ProductCount"/>個</td>
 <td><s:property value="sum"/></td>
-<td><input type="checkbox" name="ProductId" value="<s:property value="ProductId"/>"/></td>
+<td><input type="checkbox" name="ProductId" value="<s:property value="ProductId"/>" class="checkbox" onchange="checkValue(this)"/></td>
 <tr>
 </table>
 </s:iterator>
 <div>カート内合計:<s:property value="totalprice"/>円</div>
-<div><s:submit value="削除"/></div>
+<div><s:submit value="削除" id="deleteButton" disabled="true"/></div>
 </s:form>
 
-<s:form action="SettlementConfirmAction">
-<div><input type="submit" value="決済"/></div>
+<s:form action="SettlementConfirmAction" id="cartForm">
+<div><input type="submit" value="決済" class="cartForm"/></div>
 </s:form>
 </body>
 </html>
