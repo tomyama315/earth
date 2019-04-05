@@ -13,7 +13,7 @@ public class GoLoginAction extends ActionSupport implements SessionAware {
 
 	public String execute() {
 
-		//タイムアウトしたかチェック
+		//session内に何も情報が入っていない場合、タイムアウト（接続不可）と扱う。
 		if(session.isEmpty()) {
 			return "sessionTimeout";
 		}

@@ -9,7 +9,7 @@
 <title>ログイン</title>
 </head>
 <body>
-<%-- <script type="text/javascript" src= "./js/login.js"></script> --%>
+<script type="text/javascript" src= "./js/login.js"></script>
 <div class="header">
 <%@include file="header.jsp"%>
 </div>
@@ -57,13 +57,13 @@
 	</tr>
 	</table>
 	<div class="box">
-		<s:if test="#session.savedUserIdFlag==true
-		&& #session.savedUserId!=null
-		&& !#session.savedUserId.isEmpty()">
-		<s:checkbox name="savedUserIdFlag"/>
+		<s:if test="#session.loginflag==true
+		&& #session.loginuserid!=null
+		&& !#session.loginuserid.isEmpty()">
+		<s:checkbox name="loginflag"/>
 		</s:if>
 		<s:else>
-			<s:checkbox name="savedUserIdFlag"/>
+			<s:checkbox name="loginflag"/>
 		</s:else>
 		<s:label value="ユーザーID保存"/><br>
 	</div>

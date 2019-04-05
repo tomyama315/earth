@@ -18,6 +18,7 @@ public class LogoutAction extends ActionSupport implements SessionAware {
 		boolean savedUserId = Boolean.valueOf(String.valueOf(session.get("loginflag")));
 
 		int count = userInfoDAO.logout(userId);
+		//DBのuserIdが0以上（誰かがログインしている）状態なら～
 		if(count > 0) {
 			session.clear();
 			if(savedUserId) {
