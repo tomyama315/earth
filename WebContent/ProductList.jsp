@@ -35,9 +35,14 @@
 				<s:iterator value="productInfoDTOList">
 					<div class="image_box">
 						<a href='<s:url action="ProductInfoDetailAction"><s:param name="productId" value="%{productId}"/></s:url>'>
-							<img src='<s:property value="imageFilePath" />/<s:property value="imageFileName" />' class ="item-image-box-200"/>
+							<img src='<s:property value="imageFilePath" />/<s:property value="imageFileName"/>' class ="item-image-box-200" width="100px" height="100px"/>
 
 						</a><br>
+						<div class="product_name_kana">
+							<a href='<s:url action="ProductInfoDetailAction"><s:param name="productId" value="%{productId}"/></s:url>'>
+								<s:property value="productName" />
+							</a><br>
+						</div>
 						<div class="product_name_kana">
 							<a href='<s:url action="ProductInfoDetailAction"><s:param name="productId" value="%{productId}"/></s:url>'>
 								<s:property value="productNameKana" />
