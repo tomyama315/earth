@@ -11,7 +11,7 @@ import com.internousdev.earth.dto.ProductInfoDTO;
 import com.internousdev.earth.util.InputChecker;
 import com.opensymphony.xwork2.ActionSupport;
 
-public class SearhItemAction extends ActionSupport implements SessionAware {
+public class SearchItemAction extends ActionSupport implements SessionAware {
 	private String categoryId;
 	private String keyword;
 	private List<String> keywordsErrorMessageList;
@@ -19,6 +19,10 @@ public class SearhItemAction extends ActionSupport implements SessionAware {
 	private Map<String, Object> session;
 
 	public String execute() {
+		//sessionが空だと接続不可
+		if(session.isEmpty()) {
+			return "sessionTimeout";
+		}
 
 		InputChecker inputChecker =  new InputChecker();
 
