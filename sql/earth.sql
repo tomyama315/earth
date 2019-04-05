@@ -1,8 +1,8 @@
 
-drop database if exists ecsite;
+drop database if exists earth;
 
-create database if not exists ecsite;
-use ecsite;
+create database if not exists earth;
+use earth;
 
 drop table if exists user_info;
 create table user_info(
@@ -111,8 +111,15 @@ insert into m_category values
 (5,5,"クッキー","クッキーに関するカテゴリーが対象となります",now(),now());
 
 insert into product_info values
-( 1, 1,"チョコチップクッキー","ほん1","本1の商品詳細",2,100,"./images","sample.jpg",now(),"発売会社",0,now(),now()),
-( 2, 2,"羊羹","ほん2","本2の商品詳細",2,200,"./images","sample.jpg",now(),"発売会社",0,now(),now()),
-( 3, 3,"ショートケーキ","ほん3","本3の商品詳細",2,300,"./images","sample.jpg",now(),"発売会社",0,now(),now()),
-( 4, 4,"うまい棒","ほん4","本4の商品詳細",2,100,"./images","sample.jpg",now(),"発売会社",0,now(),now()),
-( 5, 5,"","ほん5","本5の商品詳細",2,200,"./images","sample.jpg",now(),"発売会社",0,now(),now());
+( 1, 1,"チョコチップクッキー","ちょこちっぷくっきー","チョコチップクッキーの商品詳細",5,100,"./images","sample.jpg",now(),"発売会社",0,now(),now()),
+( 2, 2,"羊羹","ようかん","羊羹の商品詳細",2,200,"./images","sample.jpg",now(),"発売会社",0,now(),now()),
+( 3, 3,"ショートケーキ","しょーとけーき","ショートケーキの商品詳細",3,300,"./images","sample.jpg",now(),"発売会社",0,now(),now()),
+( 4, 4,"うまい棒","うまいぼう","うまい棒の商品詳細",4,100,"./images","sample.jpg",now(),"発売会社",0,now(),now()),
+( 5, 5,"中嶋祐介","なかじまゆうすけ","中嶋祐介の商品詳細",5,200,"./images","sample.jpg",now(),"発売会社",0,now(),now());
+
+insert into cart_info values
+(1,1,1,1,3,100,now(),now()),
+(2,1,1,2,2,200,now(),now()),
+(3,1,1,3,5,300,now(),now()),
+(4,2,2,4,4,100,now(),now()),
+(5,1,2,5,12,200,now(),now());

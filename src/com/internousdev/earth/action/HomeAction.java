@@ -15,13 +15,13 @@ public class HomeAction extends ActionSupport implements SessionAware {
 	private Map<String, Object> session;
 
 	public String execute() {
-		//未登録ユーザーも仮ユーザーで入場させます.
+		//未登録ユーザーも仮ユーザーで入場させます
 		if(!(session.containsKey("loginuserid")) && !(session.containsKey("tempuserid"))) {
 			CommonUtility cu = new CommonUtility();
 			session.put("tempuserid", cu.getRamdomValue());
 		}
 
-		//ログイン状況のNULLをなくします。
+		//ログインのエラー処理。NULLをなくします。
 		if(!session.containsKey("logined")) {
 			session.put("logined", 0);
 		}

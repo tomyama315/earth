@@ -13,14 +13,8 @@ import com.opensymphony.xwork2.ActionSupport;
 		private ProductInfoDAO productInfoDAO = new ProductInfoDAO();
 
 		public String execute() {
-			String result = ERROR;
 	              productInfoDTOList = productInfoDAO.selectAll();
-	                  if(productInfoDTOList.size() > 0) {
-	                        result = SUCCESS;
-	                   }else{
-	                        result = ERROR;
-	                   }
-	                      return result;
+	                      return SUCCESS;
 	            }
 
 
@@ -44,4 +38,5 @@ import com.opensymphony.xwork2.ActionSupport;
 		public void setProductInfodao(ProductInfoDAO productInfodao) {
 			this.productInfoDAO = productInfodao;
 		}
+
 	}

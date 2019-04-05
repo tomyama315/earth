@@ -29,6 +29,8 @@ public class CreateUserAction extends ActionSupport implements SessionAware{
 			session.remove("userIdForCreateUser");
 			session.remove("password");
 		}
+
+//インスタンス化
 		List<String> sexList = new ArrayList<String>();
 // 画面表示時に選択されている性別を作成
 		if(!session.containsKey("sex")) {
