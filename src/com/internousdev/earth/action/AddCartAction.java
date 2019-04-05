@@ -18,36 +18,36 @@ public class AddCartAction extends ActionSupport implements SessionAware {
 	private String message;
 	private int totalprice;
 
-	public String execute() throws SQLException{
+	public String execute() throws SQLException {
 		ProductInfoDTO productdto = (ProductInfoDTO) session.get("additem");
 		CartInfoDAO dao = new CartInfoDAO();
 		cartlist = dao.getCartContents(session.get("loginuserid").toString());
-		int result=0;
-		if (!cartlist.isEmpty()) {
+		int result = 0;
+		if (!cartlist.isEmpty()) { //カートが空ではない場合
 			for (CartInfoDTO dto : cartlist) {
-				if (productdto.getProductId() == dto.getProductId()) {
+				if (productdto.getProductId() == dto.getProductId()) { //詳細画面からの商品IDとカートの商品IDを走査
 					CartInfoDAO updatedao = new CartInfoDAO();
 					int totalcount = dto.getProductCount() + productdto.getProductCount();
 					result = updatedao.update(totalcount, session.get("loginuserid").toString(), dto.getProductId());
-					IdentifyKey = 1;
+					IdentifyKey = 1;  //走査の結果同一値が存在した場合更新（既にカートに存在する商品が追加された場合）
 					break;
 				}
 			}
 		}
-		if (IdentifyKey == 0) {
+		if (IdentifyKey == 0) {  //走査の結果IdentifyKeyが更新されなかった場合（同じものをカートに追加していない）
 			CartInfoDAO adddao = new CartInfoDAO();
 			result = adddao.add(session.get("loginuserid").toString(), productdto);
 		}
-		if (result == 0) {
+		if (result == 0) {  //executeUpdate()の結果による分岐
 			message = "カートに追加できませんでした";
 		} else {
 			CartInfoDAO initializedao = new CartInfoDAO();
-			cartlist = initializedao.getCartContents(session.get("loginuserid").toString());
-			for(CartInfoDTO dto:cartlist){
-				totalprice+=dto.getSum();
+			cartlist = initializedao.getCartContents(session.get("loginuserid").toString()); //表示するカート内容の更新
+			for (CartInfoDTO dto : cartlist) {  //合計金額の更新
+				totalprice += dto.getSum();
 			}
 		}
-		return result == 0 ? ERROR : SUCCESS;
+		return result == 0 ? ERROR : SUCCESS;  //resultが0ならERROR、それ以外ならSUCCESS
 
 	}
 
@@ -90,6 +90,5 @@ public class AddCartAction extends ActionSupport implements SessionAware {
 	public void setTotalprice(int totalprice) {
 		this.totalprice = totalprice;
 	}
-
 
 }
