@@ -12,7 +12,7 @@ import com.internousdev.earth.util.DBConnector;
 
 public class PurchaseHistoryInfoDAO {
 
-	public List<PurchaseHistoryInfoDTO> getPurchaseHistoryInfo(String userId){
+	public List<PurchaseHistoryInfoDTO> getPurchaseHistoryList(String userId){
 		DBConnector dbConnector = new DBConnector();
 	    Connection connection = dbConnector.getConnection();
 		List<PurchaseHistoryInfoDTO> purchaseHistoryInfoDTOList = new ArrayList<PurchaseHistoryInfoDTO>();
