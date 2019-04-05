@@ -4,7 +4,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<META http-equiv="Refresh" content="3;URL=home.jsp">
+<link rel="stylesheet" href="./css/earth.css">
+<META http-equiv="Refresh" content="3;URL=HomeAction">
 <title>settlementComplete</title>
 </head>
 <body>

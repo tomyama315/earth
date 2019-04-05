@@ -5,6 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="./css/earth.css">
 <title>settlementConfirm</title>
 </head>
 <body>
@@ -13,7 +14,7 @@
 </div>
 
 	<div class="maincontainer"></div>
-	<s:if test="destinationInfoDTOList == null">
+	<s:if test="destinationInfoDTO.size() == 0">
 		<h3>宛先情報がありません。</h3>
 	</s:if>
 	<s:else>
@@ -31,7 +32,7 @@
 				</tr>
 				<tr>
 					<s:iterator value="destinationInfoDTOList">
-						<th><input type="radio" name="id" value="<s:property value="id" />"></th>
+						<th><input type="radio" name="id" checked="checked" value="<s:property value="id" />"></th>
 						<th><s:property value="family_name" /></th>
 						<th><s:property value="first_name" /></th>
 						<th><s:property value="family_name_kana + first_name_kana" /></th>
