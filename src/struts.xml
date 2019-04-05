@@ -66,19 +66,19 @@
 <!-- <result name="success">home.jsp</result> -->
 <!-- </action> -->
 
-<!-- <action name="AddCartAction" class="com.internousdev.earth.action.AddCartAction" method="execute"> -->
-<!-- <result name="success">cart.jsp</result> -->
-<!-- <result name="error">error.jsp</result> -->
-<!-- </action> -->
+<action name="AddCartAction" class="com.internousdev.earth.action.AddCartAction" method="execute">
+<result name="success">cart.jsp</result>
+<result name="error">error.jsp</result>
+</action>
 
 <action name="CartAction" class="com.internousdev.earth.action.CartAction" method="execute">
 <result name="success">cart.jsp</result>
 </action>
 
-<!-- <action name="DeleteCartAction" class="com.internousdev.earth.action.DeleteCartAction" method="execute"> -->
-<!-- <result name="success">cart.jsp</result> -->
-<!-- <result name="error">error.jsp</result> -->
-<!-- </action> -->
+<action name="DeleteCartAction" class="com.internousdev.earth.action.DeleteCartAction" method="execute">
+<result name="success">cart.jsp</result>
+<result name="error">error.jsp</result>
+</action>
 
 
 <!-- <action name="SettlementConfirmAction" class="com.internousdev.earth.action.SettlementConfirmAction" method="execute"> -->

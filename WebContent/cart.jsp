@@ -11,10 +11,10 @@
 <div class="header">
 <%@include file="header.jsp"%>
 </div>
-process of iterator
 <s:if test="cartlist.isEmpty()">
 <s:property value="message"/>
 </s:if>
+
 <s:form action="DeleteCartAction">
 <s:iterator value="cartlist">
 <img src='<s:property value="ImagePath"/>/<s:property value="ImageName"/>' width="50px" height="50px" />
@@ -25,11 +25,12 @@ process of iterator
 <s:property value="ReleaseDate"/>
 <s:property value="ProductCount"/>
 <s:property value="sum"/>
-<input type="checkbox" value="ProductId"/>
+<input type="checkbox" name="ProductId" value="<s:property value="ProductId"/>"/>
 </s:iterator>
-<s:property value="totalprice"/>
-<input type="submit" value="削除"/>
+totalprice:<s:property value="totalprice"/>
+<s:submit value="削除"/>
 </s:form>
+
 <s:form action="SettlementConfirmAction">
 <input type="submit" value="決済"/>
 </s:form>

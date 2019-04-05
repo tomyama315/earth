@@ -1,8 +1,8 @@
 
-drop database if exists ecsite;
+drop database if exists earth;
 
-create database if not exists ecsite;
-use ecsite;
+create database if not exists earth;
+use earth;
 
 drop table if exists user_info;
 create table user_info(
