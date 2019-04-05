@@ -16,8 +16,6 @@
 <%@include file="header.jsp" %>
 </div>
 
-
-<div id="contents">
 <h1>ユーザー情報入力画面</h1>
 
 
@@ -134,6 +132,6 @@
 <s:submit value="確認" class="submit_btn" />
 </div>
 </s:form>
-</div>
+
 </body>
 </html>
