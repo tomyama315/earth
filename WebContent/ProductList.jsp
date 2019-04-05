@@ -38,7 +38,7 @@
 							<img src='<s:property value="imageFilePath" />/<s:property value="imageFileName"/>' class ="item-image-box-200" width="100px" height="100px"/>
 
 						</a><br>
-						<div class="product_name_kana">
+						<div class="product_name">
 							<a href='<s:url action="ProductInfoDetailAction"><s:param name="productId" value="%{productId}"/></s:url>'>
 								<s:property value="productName" />
 							</a><br>
