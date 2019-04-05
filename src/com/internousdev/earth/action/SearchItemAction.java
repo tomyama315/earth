@@ -19,6 +19,7 @@ public class SearchItemAction extends ActionSupport implements SessionAware {
 	private Map<String, Object> session;
 
 	public String execute() {
+		System.out.println("keyword:"+keyword);
 		//sessionが空だと接続不可
 		if(session.isEmpty()) {
 			return "sessionTimeout";
@@ -61,11 +62,11 @@ public class SearchItemAction extends ActionSupport implements SessionAware {
 	public void setCategoryId(String categoryId) {
 		this.categoryId = categoryId;
 	}
-	public String getKeywords() {
+	public String getKeyword() {
 		return keyword;
 	}
-	public void setKeywords(String keywords) {
-		this.keyword = keywords;
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
 	}
 	public List<String> getKeywordsErrorMessageList() {
 		return keywordsErrorMessageList;

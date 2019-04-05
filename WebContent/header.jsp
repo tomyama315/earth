@@ -12,7 +12,13 @@
 <ul style="list-style-type: none">
 <li><img src="./images/earth.jpg" width="200px" height="40px"/></li>
 <li><s:form action="SearchItemAction">
-<input type="text" name="keyword" value="" placeholder="検索ワード"/>
+<li><select name="categoryId" tabindex="5">
+<s:iterator value="#session.mcategorylist">
+<option value="<s:property value="categoryId"/>"><s:property value="categoryName"/></option>
+</s:iterator>
+</select>
+</li>
+<input type="text" name="keyword" placeholder="検索ワード"/>
 <input type="submit" value="検索"/>
 </s:form></li>
 

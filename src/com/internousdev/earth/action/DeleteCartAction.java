@@ -31,6 +31,9 @@ public class DeleteCartAction extends ActionSupport implements SessionAware {
 		} else {
 			CartInfoDAO initializedao = new CartInfoDAO();
 			cartlist = initializedao.getCartContents(session.get("loginuserid").toString());
+			if(cartlist.isEmpty()){
+				message = "カート情報がありません";
+			}
 			for (CartInfoDTO dto : cartlist) {
 				totalprice += dto.getSum();
 			}
