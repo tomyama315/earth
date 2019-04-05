@@ -1,5 +1,5 @@
 /**
- * @author sksgym（すぎ）
+ * @author sksgym（すぎ）aaaaaaa
  */
 package com.internousdev.earth.action;
 
