@@ -8,7 +8,9 @@
 <title>マイページ</title>
 </head>
 <body>
-
+<div class="header">
+<%@include file ="header.jsp" %>
+</div>
      <div id ="main">
        <h1>マイページ画面</h1>
          <s:if test="familyName!=null && !famiryName.isEmpty()">
