@@ -146,18 +146,19 @@ public class ProductInfoDAO {
 		return productInfoDTOList;
 	}
 
+	//商品検索。（複数ワードでの検索にも対応）
 	public List<ProductInfoDTO> getProductInfoListAll(String[] keywordsList) {
 		DBConnector db = new DBConnector();
 		Connection con = db.getConnection();
 		List<ProductInfoDTO> productInfoDTOList = new ArrayList<ProductInfoDTO>();
-		String sql = "select * from product_info where";
+		String sql = "SELECT * FROM product_info where";
 		boolean initializeFlag = true;
 		for (String keyword : keywordsList) {
 			if (initializeFlag) {
-				sql += " (product_name like '%" + keyword + "%' or product_name_kana like '%" + keyword + "%')";
+				sql += " (product_name LIKE '%" + keyword + "%' OR product_name_kana LIKE '%" + keyword + "%')";
 				initializeFlag = false;
 			} else {
-				sql += " or (product_name like '%" + keyword + "%' or product_name_kana like '%" + keyword + "%')";
+				sql += " OR (product_name LIKE '%" + keyword + "%' OR product_name_kana LIKE '%" + keyword + "%')";
 			}
 		}
 
@@ -195,14 +196,14 @@ public class ProductInfoDAO {
 		DBConnector db = new DBConnector();
 		Connection con = db.getConnection();
 		List<ProductInfoDTO> productInfoDTOList = new ArrayList<ProductInfoDTO>();
-		String sql = "select * from product_info where";
+		String sql = "SELECT * FROM product_info where";
 		boolean initializeFlag = true;
 		for (String keyword : keywordsList) {
 			if (initializeFlag) {
-				sql += " category_id=" + categoryId + " and ((product_name like '%" + keyword + "%' or product_name_kana like '%" + keyword + "%')";
+				sql += " category_id=" + categoryId + " AND ((product_name like '%" + keyword + "%' or product_name_kana like '%" + keyword + "%')";
 				initializeFlag = false;
 			} else {
-				sql += " or (product_name like '%" + keyword + "%' or product_name_kana like '%" + keyword + "%')";
+				sql += " OR (product_name like '%" + keyword + "%' OR product_name_kana like '%" + keyword + "%')";
 			}
 		}
 		sql += ")";
