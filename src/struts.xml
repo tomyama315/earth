@@ -8,19 +8,19 @@
 	<constant name="struts.ui.theme" value="simple" />
 	<package name="com.internousdev.earth.action" extends="struts-default">
 
-<!-- <action name="CreateUserAction" class="com.internousdev.earth.action.CreateUserAction" method="execute"> -->
-<!-- <result name="success">createUser.jsp</result> -->
-<!-- </action> -->
+<action name="CreateUserAction" class="com.internousdev.earth.action.CreateUserAction" method="execute">
+<result name="success">createUser.jsp</result>
+</action>
 
-<!-- <action name="CreateUserConfirmAction" class="com.internousdev.earth.action.CreateUserConfirmAction" method="execute"> -->
-<!-- <result name="success">createUserConfirm.jsp</result> -->
-<!-- <result name="error">createUser.jsp</result> -->
-<!-- </action> -->
+<action name="CreateUserConfirmAction" class="com.internousdev.earth.action.CreateUserConfirmAction" method="execute">
+<result name="success">createUserConfirm.jsp</result>
+<result name="error">createUser.jsp</result>
+</action>
 
-<!-- <action name="CreateUserCompleteAction" class="com.internousdev.earth.action.CreateUserCompleteAction" method="execute"> -->
-<!-- <result name="success">createUserComplete.jsp</result> -->
-<!-- <result name="error">error.jsp</result> -->
-<!-- </action> -->
+<action name="CreateUserCompleteAction" class="com.internousdev.earth.action.CreateUserCompleteAction" method="execute">
+<result name="success">createUserComplete.jsp</result>
+<result name="error">error.jsp</result>
+</action>
 
 <!-- <action name="GoLoginAction" class="com.internousdev.earth.action.GoLoginAction" method="execute"> -->
 <!-- <result name="success">login.jsp</result> -->
@@ -33,19 +33,19 @@
 <!-- </action> -->
 
 
-<!-- <action name="ResetPasswordAction" class="com.internousdev.earth.action.ResetPasswordAction" method="execute"> -->
-<!-- <result name="success">resetPassword.jsp</result> -->
-<!-- </action> -->
+<action name="ResetPasswordAction" class="com.internousdev.earth.action.ResetPasswordAction" method="execute">
+<result name="success">resetPassword.jsp</result>
+</action>
 
-<!-- <action name="ResetPasswordConfirmAction" class="com.internousdev.earth.action.ResetPasswordConfirmAction" method="execute"> -->
-<!-- <result name="success">resetPasswordConfirm.jsp</result> -->
-<!-- <result name="error">resetPassword.jsp</result> -->
-<!-- </action> -->
+<action name="ResetPasswordConfirmAction" class="com.internousdev.earth.action.ResetPasswordConfirmAction" method="execute">
+<result name="success">resetPasswordConfirm.jsp</result>
+<result name="error">resetPassword.jsp</result>
+</action>
 
-<!-- <action name="ResetPasswordCompleteAction" class="com.internousdev.earth.action.ResetPasswordCompleteAction" method="execute"> -->
-<!-- <result name="success">resetPasswordComplete.jsp</result> -->
-<!-- <result name="error">error.jsp</result> -->
-<!-- </action> -->
+<action name="ResetPasswordCompleteAction" class="com.internousdev.earth.action.ResetPasswordCompleteAction" method="execute">
+<result name="success">resetPasswordComplete.jsp</result>
+<result name="error">error.jsp</result>
+</action>
 
 
 <!-- <action name="ProductListAction" class="com.internousdev.earth.action.ProductListAction" method="execute"> -->

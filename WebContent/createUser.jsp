@@ -97,31 +97,32 @@
 <table class="vertical-list-table">
 <tr>
 	<th scope="row">姓</th>
-	<td><s:textfield name="familyName" value="%{#session.familyName}" placeholder="姓" class="txt" /></td>
+	<td><s:textfield name="familyName" value="" placeholder="姓" class="txt" /></td>
 </tr>
 <tr>
 	<th scope="row">名</th>
-	<td><s:textfield name="firstName" value="%{#session.firstName}" placeholder="名" class="txt" /></td>
+	<td><s:textfield name="firstName" value="" placeholder="名" class="txt" /></td>
 </tr>
 <tr>
 	<th scope="row">姓ふりがな</th>
-	<td><s:textfield name="familyNameKana" value="%{#session.familyNameKana}" placeholder="姓ふりがな" class="txt" /></td>
+	<td><s:textfield name="familyNameKana" value="" placeholder="姓ふりがな" class="txt" /></td>
 </tr>
 <tr>
 	<th scope="row">名ふりがな</th>
-	<td><s:textfield name="firstNameKana" value="%{#session.firstNameKana}" placeholder="名ふりがな" class="txt" /></td>
+	<td><s:textfield name="firstNameKana" value="" placeholder="名ふりがな" class="txt" /></td>
 </tr>
 <tr>
 	<th scope="row">性別</th>
-	<td><s:radio name="sex" list="%{#session.sexList}" value="%{#session.sex}" placeholder="性別"/></td>
+	<td><input type="radio" name="sex" list="" value="" placeholder="性別"/>男性
+	    <input type="radio" name="sex" list="" value="" placeholder="性別"/>女性</td>
 </tr>
 <tr>
 	<th scope="row">メールアドレス</th>
-	<td><s:textfield name="email" value="%{#session.email}" placeholder="メールアドレス" class="txt" /></td>
+	<td><s:textfield name="email" value="" placeholder="メールアドレス" class="txt" /></td>
 </tr>
 <tr>
 	<th scope="row">ユーザーID</th>
-	<td><s:textfield name="userId" value="%{#session.userIdForCreateUser}" placeholder="ユーザーID" class="txt" /></td>
+	<td><s:textfield name="userId" value="" placeholder="ユーザーID" class="txt" /></td>
 </tr>
 <tr>
 	<th scope="row">パスワード</th>
