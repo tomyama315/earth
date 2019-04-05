@@ -1,7 +1,6 @@
 /**
  * @author sksgym（すぎ）
  */
-
 package com.internousdev.earth.action;
 import java.util.Map;
 
