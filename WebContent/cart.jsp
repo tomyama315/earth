@@ -5,6 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript" src= "./js/cart.js"></script>
 <title>カート画面</title>
 </head>
 <body>
@@ -12,27 +13,43 @@
 <%@include file="header.jsp"%>
 </div>
 <s:if test="cartlist.isEmpty()">
-<s:property value="message"/>
+<div><h3><s:property value="message"/></h3></div>
 </s:if>
-
-<s:form action="DeleteCartAction">
+<s:else><table class="index" border="1">
+<tr>
+<th>Image</th>
+<th>名前</th>
+<th>名前かな</th>
+<th>価格</th>
+<th>発売会社</th>
+<th>発売日</th>
+<th>個数</th>
+<th>小計</th>
+<th>削除</th>
+</tr>
+</table>
+</s:else>
+<s:form action="DeleteCartAction" id="cartForm">
 <s:iterator value="cartlist">
-<img src='<s:property value="ImagePath"/>/<s:property value="ImageName"/>' width="50px" height="50px" />
-<s:property value="ProductName"/>
-<s:property value="ProductNameKana"/>
-<s:property value="Price"/>
-<s:property value="ReleaseComp"/>
-<s:property value="ReleaseDate"/>
-<s:property value="ProductCount"/>
-<s:property value="sum"/>
-<input type="checkbox" name="ProductId" value="<s:property value="ProductId"/>"/>
+<table class="carttable" border="1">
+<tr><td><img src='<s:property value="ImagePath"/>/<s:property value="ImageName"/>' width="100px" height="50px" /></td>
+<td><s:property value="ProductName"/></td>
+<td><s:property value="ProductNameKana"/></td>
+<td><s:property value="Price"/>円</td>
+<td><s:property value="ReleaseComp"/></td>
+<td><s:property value="ReleaseDate"/></td>
+<td><s:property value="ProductCount"/>個</td>
+<td><s:property value="sum"/></td>
+<td><input type="checkbox" name="ProductId" value="<s:property value="ProductId"/>" class="checkbox" onchange="checkValue(this)"/></td>
+<tr>
+</table>
 </s:iterator>
-totalprice:<s:property value="totalprice"/>
-<s:submit value="削除"/>
+<div>カート内合計:<s:property value="totalprice"/>円</div>
+<div><s:submit value="削除" id="deleteButton" disabled="true"/></div>
 </s:form>
 
-<s:form action="SettlementConfirmAction">
-<input type="submit" value="決済"/>
+<s:form action="SettlementConfirmAction" id="cartForm">
+<div><input type="submit" value="決済" class="cartForm"/></div>
 </s:form>
 </body>
 </html>

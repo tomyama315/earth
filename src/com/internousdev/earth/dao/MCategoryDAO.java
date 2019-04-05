@@ -15,7 +15,7 @@ import com.internousdev.earth.util.DBConnector;
 			DBConnector db = new DBConnector();
 			Connection con = db.getConnection();
 			List<MCategoryDTO> mCategoryDTOList = new ArrayList<MCategoryDTO>();
-			String sql = "select id,category_id,category_name from m_category";
+			String sql = "SELECT id, category_id, category_name FROM m_category";
 			try {
 				PreparedStatement ps = con.prepareStatement(sql);
 				ResultSet rs = ps.executeQuery();

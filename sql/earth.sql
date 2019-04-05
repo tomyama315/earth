@@ -112,7 +112,7 @@ insert into m_category values
 
 insert into product_info values
 ( 1, 1,"チョコチップクッキー","ちょこちっぷくっきー","チョコチップクッキーの商品詳細",5,100,"./images","sample.jpg",now(),"発売会社",0,now(),now()),
-( 2, 2,"羊羹","ほん2","羊羹の商品詳細",2,200,"./images","sample.jpg",now(),"発売会社",0,now(),now()),
+( 2, 2,"羊羹","ようかん","羊羹の商品詳細",2,200,"./images","sample.jpg",now(),"発売会社",0,now(),now()),
 ( 3, 3,"ショートケーキ","しょーとけーき","ショートケーキの商品詳細",3,300,"./images","sample.jpg",now(),"発売会社",0,now(),now()),
 ( 4, 4,"うまい棒","うまいぼう","うまい棒の商品詳細",4,100,"./images","sample.jpg",now(),"発売会社",0,now(),now()),
 ( 5, 5,"中嶋祐介","なかじまゆうすけ","中嶋祐介の商品詳細",5,200,"./images","sample.jpg",now(),"発売会社",0,now(),now());
@@ -121,4 +121,5 @@ insert into cart_info values
 (1,1,1,1,3,100,now(),now()),
 (2,1,1,2,2,200,now(),now()),
 (3,1,1,3,5,300,now(),now()),
-(4,2,2,4,4,300,now(),now());
+(4,2,2,4,4,100,now(),now()),
+(5,1,2,5,12,200,now(),now());

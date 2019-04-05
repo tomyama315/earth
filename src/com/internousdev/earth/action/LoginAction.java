@@ -1,8 +1,9 @@
 /**
- * @author sksgym（すぎ）aaaaaaa
+ * @author sksgym（すぎ）
  */
 package com.internousdev.earth.action;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
@@ -26,11 +27,9 @@ public class LoginAction extends ActionSupport implements SessionAware{
 	private String isNotUserInfoMessage;
 	private Map<String, Object> session;
 
-	UserInfoDAO userInfoDAO = new UserInfoDAO();
-	InputChecker inputChecker = new InputChecker();
 
 
-	public String execute(){
+	public String execute()throws SQLException{
 
 		//session内に何も情報が入っていない場合、タイムアウト（接続不可）と扱う。
 		if(session.isEmpty()) {
@@ -53,6 +52,7 @@ public class LoginAction extends ActionSupport implements SessionAware{
  * DBの会員情報テーブルにユーザーIDとパスワードが
  * 一致するユーザーが存在しているかを確認する。
  */
+		InputChecker inputChecker = new InputChecker();
 
 		//ユーザーIDは最低1文字、最大8文字
 		userIdErrorMessageList = inputChecker.doCheck("ユーザーID", userId, 1, 8, true, false, false, true, false, false, false);
@@ -66,6 +66,8 @@ public class LoginAction extends ActionSupport implements SessionAware{
 			session.put("logined", 0);
 			return result;
 		}
+
+		UserInfoDAO userInfoDAO = new UserInfoDAO();
 
 		if(userInfoDAO.isExistsUserInfo(userId, password)) {
 
@@ -106,7 +108,7 @@ public class LoginAction extends ActionSupport implements SessionAware{
 	 * DBのカート情報を更新/作成する。
 	 * @param cartInfoDTOListBySession
 	 */
-	private boolean changeCartInfo(List<CartInfoDTO> cartInfoDTOListBySession) {
+	private boolean changeCartInfo(List<CartInfoDTO> cartInfoDTOListBySession)throws SQLException {
 		int count=0;
 		boolean result = false;
 		String tempUserId = session.get("tempuserid").toString();
@@ -119,17 +121,17 @@ public class LoginAction extends ActionSupport implements SessionAware{
 
 			if(cartInfoDAO.isExistsCartInfo(userId, dto.getProductId())) {
 				//存在する場合は、カート情報テーブルの購入個数を更新し、tempUserIdのデータは削除する。
-				count += cartInfoDAO.updateProductCount(userId, dto.getProductId(), dto.getProductCount());
-				cartInfoDAO.delete(String.valueOf(dto.getProductId()), tempUserId);
+				count += cartInfoDAO.updateFromLogin(dto.getProductCount(),userId, dto.getProductId());
+				cartInfoDAO.delete(tempUserId,dto.getProductId());
 
 			} else {
 				//存在しない場合は、ユーザーIDをtempUserIdからuserIdに変更する。
-				count += cartInfoDAO.linkToUserId(tempuserid, userId, dto.getProductId());
+				count += cartInfoDAO.linkToUserId(tempUserId, userId, dto.getProductId());
 			}
 		}
 
 		if(count == cartInfoDTOListBySession.size()) {
-			cartInfoDTOList = cartInfoDAO.getCartInfoDTOList(userId);
+			cartInfoDTOList = cartInfoDAO.getCartContents(userId);
 			result = true;
 		}
 		return result;

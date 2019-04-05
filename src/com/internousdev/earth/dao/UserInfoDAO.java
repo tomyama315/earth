@@ -27,8 +27,8 @@ public class UserInfoDAO {
 			preparedStatement.setString(4, firstName);
 			preparedStatement.setString(5, familyNameKana);
 			preparedStatement.setString(6, firstNameKana);
-			preparedStatement.setString(6, sex);
-			preparedStatement.setString(6, email);
+			preparedStatement.setString(7, sex);
+			preparedStatement.setString(8, email);
 			preparedStatement.setInt(9, 0);
 			preparedStatement.setInt(10, 1);
 			count=preparedStatement.executeUpdate();

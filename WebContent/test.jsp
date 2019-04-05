@@ -8,7 +8,7 @@
 <title>test</title>
 </head>
 <body>
-<s:form action="CartAction">
+<s:form action="ProductListAction">
 <s:submit value="test"/>
 </s:form>
 </body>

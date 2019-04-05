@@ -77,11 +77,12 @@ public class CartInfoDAO {
 
 
 	//重複更新
-	public int update(int TotalCount,String UserId,int ProductId){
+	public int update(int TotalCount,String UserId,int ProductId)throws SQLException{
 		DBConnector dbConnector = new DBConnector();
 		Connection connection = dbConnector.getConnection();
 		int result=0;
-		String sql = "update cart_info set product_count=? update_date=now() where user_id=? product_id=?";
+
+		String sql = "update cart_info set product_count=? update_date=now() where user_id=? and product_id=?";
 		try {
 			PreparedStatement ps = connection.prepareStatement(sql);
 			ps.setInt(1,TotalCount );
@@ -132,4 +133,76 @@ public class CartInfoDAO {
 		}
 		return result;
 	}
+
+	public boolean isExistsCartInfo(String UserId,int ProductId){
+		boolean result=false;
+		DBConnector dbConnector = new DBConnector();
+		Connection connection = dbConnector.getConnection();
+		String sql = "select * FROM cart_info where user_id=? and product_id=?";
+		try {
+			PreparedStatement ps = connection.prepareStatement(sql);
+			ps.setString(1, UserId);
+			ps.setInt(2, ProductId);
+			ResultSet preres=ps.executeQuery();
+			if(preres.next()){
+				result=true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	public int updateFromLogin(int TotalCount,String UserId,int ProductId)throws SQLException{
+		DBConnector dbConnector = new DBConnector();
+		Connection connection = dbConnector.getConnection();
+		int ResourceQuantity=0;
+		int result=0;
+		ArrayList<CartInfoDTO> list=this.getCartContents(UserId);
+		for(CartInfoDTO dto:list){
+			if(ProductId==dto.getProductId()){
+				ResourceQuantity=dto.getProductCount();
+				break;
+			}
+		}
+
+		String sql = "update cart_info set product_count=? update_date=now() where user_id=? and product_id=?";
+		try {
+			PreparedStatement ps = connection.prepareStatement(sql);
+			ps.setInt(1,TotalCount+ResourceQuantity);
+			ps.setString(2, LocalDate.now().toString());
+			ps.setString(3, UserId);
+			ps.setInt(4, ProductId);
+			result=ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			result = 0;
+		}
+		return result;
+	}
+
+
+	public int linkToUserId(String TempUserId, String UserId, int ProductId)throws SQLException{
+		DBConnector dbConnector = new DBConnector();
+		Connection connection = dbConnector.getConnection();
+		int result=0;
+		ArrayList<CartInfoDTO> list=this.getCartContents(TempUserId);
+
+		try {
+			for(CartInfoDTO dto:list){
+			String sql = "insert into cart_info(user_id,product_id,product_count,price,resist_date) values(?,?,?,?,?,?)";
+			PreparedStatement ps = connection.prepareStatement(sql);
+			ps.setString(1, UserId);
+			ps.setInt(2,dto.getProductId() );
+			ps.setInt(3, dto.getProductCount());
+			ps.setInt(4, dto.getPrice());
+			ps.setString(5,"now()");
+			result=ps.executeUpdate();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			result = 0;
+		}
+		return result;
+	}
+
 }
