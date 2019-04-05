@@ -1,5 +1,5 @@
 /**
- * @author sksgym（すぎ）aaaaaaa
+ * @author sksgym（すぎ）
  */
 package com.internousdev.earth.action;
 
@@ -26,8 +26,6 @@ public class LoginAction extends ActionSupport implements SessionAware{
 	private String isNotUserInfoMessage;
 	private Map<String, Object> session;
 
-	UserInfoDAO userInfoDAO = new UserInfoDAO();
-	InputChecker inputChecker = new InputChecker();
 
 
 	public String execute(){
@@ -53,6 +51,7 @@ public class LoginAction extends ActionSupport implements SessionAware{
  * DBの会員情報テーブルにユーザーIDとパスワードが
  * 一致するユーザーが存在しているかを確認する。
  */
+		InputChecker inputChecker = new InputChecker();
 
 		//ユーザーIDは最低1文字、最大8文字
 		userIdErrorMessageList = inputChecker.doCheck("ユーザーID", userId, 1, 8, true, false, false, true, false, false, false);
@@ -66,6 +65,8 @@ public class LoginAction extends ActionSupport implements SessionAware{
 			session.put("logined", 0);
 			return result;
 		}
+
+		UserInfoDAO userInfoDAO = new UserInfoDAO();
 
 		if(userInfoDAO.isExistsUserInfo(userId, password)) {
 
@@ -124,7 +125,7 @@ public class LoginAction extends ActionSupport implements SessionAware{
 
 			} else {
 				//存在しない場合は、ユーザーIDをtempUserIdからuserIdに変更する。
-				count += cartInfoDAO.linkToUserId(tempuserid, userId, dto.getProductId());
+				count += cartInfoDAO.linkToUserId(tempUserId, userId, dto.getProductId());
 			}
 		}
 
