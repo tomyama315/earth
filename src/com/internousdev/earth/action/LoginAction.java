@@ -1,5 +1,5 @@
 /**
- * session使ってるのでctrl+Fで検索して
+ * @author sksgym（すぎ）
  */
 package com.internousdev.earth.action;
 
@@ -8,29 +8,28 @@ import java.util.Map;
 
 import org.apache.struts2.interceptor.SessionAware;
 
-import com.internousdev.earth.dto.CartInfoDTO;
-import com.opensymphony.xwork2.ActionSupport;
 import com.internousdev.earth.dao.CartInfoDAO;
 import com.internousdev.earth.dao.UserInfoDAO;
+import com.internousdev.earth.dto.CartInfoDTO;
 import com.internousdev.earth.dto.UserInfoDTO;
 import com.internousdev.earth.util.InputChecker;
+import com.opensymphony.xwork2.ActionSupport;
 
 
 public class LoginAction extends ActionSupport implements SessionAware{
 	private String userId;
 	private String password;
+	private List<CartInfoDTO> cartInfoDTOList;
 	private boolean savedUserIdFlag;
 	private List<String> userIdErrorMessageList;
 	private List<String> passwordErrorMessageList;
 	private String isNotUserInfoMessage;
-	private List<CartInfoDTO> cartInfoDTOList;
 	private Map<String, Object> session;
 
 	UserInfoDAO userInfoDAO = new UserInfoDAO();
 	InputChecker inputChecker = new InputChecker();
 
 
-	//sessionを使用します。
 	public String execute(){
 
 		//session内に何も情報が入っていない場合、タイムアウト（接続不可）と扱う。
@@ -43,12 +42,12 @@ public class LoginAction extends ActionSupport implements SessionAware{
 
 		if(savedUserIdFlag){
 			//session内でログイン中のユーザーIDを他クラスと共有する。
-			session.put("savedUserIdFlag", true);
-			session.put("savedUserId", userId);
+			session.put("loginflag", true);
+			session.put("loginuserid", userId);
 		}else{
-			//session内に格納していた（かもしれない）いらない情報を削除する。
-			session.remove("savedUserIdFlag");
-			session.remove("savedUserId");
+			//session内に格納している不要な情報を削除する。
+			session.remove("loginflag");
+			session.remove("loginuserid");
 		}
 /**
  * DBの会員情報テーブルにユーザーIDとパスワードが
@@ -60,10 +59,8 @@ public class LoginAction extends ActionSupport implements SessionAware{
 
 		//パスワードは最低1文字、最大16文字
 		passwordErrorMessageList = inputChecker.doCheck("パスワード", password, 1, 16, true, false, false, true, false, false, false);
-/**
- * 		エラーがない場合は認証処理を行う。
- */
-		//loginedはたぶんUserInfoクラスからsessionを介して持ってきます。
+
+		//エラー処理
 		if(userIdErrorMessageList.size() > 0
 		|| passwordErrorMessageList.size() > 0) {
 			session.put("logined", 0);
@@ -76,7 +73,7 @@ public class LoginAction extends ActionSupport implements SessionAware{
 				//カートの情報をユーザーに紐付ける。
 				//sessionからカート情報を取得
 				@SuppressWarnings("unchecked")
-				List<CartInfoDTO> cartInfoDTOListBySession = (List<CartInfoDTO> session.get("cartInfoDTOList");
+				List<CartInfoDTO> cartInfoDTOListBySession = (List<CartInfoDTO>) session.get("cartinfo");
 
 				if(cartInfoDTOListBySession != null) {
 					boolean cartresult = changeCartInfo(cartInfoDTOListBySession);
@@ -87,17 +84,17 @@ public class LoginAction extends ActionSupport implements SessionAware{
 				}
 
 // 				カート画面から推移してきた場合は、カート画面に推移する。
-				if(session.containsKey("cartFlag")) {
-					session.remove("cartFlag");
-					retult = "cart";
+				if(session.containsKey("cartflag")) {
+					session.remove("cartflag");
+					result = "cart";
 				} else {
 //					ログインボタンを押下した場合は、自画面に推移。
 					result = SUCCESS;
 				}
 
-				//ユーザー情報をsessionに登録する。
+				//ユーザー情報をsessionに登録し、ログイン可能にする。
 				UserInfoDTO userInfoDTO = userInfoDAO.getUserInfo(userId, password);
-				session.put("userId", userInfoDTO.getUserId());
+				session.put("loginuserid", userInfoDTO.getUserId());
 				session.put("logined", 1);
 			}
 		} else {
@@ -112,7 +109,7 @@ public class LoginAction extends ActionSupport implements SessionAware{
 	private boolean changeCartInfo(List<CartInfoDTO> cartInfoDTOListBySession) {
 		int count=0;
 		boolean result = false;
-		String tempUserId = session.get("tempUserId").toString();
+		String tempUserId = session.get("tempuserid").toString();
 		CartInfoDAO cartInfoDAO = new CartInfoDAO();
 
 		for(CartInfoDTO dto : cartInfoDTOListBySession) {
@@ -127,7 +124,7 @@ public class LoginAction extends ActionSupport implements SessionAware{
 
 			} else {
 				//存在しない場合は、ユーザーIDをtempUserIdからuserIdに変更する。
-				count += cartInfoDAO.linkToUserId(tempUserId, userId, dto.getProductId());
+				count += cartInfoDAO.linkToUserId(tempuserid, userId, dto.getProductId());
 			}
 		}
 
@@ -137,10 +134,6 @@ public class LoginAction extends ActionSupport implements SessionAware{
 		}
 		return result;
 	}
-
-	/**
-	 * カプセル化した変数にアクセスできるようにします。
-	 */
 
 	public String getUserId() {
 		return userId;
