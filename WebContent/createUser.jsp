@@ -92,24 +92,24 @@
 	</div>
 </s:if>
 
-<s:form action="CreateUserConfirmAction">
+<s:form action="CreateUserConfirmAction" >
 
 <table class="vertical-list-table">
 <tr>
 	<th scope="row">姓</th>
-	<td><s:textfield name="familyName" value="" placeholder="姓" class="txt" /></td>
+	<td><s:textfield name="familyName" value="" placeholder="姓" class="txt" style="width:500px; height:25px; margin:5px; "/></td>
 </tr>
 <tr>
 	<th scope="row">名</th>
-	<td><s:textfield name="firstName" value="" placeholder="名" class="txt" /></td>
+	<td><s:textfield name="firstName" value="" placeholder="名" class="txt" style="width:500px; height:25px; margin:5px"/></td>
 </tr>
 <tr>
 	<th scope="row">姓ふりがな</th>
-	<td><s:textfield name="familyNameKana" value="" placeholder="姓ふりがな" class="txt" /></td>
+	<td><s:textfield name="familyNameKana" value="" placeholder="姓ふりがな" class="txt" style="width:500px; height:25px; margin:5px;"/></td>
 </tr>
 <tr>
 	<th scope="row">名ふりがな</th>
-	<td><s:textfield name="firstNameKana" value="" placeholder="名ふりがな" class="txt" /></td>
+	<td><s:textfield name="firstNameKana" value="" placeholder="名ふりがな" class="txt" style="width:500px; height:25px; margin:5px;"/></td>
 </tr>
 <tr>
 	<th scope="row">性別</th>
@@ -118,15 +118,15 @@
 </tr>
 <tr>
 	<th scope="row">メールアドレス</th>
-	<td><s:textfield name="email" value="" placeholder="メールアドレス" class="txt" /></td>
+	<td><s:textfield name="email" value="" placeholder="メールアドレス" class="txt" style="width:500px; height:25px; margin:5px;"/></td>
 </tr>
 <tr>
 	<th scope="row">ユーザーID</th>
-	<td><s:textfield name="userId" value="" placeholder="ユーザーID" class="txt" /></td>
+	<td><s:textfield name="userId" value="" placeholder="ユーザーID" class="txt" style="width:500px; height:25px; margin:5px;"/></td>
 </tr>
 <tr>
 	<th scope="row">パスワード</th>
-	<td><s:password name="password" value="" placeholder="パスワード" class="txt" /></td>
+	<td><s:password name="password" value="" placeholder="パスワード" class="txt" style="width:500px; height:25px; margin:5px;"/></td>
 </tr>
 </table>
 <div class="submit_btn_box">
