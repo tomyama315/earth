@@ -12,7 +12,7 @@ public class CreateUserCompleteAction extends ActionSupport implements SessionAw
 	private Map<String, Object> session;
 
 	public String execute() {
-		//sessionがタイムアウトのチェック
+//sessionがタイムアウトのチェック
 		if(session.isEmpty()) {
 			return "sessionTimeout";
 		}
@@ -36,10 +36,11 @@ public class CreateUserCompleteAction extends ActionSupport implements SessionAw
 				String.valueOf(session.get("userIdForCreateUser")),
 				String.valueOf(session.get("password")));
 
+//カウントが0より大きかったら成功
 		if(count > 0) {
 			result = SUCCESS;
 		}
-
+//セッション情報を削除する。
 		session.remove("familyName");
 		session.remove("firstName");
 		session.remove("familyNameKana");
@@ -47,7 +48,7 @@ public class CreateUserCompleteAction extends ActionSupport implements SessionAw
 		session.remove("sex");
 		session.remove("sexList");
 		session.remove("email");
-
+//結果を返す
 		return result;
 	}
 

@@ -21,27 +21,27 @@ public class CartInfoDAO {
 		Connection connection = dbConnector.getConnection();
 		CartInfoDTO dto = new CartInfoDTO();
 
-		String sql = "SELECT * FROM cart_info where user_id=? left outer join product_info on cart_info.product_id=product_info.product_id by resist_date desc , update_date desc ";
+		String sql = "SELECT * FROM cart_info left outer join product_info on cart_info.product_id=product_info.product_id where user_id=? by cart_info.resist_date desc , cart_info.update_date desc ";
 		try {
 			PreparedStatement ps = connection.prepareStatement(sql);
 			ps.setString(1, UserId);
 			ResultSet rs = ps.executeQuery();
 
 			while (rs.next()) {
-				dto.setUserId(rs.getString("user_id"));
-				dto.setTempId(rs.getString("temp_user_id"));
-				dto.setProductId(rs.getInt("product_id"));
-				dto.setProductCount(rs.getInt("product_count"));
-				dto.setPrice(rs.getInt("price"));
-				dto.setResistDate(rs.getString("resist_date"));
-				dto.setUpdateDate(rs.getString("update_date"));
-				dto.setProductName(rs.getString("product_name"));
-				dto.setProductNameKana(rs.getString("product_name_kana"));
-				dto.setImagePath(rs.getString("image_file_path"));
-				dto.setImageName(rs.getString("image_file_name"));
-				dto.setReleaseComp(rs.getString("release_company"));
-				dto.setReleaseDate(rs.getString("release_date"));
-				int sum=rs.getInt("price")*rs.getInt("product_count");
+				dto.setUserId(rs.getString("cart_info.user_id"));
+				dto.setTempId(rs.getString("cart_info.temp_user_id"));
+				dto.setProductId(rs.getInt("cart_info.product_id"));
+				dto.setProductCount(rs.getInt("cart_info.product_count"));
+				dto.setPrice(rs.getInt("cart_info.price"));
+				dto.setResistDate(rs.getString("cart_info.resist_date"));
+				dto.setUpdateDate(rs.getString("cart_info.update_date"));
+				dto.setProductName(rs.getString("product_info.product_name"));
+				dto.setProductNameKana(rs.getString("product_info.product_name_kana"));
+				dto.setImagePath(rs.getString("product_info.image_file_path"));
+				dto.setImageName(rs.getString("product_info.image_file_name"));
+				dto.setReleaseComp(rs.getString("product_info.release_company"));
+				dto.setReleaseDate(rs.getString("product_info.release_date"));
+				int sum=rs.getInt("price")*rs.getInt("cart_info.product_count");
 				dto.setSum(sum);
 				toTransList.add(dto);
 			}
