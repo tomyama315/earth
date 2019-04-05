@@ -23,7 +23,7 @@ public class ResetPasswordAction extends ActionSupport implements SessionAware{
 //セッション情報を削除→userIdForResetPassword;
 			session.remove("userIdForResetPassword");
 		}
-//サクセスを返す。
+
 		return SUCCESS;
 	}
 	public int getBackFlag() {
