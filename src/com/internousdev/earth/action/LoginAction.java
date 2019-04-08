@@ -151,11 +151,11 @@ public class LoginAction extends ActionSupport implements SessionAware{
 		this.password = password;
 	}
 
-	public boolean isSavedUserIdFlag() {
+	public boolean isSaveduseridflag() {
 		return saveduseridflag;
 	}
 
-	public void setSavedUserIdFlag(boolean saveduseridflag) {
+	public void setSaveduseridflag(boolean saveduseridflag) {
 		this.saveduseridflag = saveduseridflag;
 	}
 
