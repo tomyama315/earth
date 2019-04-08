@@ -239,7 +239,7 @@ public class ProductInfoDAO {
 		return productInfoDTOList;
 	}
 
-public ArrayList<ProductInfoDTO> selectRelatives(int categoryId) {
+public ArrayList<ProductInfoDTO> selectRelative(int categoryId) {
 	DBConnector db = new DBConnector();
 	Connection ct = db.getConnection();
 	ProductInfoDTO productInfoDTO = new ProductInfoDTO();
