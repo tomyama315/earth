@@ -8,7 +8,9 @@ import java.util.Map;
 import org.apache.struts2.interceptor.SessionAware;
 
 import com.internousdev.earth.dao.CartInfoDAO;
+import com.internousdev.earth.dao.PurchaseHistoryInfoDAO;
 import com.internousdev.earth.dto.CartInfoDTO;
+import com.internousdev.earth.dto.PurchaseHistoryInfoDTO;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class SettlementCompleteAction extends ActionSupport implements SessionAware {
