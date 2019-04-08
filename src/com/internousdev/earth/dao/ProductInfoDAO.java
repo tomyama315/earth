@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import com.internousdev.earth.dto.ProductInfoDTO;
@@ -237,4 +238,57 @@ public class ProductInfoDAO {
 		}
 		return productInfoDTOList;
 	}
+
+public ArrayList<ProductInfoDTO> selectRelatives(int categoryId) {
+	DBConnector db = new DBConnector();
+	Connection ct = db.getConnection();
+	ProductInfoDTO productInfoDTO = new ProductInfoDTO();
+	ArrayList<ProductInfoDTO> sortedList = new ArrayList<ProductInfoDTO>();
+	if (categoryId == 1) {
+		productInfoDTOList = this.selectAll();
+	} else {
+		String sql = "SELECT *  FROM product_info WHERE category_id = ?";
+		try {
+			PreparedStatement ps = ct.prepareStatement(sql);
+			ps.setInt(1, categoryId);
+			ResultSet resultSet = ps.executeQuery();
+			while (resultSet.next()) {
+				productInfoDTO = new ProductInfoDTO();
+				productInfoDTO.setId(resultSet.getInt("id"));
+				productInfoDTO.setProductId(resultSet.getInt("product_id"));
+				productInfoDTO.setProductName(resultSet.getString("product_name"));
+				productInfoDTO.setProductNameKana(resultSet.getString("product_name_kana"));
+				productInfoDTO.setProductDescription(resultSet.getString("product_description"));
+				productInfoDTO.setCategoryId(resultSet.getInt("category_id"));
+				productInfoDTO.setPrice(resultSet.getInt("price"));
+				productInfoDTO.setImageFilePath(resultSet.getString("image_file_path"));
+				productInfoDTO.setImageFileName(resultSet.getString("image_file_name"));
+				productInfoDTO.setReleaseDate(resultSet.getDate("release_date"));
+				productInfoDTO.setReleaseCompany(resultSet.getString("release_company"));
+				productInfoDTO.setStatus(resultSet.getShort("status"));
+				productInfoDTO.setRegistDate(resultSet.getDate("regist_date"));
+				productInfoDTO.setUpDate(resultSet.getDate("up_date"));
+				productInfoDTOList.add(productInfoDTO);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+
+		}
+
+		try {
+			ct.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+
+		}
+	}
+	Collections.shuffle(productInfoDTOList);
+	productInfoDTOList.stream().limit(3).forEach(s->sortedList.add(s));
+
+
+	return sortedList;
 }
+}
+
