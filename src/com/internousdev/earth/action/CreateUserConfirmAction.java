@@ -63,10 +63,15 @@ public class CreateUserConfirmAction extends ActionSupport implements SessionAwa
 //0だったらエラーメッセージを表示する。かつ、または〜
 		if(familyNameErrorMessageList.size()>0
 		|| firstNameErrorMessageList.size()>0
+
 		|| familyNameKanaErrorMessageList.size()>0
+
 		|| firstNameKanaErrorMessageList.size()>0
+
 		|| emailErrorMessageList.size()>0
+
 		|| userIdErrorMessageList.size()>0
+
 		|| passwordErrorMessageList.size() > 0) {
 			return result;
 		}
@@ -181,7 +186,7 @@ public class CreateUserConfirmAction extends ActionSupport implements SessionAwa
 	public List<String> getPasswordErrorMessageList(){
 		return passwordErrorMessageList;
 	}
-	public void setPasswordErrorMessageList(List<String> passwordErrorMessage) {
+	public void setPasswordErrorMessageList(List<String> passwordErrorMessageList) {
 		this.passwordErrorMessageList = passwordErrorMessageList;
 	}
 
