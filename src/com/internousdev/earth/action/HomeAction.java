@@ -21,7 +21,7 @@ public class HomeAction extends ActionSupport implements SessionAware {
 			session.put("tempuserid", cu.getRamdomValue());
 		}
 
-		//ログインのエラー処理。NULLをなくします。
+		//ログイン状態の保存。0は未ログイン。
 		if(!session.containsKey("logined")) {
 			session.put("logined", 0);
 		}

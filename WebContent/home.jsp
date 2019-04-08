@@ -15,7 +15,7 @@
 <%@include file="header.jsp"%>
 </div>
 	<div>
-		<h1>HOME画面</h1>
+		<h2>HOME画面</h2>
 	</div>
 
 </body>
