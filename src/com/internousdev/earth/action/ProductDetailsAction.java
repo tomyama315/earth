@@ -1,5 +1,6 @@
 package com.internousdev.earth.action;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -21,6 +22,7 @@ public class ProductDetailsAction extends ActionSupport implements SessionAware 
 	// private String productDescription;
 	private Map<String, Object> session;
 	private List<ProductInfoDTO> selectRelativeList;
+	private List<Integer> countList;
 
 	public String execute() {
 		if (session.isEmpty()) {
@@ -59,6 +61,12 @@ public class ProductDetailsAction extends ActionSupport implements SessionAware 
 		// 関連情報の取得、引数にint categoryIdを渡す
 		// 戻り値をselectRelativeListに格納→jspでiterator
 		selectRelativeList = productInfoDAO.selectRelative(productInfoDTO.getCategoryId());
+
+		//商品個数
+		countList = new ArrayList<Integer>();
+		for (int i = 1; i <= 5; i++) {
+			countList.add(i);
+		}
 
 		return SUCCESS;
 	}
@@ -149,6 +157,14 @@ public class ProductDetailsAction extends ActionSupport implements SessionAware 
 
 	public void setSelectRelativeList(List<ProductInfoDTO> selectRelativeList) {
 		this.selectRelativeList = selectRelativeList;
+	}
+
+	public List<Integer> getCountList() {
+		return countList;
+	}
+
+	public void setCountList(List<Integer> countList) {
+		this.countList = countList;
 	}
 
 }

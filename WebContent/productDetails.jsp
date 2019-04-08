@@ -41,13 +41,7 @@
 				</tr>
 				<tr>
 					<td>販売個数</td>
-					<td><select name="count">
-							<option value="1" selected="selected">1</option>
-							<option value="2">2</option>
-							<option value="3">3</option>
-							<option value="4">4</option>
-							<option value="5">5</option>
-					</select></td>
+					<td><s:select name="countList" list="%{countList}"/></td>
 				</tr>
 				<tr>
 					<td>販売会社名</td>
