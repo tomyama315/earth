@@ -14,10 +14,18 @@
 	<div id="maincontainer">
 		<h1>商品詳細画面</h1>
 		<s:form action="AddCartAction">
+		<s:iterator value="productInfoDTO">
 			<tr>
-				<img src="<s:property value="productInfoDTO.getImageFilePath()"/>">
-				<s:property value="productInfoDTO.getProductName()" />
+				<td>
+				<img src='<s:property value="ImagePath"/>/<s:property value="ImageName"/>'width="300px" height="300px" />
+				</td>
 			</tr>
+			<tr>
+				<td>
+				<s:property value="productInfoDTO.getProductName()" />
+				</td>
+			</tr>
+
 			<table>
 				<tr>
 					<td>商品名</td>
@@ -54,8 +62,17 @@
 					<td><s:property value="productInfoDTO.getProductDescription()" /></td>
 				</tr>
 			</table>
+			</s:iterator>
 		</s:form>
 	</div>
+	<div id = "sub">
+	<h2>関連商品</h2>
+		<s:iterator value = "selectRelativeList">
+		<a href='<s:url action="ProductDetailsAction"><s:param name="productId" value="%{productId}"/>
+					</s:url>'><img src='<s:property value="imageFilePath"/>/<s:property value="imageFileName"/>' class="item-image-box-100"/></a>
+					<s:property value="productName"/><br>
+			</s:iterator>
+		</div>
 
 
 </body>
