@@ -36,7 +36,7 @@ public class SettlementConfirmAction extends ActionSupport implements SessionAwa
 		// 未ログインだったらログイン画面へ
 		if (session.get("logined").equals(0)) {
 			// ログイン機能でカート画面から遷移してきた場合、認証成功でカート画面に戻るのでflgを渡す。
-			session.put("cartlag", "1");
+			session.put("cartflg", "1");
 			result = "login";
 		}
 		// ログインしてたら宛先情報確認

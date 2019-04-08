@@ -1,15 +1,8 @@
 package com.internousdev.earth.action;
 
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Map;
-
-import org.apache.struts2.interceptor.SessionAware;
-
-import com.internousdev.earth.dao.CartInfoDAO;
-import com.internousdev.earth.dto.CartInfoDTO;
-import com.internousdev.earth.dto.ProductInfoDTO;
-import com.opensymphony.xwork2.ActionSupport;
+import src.com.internousdev.earth.dao.CartInfoDAO;
+import src.com.internousdev.earth.dto.CartInfoDTO;
+import src.com.internousdev.earth.dto.ProductInfoDTO;
 
 public class AddCartAction extends ActionSupport implements SessionAware {
 	private ArrayList<CartInfoDTO> cartlist;
