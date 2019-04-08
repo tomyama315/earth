@@ -19,21 +19,24 @@ public class SearchItemAction extends ActionSupport implements SessionAware {
 	private Map<String, Object> session;
 
 	public String execute() {
-		System.out.println("keyword:"+keyword);
 		//sessionが空だと接続不可
 		if(session.isEmpty()) {
 			return "sessionTimeout";
 		}
-
+		System.out.println(keyword);
 		InputChecker inputChecker =  new InputChecker();
 
 		String tempKeywords = null;
 
+		//検索ワードが空白の場合、空として扱います
 		if(StringUtils.isBlank(keyword)) {
 			tempKeywords = "";
-		} else {
+		}
+		//全角スペースが入力されている場合は半角スペースに置換、スペースが2個以上ある場合も半角スペース1個に変換
+		else {
 			tempKeywords =keyword.replaceAll("　", " ").replaceAll("\\s{2,}", " ");
 		}
+		//検索ワードが入力されている場合、入力チェックをします。
 		if(!(tempKeywords.equals(""))) {
 			keywordsErrorMessageList = inputChecker.doCheck("検索", "keyword", 0, 50, true, true, true, true, false, true, true);
 
