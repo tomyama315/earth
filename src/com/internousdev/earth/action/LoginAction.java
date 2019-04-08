@@ -14,7 +14,7 @@ public class LoginAction extends ActionSupport implements SessionAware{
 	private String userId;
 	private String password;
 	private List<CartInfoDTO> cartInfoDTOList;
-	private boolean savedUserIdFlag;
+	private boolean saveduseridflag;
 	private List<String> userIdErrorMessageList;
 	private List<String> passwordErrorMessageList;
 	private String isNotUserInfoMessage;
@@ -31,7 +31,7 @@ public class LoginAction extends ActionSupport implements SessionAware{
 		//strutsにresultを渡して画面推移を行う。ひとまずエラー扱いとする。
 		String result = ERROR;
 
-		if(savedUserIdFlag){
+		if(saveduseridflag){
 			//session内でログイン中のユーザーIDを他クラスと共有する。
 			//ユーザーIDを保存したかどうかのフラグ。
 			session.put("saveduseridflag", true);
@@ -144,11 +144,11 @@ public class LoginAction extends ActionSupport implements SessionAware{
 	}
 
 	public boolean isSavedUserIdFlag() {
-		return savedUserIdFlag;
+		return saveduseridflag;
 	}
 
-	public void setSavedUserIdFlag(boolean savedUserIdFlag) {
-		this.savedUserIdFlag = savedUserIdFlag;
+	public void setSavedUserIdFlag(boolean saveduseridflag) {
+		this.saveduseridflag = saveduseridflag;
 	}
 
 	public List<String> getUserIdErrorMessageList() {
