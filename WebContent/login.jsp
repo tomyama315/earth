@@ -22,7 +22,7 @@
 	<s:if test="userIdErrorMessageList!=null && userIdErrorMessageList.size()>0">
 		<div class="error">
 			<div class="error-message">
-				<s:iterator value="userIdErrorMesageList"><s:property /><br></s:iterator>
+				<s:iterator value="userIdErrorMessageList"><s:property /><br></s:iterator>
 			</div>
 		</div>
 	</s:if>

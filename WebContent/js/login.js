@@ -6,7 +6,7 @@ function goLoginAction() {
 	document.getElementById("loginForm").action="LoginAction";
 }
 
-function goCreateAction() {
+function goCreateUserAction() {
 	document.getElementById("loginForm").action="CreateUserAction";
 }
 
