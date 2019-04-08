@@ -21,9 +21,7 @@ public class GoLoginAction extends ActionSupport implements SessionAware {
 		session.remove("cartflag");
 		return SUCCESS;
 	}
-	/**
-	 * sessionを使うためのゲッター・セッター
-	 */
+
 	public Map<String, Object> getSession() {
 		return session;
 	}

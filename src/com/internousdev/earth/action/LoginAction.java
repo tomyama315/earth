@@ -60,6 +60,7 @@ public class LoginAction extends ActionSupport implements SessionAware{
 		//エラー処理
 		if(userIdErrorMessageList.size() > 0
 		|| passwordErrorMessageList.size() > 0) {
+			//ログインフラグを折る
 			session.put("logined", 0);
 			return result;
 		}
@@ -93,7 +94,7 @@ public class LoginAction extends ActionSupport implements SessionAware{
 
 				//ユーザー情報をsessionに登録し、ログイン可能にする。
 				UserInfoDTO userInfoDTO = userInfoDAO.getUserInfo(userId, password);
-				session.put("loginuserid", userInfoDTO.getUserId());
+				session.put("userId", userInfoDTO.getUserId());
 				session.put("logined", 1);
 			}
 		} else {

@@ -57,6 +57,7 @@
 	</tr>
 	</table>
 	<div class="box">
+	
 		<s:if test="#session.saveduseridflag==true
 		&& #session.saveduseridflag!=null
 		&& !#session.saveduseridflag.isEmpty()">
