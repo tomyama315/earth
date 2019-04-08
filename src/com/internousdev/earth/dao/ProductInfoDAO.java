@@ -36,7 +36,7 @@ public class ProductInfoDAO {
 				productInfoDTO.setReleaseDate(resultSet.getDate("release_date"));
 				productInfoDTO.setReleaseCompany(resultSet.getString("release_company"));
 				productInfoDTO.setStatus(resultSet.getInt("status"));
-				productInfoDTO.setRegistDate(resultSet.getDate("resist_date"));
+				productInfoDTO.setRegistDate(resultSet.getDate("regist_date"));
 				productInfoDTO.setUpDate(resultSet.getDate("update_date"));
 				productInfoDTOList.add(productInfoDTO);
 			}
@@ -80,7 +80,7 @@ public class ProductInfoDAO {
 				productInfoDTO.setReleaseDate(resultSet.getDate("release_date"));
 				productInfoDTO.setReleaseCompany(resultSet.getString("release_company"));
 				productInfoDTO.setStatus(resultSet.getInt("status"));
-				productInfoDTO.setRegistDate(resultSet.getDate("resist_Date"));
+				productInfoDTO.setRegistDate(resultSet.getDate("regist_Date"));
 				productInfoDTO.setUpDate(resultSet.getDate("update_date"));
 			}
 
@@ -126,7 +126,7 @@ public class ProductInfoDAO {
 					productInfoDTO.setReleaseDate(resultSet.getDate("release_date"));
 					productInfoDTO.setReleaseCompany(resultSet.getString("release_company"));
 					productInfoDTO.setStatus(resultSet.getShort("status"));
-					productInfoDTO.setRegistDate(resultSet.getDate("resist_date"));
+					productInfoDTO.setRegistDate(resultSet.getDate("regist_date"));
 					productInfoDTO.setUpDate(resultSet.getDate("update_date"));
 					productInfoDTOList.add(productInfoDTO);
 				}
@@ -266,7 +266,7 @@ public ArrayList<ProductInfoDTO> selectRelative(int categoryId) {
 				productInfoDTO.setReleaseDate(resultSet.getDate("release_date"));
 				productInfoDTO.setReleaseCompany(resultSet.getString("release_company"));
 				productInfoDTO.setStatus(resultSet.getShort("status"));
-				productInfoDTO.setRegistDate(resultSet.getDate("resist_date"));
+				productInfoDTO.setRegistDate(resultSet.getDate("regist_date"));
 				productInfoDTO.setUpDate(resultSet.getDate("update_date"));
 				productInfoDTOList.add(productInfoDTO);
 			}

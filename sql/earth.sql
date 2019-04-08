@@ -17,7 +17,7 @@ sex tinyint not null Default 0,
 email varchar(32) not null,
 status tinyint not null Default 0,
 logined tinyint not null default 0,
-resist_date datetime not null,
+regist_date datetime not null,
 update_date datetime
 );
 
@@ -35,7 +35,7 @@ image_file_name varchar(50),
 release_date datetime not null,
 release_company varchar(50),
 status tinyint default 0 not null,
-resist_date datetime not null,
+regist_date datetime not null,
 update_date datetime
 );
 
@@ -47,7 +47,7 @@ temp_user_id varchar(16),
 product_id int not null,
 product_count int not null,
 price int not null,
-resist_date datetime not null,
+regist_date datetime not null,
 update_date datetime
 );
 
@@ -59,7 +59,7 @@ product_id int,
 product_count int not null,
 price int not null,
 destination_id int not null,
-resist_date datetime not null,
+regist_date datetime not null,
 update_date datetime
 );
 
@@ -74,7 +74,7 @@ first_name_kana varchar(32) not null,
 email varchar(32) not null,
 tel_number varchar(13) not null,
 user_address varchar(50) not null,
-resist_date datetime not null,
+regist_date datetime not null,
 update_date datetime
 );
 

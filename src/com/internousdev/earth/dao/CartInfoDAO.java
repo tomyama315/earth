@@ -19,7 +19,7 @@ public class CartInfoDAO {
 		Connection connection = dbConnector.getConnection();
 		ArrayList<CartInfoDTO> toTransList = new ArrayList<CartInfoDTO>();
 
-		String sql = "SELECT * FROM cart_info left outer join product_info on cart_info.product_id=product_info.product_id where cart_info.user_id=? order by cart_info.resist_date desc , cart_info.update_date desc ";
+		String sql = "SELECT * FROM cart_info left outer join product_info on cart_info.product_id=product_info.product_id where cart_info.user_id=? order by cart_info.regist_date desc , cart_info.update_date desc ";
 		try {
 			PreparedStatement ps = connection.prepareStatement(sql);
 			ps.setString(1, UserId);
@@ -32,7 +32,7 @@ public class CartInfoDAO {
 				dto.setProductId(rs.getInt("cart_info.product_id"));
 				dto.setProductCount(rs.getInt("cart_info.product_count"));
 				dto.setPrice(rs.getInt("cart_info.price"));
-				dto.setResistDate(rs.getString("cart_info.resist_date"));
+				dto.setRegistDate(rs.getString("cart_info.regist_date"));
 				dto.setUpdateDate(rs.getString("cart_info.update_date"));
 				dto.setProductName(rs.getString("product_info.product_name"));
 				dto.setProductNameKana(rs.getString("product_info.product_name_kana"));
@@ -56,7 +56,7 @@ public class CartInfoDAO {
 		DBConnector dbConnector = new DBConnector();
 		Connection connection = dbConnector.getConnection();
 		int result = 0;
-		String sql = "insert into cart_info(user_id,product_id,product_count,price,resist_date) values(?,?,?,?,?,?)";
+		String sql = "insert into cart_info(user_id,product_id,product_count,price,regist_date) values(?,?,?,?,?,?)";
 		try {
 			PreparedStatement ps = connection.prepareStatement(sql);
 			ps.setString(1, UserId);
@@ -186,7 +186,7 @@ public class CartInfoDAO {
 
 		try {
 			for (CartInfoDTO dto : list) {
-				String sql = "insert into cart_info(user_id,product_id,product_count,price,resist_date) values(?,?,?,?,?,?)";
+				String sql = "insert into cart_info(user_id,product_id,product_count,price,regist_date) values(?,?,?,?,?,?)";
 				PreparedStatement ps = connection.prepareStatement(sql);
 				ps.setString(1, UserId);
 				ps.setInt(2, dto.getProductId());
