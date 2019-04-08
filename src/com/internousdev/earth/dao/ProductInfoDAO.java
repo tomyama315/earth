@@ -56,6 +56,7 @@ public class ProductInfoDAO {
 		return productInfoDTOList;
 	}
 
+
 	// ProductID(商品ID)に応じてDTOとる
 	public ProductInfoDTO selectByProductId(int productId) {
 		DBConnector db = new DBConnector();

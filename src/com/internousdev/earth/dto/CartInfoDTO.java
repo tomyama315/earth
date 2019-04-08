@@ -20,7 +20,6 @@ public class CartInfoDTO {
     private int sum;
 
 
-
 	public String getUserId() {
 		return UserId;
 	}
