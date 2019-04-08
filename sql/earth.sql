@@ -44,7 +44,6 @@ drop table if exists cart_info;
 create table cart_info(
 id int primary key not null auto_increment,
 user_id varchar(16) not null,
-temp_user_id varchar(16),
 product_id int not null,
 product_count int not null,
 price int not null,

@@ -14,7 +14,7 @@ public class LogoutAction extends ActionSupport implements SessionAware {
 
 	public String execute() {
 		UserInfoDAO userInfoDAO = new UserInfoDAO();
-		String userId = String.valueOf(session.get("userId"));
+		String userId = String.valueOf(session.get("loginuserid"));
 		boolean loginUserId = Boolean.valueOf(String.valueOf(session.get("saveduseridflag")));
 
 		int count = userInfoDAO.logout(userId);

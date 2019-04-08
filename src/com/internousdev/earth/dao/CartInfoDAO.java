@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 import com.internousdev.earth.dto.CartInfoDTO;
@@ -28,7 +27,6 @@ public class CartInfoDAO {
 			while (rs.next()) {
 				CartInfoDTO dto = new CartInfoDTO();
 				dto.setUserId(rs.getString("cart_info.user_id"));
-				dto.setTempId(rs.getString("cart_info.temp_user_id"));
 				dto.setProductId(rs.getInt("cart_info.product_id"));
 				dto.setProductCount(rs.getInt("cart_info.product_count"));
 				dto.setPrice(rs.getInt("cart_info.price"));
@@ -42,7 +40,6 @@ public class CartInfoDAO {
 				dto.setReleaseDate(rs.getString("product_info.release_date"));
 				int sum = rs.getInt("price") * rs.getInt("cart_info.product_count");
 				dto.setSum(sum);
-				System.out.print(dto.getProductId());
 				toTransList.add(dto);
 			}
 		} catch (Exception e) {
@@ -56,14 +53,13 @@ public class CartInfoDAO {
 		DBConnector dbConnector = new DBConnector();
 		Connection connection = dbConnector.getConnection();
 		int result = 0;
-		String sql = "insert into cart_info(user_id,product_id,product_count,price,regist_date) values(?,?,?,?,?,?)";
+		String sql = "insert into cart_info(user_id,product_id,product_count,price,regist_date,update_date) values(?,?,?,?,now(),now())";
 		try {
 			PreparedStatement ps = connection.prepareStatement(sql);
 			ps.setString(1, UserId);
 			ps.setInt(2, dto.getProductId());
 			ps.setInt(3, dto.getProductCount());
 			ps.setInt(4, dto.getPrice());
-			ps.setString(5, "now()");
 			result = ps.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -80,13 +76,12 @@ public class CartInfoDAO {
 		Connection connection = dbConnector.getConnection();
 		int result = 0;
 
-		String sql = "update cart_info set product_count=? update_date=now() where user_id=? and product_id=?";
+		String sql = "update cart_info set product_count=? ,update_date=now() where user_id=? and product_id=?";
 		try {
 			PreparedStatement ps = connection.prepareStatement(sql);
 			ps.setInt(1, TotalCount);
-			ps.setString(2, LocalDate.now().toString());
-			ps.setString(3, UserId);
-			ps.setInt(4, ProductId);
+			ps.setString(2, UserId);
+			ps.setInt(3, ProductId);
 			result = ps.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -164,13 +159,12 @@ public class CartInfoDAO {
 			}
 		}
 
-		String sql = "update cart_info set product_count=? update_date=now() where user_id=? and product_id=?";
+		String sql = "update cart_info set product_count=? , update_date=now() where user_id=? and product_id=?";
 		try {
 			PreparedStatement ps = connection.prepareStatement(sql);
 			ps.setInt(1, TotalCount + ResourceQuantity);
-			ps.setString(2, LocalDate.now().toString());
-			ps.setString(3, UserId);
-			ps.setInt(4, ProductId);
+			ps.setString(2, UserId);
+			ps.setInt(3, ProductId);
 			result = ps.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -188,13 +182,12 @@ public class CartInfoDAO {
 
 		try {
 			for (CartInfoDTO dto : list) {
-				String sql = "insert into cart_info(user_id,product_id,product_count,price,regist_date) values(?,?,?,?,?,?)";
+				String sql = "insert into cart_info(user_id,product_id,product_count,price,regist_date) values(?,?,?,?,now())";
 				PreparedStatement ps = connection.prepareStatement(sql);
 				ps.setString(1, UserId);
 				ps.setInt(2, dto.getProductId());
 				ps.setInt(3, dto.getProductCount());
 				ps.setInt(4, dto.getPrice());
-				ps.setString(5, "now()");
 				result = ps.executeUpdate();
 			}
 		} catch (SQLException e) {

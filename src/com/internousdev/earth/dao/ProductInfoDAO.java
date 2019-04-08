@@ -240,7 +240,7 @@ public class ProductInfoDAO {
 		return productInfoDTOList;
 	}
 
-public ArrayList<ProductInfoDTO> selectRelative(int categoryId) {
+public ArrayList<ProductInfoDTO> selectRelative(int ProductId,int categoryId) {
 	DBConnector db = new DBConnector();
 	Connection ct = db.getConnection();
 	ProductInfoDTO productInfoDTO = new ProductInfoDTO();
@@ -284,6 +284,14 @@ public ArrayList<ProductInfoDTO> selectRelative(int categoryId) {
 			e.printStackTrace();
 
 		}
+	}
+	int count=0;
+	for(ProductInfoDTO dto:productInfoDTOList){
+	if(dto.getProductId()==ProductId){
+		productInfoDTOList.remove(count);
+		break;
+	}
+	count++;
 	}
 	Collections.shuffle(productInfoDTOList);
 	productInfoDTOList.stream().limit(3).forEach(s->sortedList.add(s));
