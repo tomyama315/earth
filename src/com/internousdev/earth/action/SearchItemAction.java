@@ -35,7 +35,7 @@ public class SearchItemAction extends ActionSupport implements SessionAware {
 		else {
 			tempKeywords =keyword.replaceAll("　", " ").replaceAll("\\s{2,}", " ");
 		}
-		//検索ワードが入力されている場合、入力チェックをしてListに入れてます。エラーがあった場合もsuccessを返す。
+		//検索ワードが入力されている場合、エラーチェックをしてListに入れてます。エラーがあった場合もsuccessを返す。
 		if(!(tempKeywords.equals(""))) {
 			keywordsErrorMessageList = inputChecker.doCheck("検索", "keyword", 0, 50, true, true, true, true, false, true, true);
 
