@@ -39,10 +39,9 @@ public class LoginAction extends ActionSupport implements SessionAware{
 		String result = ERROR;
 
 		if(saveduseridflag){
-			//session内でログイン中のユーザーIDを他クラスと共有する。
-			//ユーザーIDを保存したかどうかのフラグ。
+			//ユーザーIDの保存にチェックを入れたかどうかのフラグだとおもう
 			session.put("saveduseridflag", true);
-			//保存したユーザーIDの照合。
+			//保存したユーザーIDと入力されたIDの照合。
 			session.put("seveduserid", userId);
 		}else{
 			//session内に格納している不要な情報を削除する。
