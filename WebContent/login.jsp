@@ -29,7 +29,7 @@
 	<s:if test="passwordErrorMessageList!=null && passwordErrorMessageList.size()>0">
 	<div class="error">
 		<div class="error-message">
-			<s:iterator value="userIdErrorMessageList"><s:property /><br></s:iterator>
+			<s:iterator value="passwordErrorMessageList"><s:property /><br></s:iterator>
 		</div>
 	</div>
 	</s:if>
@@ -45,7 +45,7 @@
 	<tr>
 		<th scope="row"><s:label value="ユーザーID"/></th>
 		<s:if test="#session.saveduseridflag==true">
-		<td><s:textfield name="userId" class="txt" placeholder="ユーザーID" value='%{#session.loginuserid}' autocomplete="off"/></td>
+		<td><s:textfield name="userId" class="txt" placeholder="ユーザーID" value='%{#session.saveduserid}' autocomplete="off"/></td>
 		</s:if>
 		<s:else>
 		<td><s:textfield name="userId" class="txt" placeholder="ユーザーID" value='%{userId}' autocomplete="off"/></td>
@@ -57,10 +57,10 @@
 	</tr>
 	</table>
 	<div class="box">
-	
+
 		<s:if test="#session.saveduseridflag==true
-		&& #session.saveduseridflag!=null
-		&& !#session.saveduseridflag.isEmpty()">
+		&& #session.saveduserid!=null
+		&& !#session.saveduserid.isEmpty()">
 		<s:checkbox name="saveduseridflag" checked="checked"/>
 		</s:if>
 		<s:else>
