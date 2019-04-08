@@ -52,7 +52,9 @@ public class ResetPasswordConfirmAction extends ActionSupport implements Session
 //何かしら入力されていたら結果を返す。
 		if(userIdErrorMessageList.size() > 0
 		|| passwordErrorMessageList.size() > 0
+
 		|| newPasswordErrorMessageList.size() > 0
+
 		|| reConfirmationNewPasswordErrorMessageList.size() > 0) {
 			return result;
 		}

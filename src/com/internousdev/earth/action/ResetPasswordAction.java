@@ -7,7 +7,6 @@ import org.apache.struts2.interceptor.SessionAware;
 import com.opensymphony.xwork2.ActionSupport;
 
 
-//継承して実装。
 public class ResetPasswordAction extends ActionSupport implements SessionAware{
 	private int backFlag;
 	private Map<String, Object> session;
