@@ -16,6 +16,7 @@
 
 <div id="contents">
 <h1>宛先情報入力画面</h1>
+<!-- 姓のエラーメッセージ表示 -->
 <s:if test="familyNameErrorMessageList!=null && familyNameErrorMessageList.size()>0">
 	<div class="error">
 		<div class="error-message">
@@ -23,6 +24,7 @@
 		</div>
 	</div>
 </s:if>
+<!-- 名のエラーメッセージ表示 -->
 <s:if test="firstNameErrorMessageList!=null && firstNameErrorMessageList.size()>0">
 	<div class="error">
 		<div class="error-message">
@@ -30,6 +32,7 @@
 		</div>
 	</div>
 </s:if>
+<!-- 姓ふりがなのエラーメッセージ表示 -->
 <s:if test="familyNameKanaErrorMessageList!=null && familyNameKanaErrorMessageList.size()>0">
 	<div class="error">
 		<div class="error-message">
@@ -37,6 +40,7 @@
 		</div>
 	</div>
 </s:if>
+<!-- 名ふりがなのエラーメッセージ表示 -->
 <s:if test="firetNameKanaErrorMessageList!=null && firstNameKanaErrorMessageList.size()>0">
 	<div class="error">
 		<div class="error-message">
@@ -44,6 +48,7 @@
 		</div>
 	</div>
 </s:if>
+<!-- メールアドレスのエラーメッセージ表示 -->
 <s:if test="emailErrorMessageList!=null && emailErrorMessageList.size()>0">
 	<div class="error">
 		<div class="error-message">
@@ -51,6 +56,7 @@
 		</div>
 	</div>
 </s:if>
+<!-- 電話番号のエラーメッセージ表示 -->
 <s:if test="telNumberErrorMessageList!=null && telNumberErrorMessageList.size()>0">
 	<div class="error">
 		<div class="error-message">
@@ -58,6 +64,7 @@
 		</div>
 	</div>
 </s:if>
+<!-- 住所のエラーメッセージ表示 -->
 <s:if test="userAddressErrorMessageList!=null && userAddressErrorMessageList.size()>0">
 	<div class="error">
 		<div class="error-message">
