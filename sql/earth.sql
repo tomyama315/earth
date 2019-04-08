@@ -22,6 +22,7 @@ update_date datetime
 );
 
 
+
 drop table if exists product_info;
 create table product_info(
 id int not null primary key auto_increment,
