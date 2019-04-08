@@ -7,7 +7,6 @@ import org.apache.struts2.interceptor.SessionAware;
 import com.internousdev.earth.dao.DestinationInfoDAO;
 import com.opensymphony.xwork2.ActionSupport;
 
-
 public class CreateDestinationCompleteAction extends ActionSupport implements SessionAware{
 	private Map<String, Object> session;
 	public String execute() {
@@ -23,9 +22,10 @@ public class CreateDestinationCompleteAction extends ActionSupport implements Se
 				String.valueOf(session.get("firstName")),
 				String.valueOf(session.get("familyNameKana")),
 				String.valueOf(session.get("firstNameKana")),
+				String.valueOf(session.get("userAddress")),
 				String.valueOf(session.get("email")),
-				String.valueOf(session.get("telNumber")),
-				String.valueOf(session.get("userAddress"))
+				String.valueOf(session.get("telNumber"))
+
 			);
 		if(count > 0) {
 			result = SUCCESS;
