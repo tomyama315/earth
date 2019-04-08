@@ -127,7 +127,7 @@ public class ProductInfoDAO {
 					productInfoDTO.setReleaseCompany(resultSet.getString("release_company"));
 					productInfoDTO.setStatus(resultSet.getShort("status"));
 					productInfoDTO.setRegistDate(resultSet.getDate("resist_date"));
-					productInfoDTO.setUpDate(resultSet.getDate("up_date"));
+					productInfoDTO.setUpDate(resultSet.getDate("update_date"));
 					productInfoDTOList.add(productInfoDTO);
 				}
 
@@ -267,7 +267,7 @@ public ArrayList<ProductInfoDTO> selectRelative(int categoryId) {
 				productInfoDTO.setReleaseCompany(resultSet.getString("release_company"));
 				productInfoDTO.setStatus(resultSet.getShort("status"));
 				productInfoDTO.setRegistDate(resultSet.getDate("resist_date"));
-				productInfoDTO.setUpDate(resultSet.getDate("up_date"));
+				productInfoDTO.setUpDate(resultSet.getDate("update_date"));
 				productInfoDTOList.add(productInfoDTO);
 			}
 
