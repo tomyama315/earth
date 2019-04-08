@@ -15,6 +15,7 @@ import com.internousdev.earth.util.DBConnector;
 			DBConnector db = new DBConnector();
 			Connection con = db.getConnection();
 			List<MCategoryDTO> mCategoryDTOList = new ArrayList<MCategoryDTO>();
+			//今回はカテゴリー詳細などはselectしてません
 			String sql = "SELECT id, category_id, category_name FROM m_category";
 			try {
 				PreparedStatement ps = con.prepareStatement(sql);
