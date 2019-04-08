@@ -25,7 +25,7 @@ public class PurchaseHistoryInfoDAO {
 				+ " pi.image_file_name as image_file_name," /* 画像ファイル名 */
 				+ " pi.image_file_path as image_file_path," /* 画像ファイルパス */
 				+ " pi.release_company," /* 発売会社 */
-				+ " pi.releas_date," /* 発売日 */
+				+ " pi.release_date," /* 発売日 */
 				+ " phi.price as price," /* 金額 */
 				+ " phi.product_count as product_count," /* 個数 */
 				+ " phi.price * phi.product_count as subtotal," /* 合計金額 */
@@ -72,15 +72,16 @@ public class PurchaseHistoryInfoDAO {
 	public int regist(String userId, int productId, int productCount, int destinationId, int price){
 		DBConnector dbConnector = new DBConnector();
 		Connection connection = dbConnector.getConnection();
-		String sql = "insert into purchase_history_info(user_id, product_id, product_count, destination_id, price, regist_date, update_date) values(?,?,?,?,?, now(), now())";
+		String sql = "insert into purchase_history_info(user_id, product_id, product_count, price, destination_id, regist_date, update_date) values(?,?,?,?,?, now(), now())";
 		int count = 0;
 		try{
 			PreparedStatement preparedStatement =  connection.prepareStatement(sql);
 			preparedStatement.setString(1,userId);
 			preparedStatement.setInt(2,productId);
 			preparedStatement.setInt(3,productCount);
-			preparedStatement.setInt(4,destinationId);
-			preparedStatement.setInt(5,price);
+			preparedStatement.setInt(4,price);
+			preparedStatement.setInt(5,destinationId);
+
 			count = preparedStatement.executeUpdate();
 		} catch(SQLException e){
 			e.printStackTrace();
