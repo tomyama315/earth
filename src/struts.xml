@@ -4,7 +4,7 @@
 "http://struts.apache.org/dtds/struts-2.3.dtd">
 <struts>
 	<!-- 開発者モード(デバッグしたい時にはコメント外してください。ユーザーのエラーページが無効にできます) -->
-<!-- 	<constant name="struts.devMode" value="true" /> -->
+	<constant name="struts.devMode" value="true" />
 	<constant name="struts.ui.theme" value="simple" />
 	<package name="com.internousdev.earth.action" extends="struts-default">
 
@@ -58,13 +58,13 @@
 
 
 
-<!-- <action name="SearchItemAction" class="com.internousdev.earth.action.SearchItemAction" method="execute"> -->
-<!-- <result name="success">productList.jsp</result> -->
-<!-- </action> -->
+<action name="SearchItemAction" class="com.internousdev.earth.action.SearchItemAction" method="execute">
+<result name="success">productList.jsp</result>
+</action>
 
-<!-- <action name="HomeAction" class="com.internousdev.earth.action.HomeAction" method="execute"> -->
-<!-- <result name="success">home.jsp</result> -->
-<!-- </action> -->
+<action name="HomeAction" class="com.internousdev.earth.action.HomeAction" method="execute">
+<result name="success">home.jsp</result>
+</action>
 
 <action name="AddCartAction" class="com.internousdev.earth.action.AddCartAction" method="execute">
 <result name="success">cart.jsp</result>
@@ -108,9 +108,9 @@
 <!-- </action> -->
 
 
-<!-- <action name="MyPageAction" class="com.internousdev.earth.action.MyPageAction" method="execute"> -->
-<!-- <result name="success">mypage.jsp</result> -->
-<!-- </action> -->
+<action name="MyPageAction" class="com.internousdev.earth.action.MyPageAction" method="execute">
+<result name="success">mypage.jsp</result>
+</action>
 
 <!-- <action name="PurchaseHistoryAction" class="com.internousdev.earth.action.PurchaseHistoryAction" method="execute"> -->
 <!-- <result name="success">purchaseHistory.jsp</result> -->

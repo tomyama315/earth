@@ -15,7 +15,7 @@ public class LogoutAction extends ActionSupport implements SessionAware {
 	public String execute() {
 		UserInfoDAO userInfoDAO = new UserInfoDAO();
 		String userId = String.valueOf(session.get("userId"));
-		boolean savedUserId = Boolean.valueOf(String.valueOf(session.get("saveduseridflag")));
+		boolean loginUserId = Boolean.valueOf(String.valueOf(session.get("saveduseridflag")));
 
 		int count = userInfoDAO.logout(userId);
 
@@ -23,10 +23,10 @@ public class LogoutAction extends ActionSupport implements SessionAware {
 		if(count > 0) {
 			//保持していた情報を削除する。
 			session.clear();
-			if(savedUserId) {
+			if(loginUserId) {
 				//ログイン認証の際、ID保存チェックが有だった場合は、ユーザーIDとID保存チェックを保持する。
-				session.put("saveduseridflag", savedUserId);
-				session.put("saveduserid", userId);
+				session.put("saveduseridflag", loginUserId);
+				session.put("loginuserid", userId);
 			}
 		}
 		//ホーム画面に推移する。

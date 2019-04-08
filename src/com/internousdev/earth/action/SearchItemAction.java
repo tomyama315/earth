@@ -23,7 +23,6 @@ public class SearchItemAction extends ActionSupport implements SessionAware {
 		if(session.isEmpty()) {
 			return "sessionTimeout";
 		}
-		System.out.println(keyword);
 		InputChecker inputChecker =  new InputChecker();
 
 		String tempKeywords = null;

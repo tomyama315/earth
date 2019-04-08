@@ -1,5 +1,5 @@
 /**
- * @author sksgym（すぎ）
+ * @author sksgym（すぎ）aaa
  */
 package com.internousdev.earth.action;
 import java.util.Map;
@@ -18,7 +18,7 @@ public class GoLoginAction extends ActionSupport implements SessionAware {
 			return "sessionTimeout";
 		}
 
-		session.remove("cartflag");
+		session.remove("cartflg");
 		return SUCCESS;
 	}
 

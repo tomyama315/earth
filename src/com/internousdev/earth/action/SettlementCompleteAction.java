@@ -31,7 +31,7 @@ public class SettlementCompleteAction extends ActionSupport implements SessionAw
 	 */
 
 	@Override
-	public String execute() throws NumberFormatException, SQLException {
+	public String execute(){
 
 		if (session.isEmpty()) {
 			return "sessionTimeout";
@@ -47,6 +47,7 @@ public class SettlementCompleteAction extends ActionSupport implements SessionAw
 		// insertした商品数のカウント
 		int insertcount = 0;
 		// 拡張for文でsessiongetしてきたListを取り出し
+		// 登録したい情報を引数に渡す
 		for (CartInfoDTO dto : cartInfoDTOList) {
 			// 戻り値をinsertcountに入れる
 			insertcount += purchaseHistoryInfoDAO.regist(
@@ -56,10 +57,10 @@ public class SettlementCompleteAction extends ActionSupport implements SessionAw
 					dto.getProductId(),
 					// 購入個数
 					dto.getProductCount(),
-					// 金額
-					dto.getPrice(),
 					// 宛先情報ID(ラジオボタンでIDが飛んでくるのでvaluestackで受け取る)
-					Integer.parseInt(destinationid));
+					Integer.parseInt(destinationid),
+					// 金額
+					dto.getPrice());
 		}
 		// 商品購入履歴を登録(insert)できなかったらエラー
 		if (insertcount > 0) {

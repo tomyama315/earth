@@ -5,6 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<!-- 3秒後画面遷移 -->
 <meta http-equiv="refresh" content="3; url='SettlementConfirmAction'">
 <link rel="stylesheet" href="./css/style.css">
 <title>宛先情報入力完了</title>
