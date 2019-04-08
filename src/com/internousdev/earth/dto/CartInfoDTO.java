@@ -7,7 +7,7 @@ public class CartInfoDTO {
 	private int ProductId;
     private int ProductCount;
     private int Price;
-    private String ResistDate;
+    private String RegistDate;
     private String UpdateDate;
     //below from product_info table
     private String ProductName;
@@ -44,11 +44,11 @@ public class CartInfoDTO {
 	public void setPrice(int price) {
 		Price = price;
 	}
-	public String getResistDate() {
-		return ResistDate;
+	public String getRegistDate() {
+		return RegistDate;
 	}
-	public void setResistDate(String resistDate) {
-		ResistDate = resistDate;
+	public void setRegistDate(String registDate) {
+		RegistDate = registDate;
 	}
 	public String getUpdateDate() {
 		return UpdateDate;
