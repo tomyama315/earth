@@ -3,23 +3,29 @@
  */
 package com.internousdev.earth.action;
 
-import src.com.internousdev.earth.dao.CartInfoDAO;
-import src.com.internousdev.earth.dao.UserInfoDAO;
-import src.com.internousdev.earth.dto.CartInfoDTO;
-import src.com.internousdev.earth.dto.UserInfoDTO;
-import src.com.internousdev.earth.util.InputChecker;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.struts2.interceptor.SessionAware;
+
+import com.internousdev.earth.dao.CartInfoDAO;
+import com.internousdev.earth.dao.UserInfoDAO;
+import com.internousdev.earth.dto.CartInfoDTO;
+import com.internousdev.earth.dto.UserInfoDTO;
+import com.internousdev.earth.util.InputChecker;
+import com.opensymphony.xwork2.ActionSupport;
 
 
 public class LoginAction extends ActionSupport implements SessionAware{
 	private String userId;
 	private String password;
 	private List<CartInfoDTO> cartInfoDTOList;
-	private boolean savedUserIdFlag;
+	private boolean saveduseridflag;
 	private List<String> userIdErrorMessageList;
 	private List<String> passwordErrorMessageList;
 	private String isNotUserInfoMessage;
 	private Map<String, Object> session;
-
 
 
 	public String execute()throws SQLException{
@@ -32,25 +38,23 @@ public class LoginAction extends ActionSupport implements SessionAware{
 		//strutsにresultを渡して画面推移を行う。ひとまずエラー扱いとする。
 		String result = ERROR;
 
-		if(savedUserIdFlag){
+		if(saveduseridflag){
 			//session内でログイン中のユーザーIDを他クラスと共有する。
-			session.put("loginflag", true);
-			session.put("loginuserid", userId);
+			//ユーザーIDを保存したかどうかのフラグ。
+			session.put("saveduseridflag", true);
+			//保存したユーザーIDの照合。
+			session.put("seveduserid", userId);
 		}else{
 			//session内に格納している不要な情報を削除する。
-			session.remove("loginflag");
-			session.remove("loginuserid");
+			session.remove("saveduseridflag");
+			session.remove("saveduserid");
 		}
 /**
  * DBの会員情報テーブルにユーザーIDとパスワードが
  * 一致するユーザーが存在しているかを確認する。
  */
 		InputChecker inputChecker = new InputChecker();
-
-		//ユーザーIDは最低1文字、最大8文字
 		userIdErrorMessageList = inputChecker.doCheck("ユーザーID", userId, 1, 8, true, false, false, true, false, false, false);
-
-		//パスワードは最低1文字、最大16文字
 		passwordErrorMessageList = inputChecker.doCheck("パスワード", password, 1, 16, true, false, false, true, false, false, false);
 
 		//エラー処理
@@ -79,8 +83,8 @@ public class LoginAction extends ActionSupport implements SessionAware{
 				}
 
 // 				カート画面から推移してきた場合は、カート画面に推移する。
-				if(session.containsKey("cartflag")) {
-					session.remove("cartflag");
+				if(session.containsKey("cartflg")) {
+					session.remove("cartflg");
 					result = "cart";
 				} else {
 //					ログインボタンを押下した場合は、自画面に推移。
@@ -147,11 +151,11 @@ public class LoginAction extends ActionSupport implements SessionAware{
 	}
 
 	public boolean isSavedUserIdFlag() {
-		return savedUserIdFlag;
+		return saveduseridflag;
 	}
 
-	public void setSavedUserIdFlag(boolean savedUserIdFlag) {
-		this.savedUserIdFlag = savedUserIdFlag;
+	public void setSavedUserIdFlag(boolean saveduseridflag) {
+		this.saveduseridflag = saveduseridflag;
 	}
 
 	public List<String> getUserIdErrorMessageList() {
@@ -190,7 +194,7 @@ public class LoginAction extends ActionSupport implements SessionAware{
 		return session;
 	}
 
-	@Override //Sessionを使うためのセッター
+	@Override
 	public void setSession(Map<String, Object> session) {
 		this.session = session;
 	}

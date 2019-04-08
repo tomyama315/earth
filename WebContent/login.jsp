@@ -44,7 +44,7 @@
 	<table class="vertical-list-table">
 	<tr>
 		<th scope="row"><s:label value="ユーザーID"/></th>
-		<s:if test="#session.savedUserIdFlag==true">
+		<s:if test="#session.saveduseridflag==true">
 		<td><s:textfield name="userId" class="txt" placeholder="ユーザーID" value='%{#session.loginuserid}' autocomplete="off"/></td>
 		</s:if>
 		<s:else>
@@ -57,13 +57,13 @@
 	</tr>
 	</table>
 	<div class="box">
-		<s:if test="#session.loginflag==true
-		&& #session.loginuserid!=null
-		&& !#session.loginuserid.isEmpty()">
-		<s:checkbox name="loginflag"/>
+		<s:if test="#session.saveduseridflag==true
+		&& #session.saveduseridflag!=null
+		&& !#session.saveduseridflag.isEmpty()">
+		<s:checkbox name="saveduseridflag" checked="checked"/>
 		</s:if>
 		<s:else>
-			<s:checkbox name="loginflag"/>
+			<s:checkbox name="saveduseridflag"/>
 		</s:else>
 		<s:label value="ユーザーID保存"/><br>
 	</div>
