@@ -18,7 +18,7 @@ public class GoLoginAction extends ActionSupport implements SessionAware {
 			return "sessionTimeout";
 		}
 
-		session.remove("cartflag");
+		session.remove("cartflg");
 		return SUCCESS;
 	}
 
