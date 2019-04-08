@@ -13,13 +13,11 @@ import com.internousdev.earth.util.DBConnector;
 
 public class CartInfoDAO {
 
-
-
-	//カート情報取得
+	// カート情報取得
 	public ArrayList<CartInfoDTO> getCartContents(String UserId) throws SQLException {
 		DBConnector dbConnector = new DBConnector();
 		Connection connection = dbConnector.getConnection();
-		ArrayList<CartInfoDTO> toTransList=new ArrayList<CartInfoDTO>();
+		ArrayList<CartInfoDTO> toTransList = new ArrayList<CartInfoDTO>();
 
 		String sql = "SELECT * FROM cart_info left outer join product_info on cart_info.product_id=product_info.product_id where cart_info.user_id=? order by cart_info.resist_date desc , cart_info.update_date desc ";
 		try {
@@ -42,7 +40,7 @@ public class CartInfoDAO {
 				dto.setImageName(rs.getString("product_info.image_file_name"));
 				dto.setReleaseComp(rs.getString("product_info.release_company"));
 				dto.setReleaseDate(rs.getString("product_info.release_date"));
-				int sum=rs.getInt("price")*rs.getInt("cart_info.product_count");
+				int sum = rs.getInt("price") * rs.getInt("cart_info.product_count");
 				dto.setSum(sum);
 				System.out.print(dto.getProductId());
 				toTransList.add(dto);
@@ -53,21 +51,20 @@ public class CartInfoDAO {
 		return toTransList;
 	}
 
-
-	//カートに追加-受け取る値は要考慮
-	public int add(String UserId,ProductInfoDTO dto){
+	// カートに追加-受け取る値は要考慮
+	public int add(String UserId, ProductInfoDTO dto) {
 		DBConnector dbConnector = new DBConnector();
 		Connection connection = dbConnector.getConnection();
-		int result=0;
+		int result = 0;
 		String sql = "insert into cart_info(user_id,product_id,product_count,price,resist_date) values(?,?,?,?,?,?)";
 		try {
 			PreparedStatement ps = connection.prepareStatement(sql);
 			ps.setString(1, UserId);
-			ps.setInt(2,dto.getProductId() );
+			ps.setInt(2, dto.getProductId());
 			ps.setInt(3, dto.getProductCount());
 			ps.setInt(4, dto.getPrice());
-			ps.setString(5,"now()");
-			result=ps.executeUpdate();
+			ps.setString(5, "now()");
+			result = ps.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 			result = 0;
@@ -75,21 +72,20 @@ public class CartInfoDAO {
 		return result;
 	}
 
-
-	//重複更新
-	public int update(int TotalCount,String UserId,int ProductId)throws SQLException{
+	// 重複更新
+	public int update(int TotalCount, String UserId, int ProductId) throws SQLException {
 		DBConnector dbConnector = new DBConnector();
 		Connection connection = dbConnector.getConnection();
-		int result=0;
+		int result = 0;
 
 		String sql = "update cart_info set product_count=? update_date=now() where user_id=? and product_id=?";
 		try {
 			PreparedStatement ps = connection.prepareStatement(sql);
-			ps.setInt(1,TotalCount );
+			ps.setInt(1, TotalCount);
 			ps.setString(2, LocalDate.now().toString());
 			ps.setString(3, UserId);
 			ps.setInt(4, ProductId);
-			result=ps.executeUpdate();
+			result = ps.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 			result = 0;
@@ -97,18 +93,17 @@ public class CartInfoDAO {
 		return result;
 	}
 
-
-	 //カートから個別削除
-	public int delete(String UserId,int ProductId) {
+	// カートから個別削除
+	public int delete(String UserId, int ProductId) {
 		DBConnector dbConnector = new DBConnector();
 		Connection connection = dbConnector.getConnection();
-		int result=0;
+		int result = 0;
 		String sql = "delete FROM cart_info where user_id=? and product_id=?";
 		try {
 			PreparedStatement ps = connection.prepareStatement(sql);
 			ps.setString(1, UserId);
 			ps.setInt(2, ProductId);
-			result=ps.executeUpdate();
+			result = ps.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 			result = 0;
@@ -116,8 +111,7 @@ public class CartInfoDAO {
 		return result;
 	}
 
-
-	//決済時カートから全削除
+	// 決済時カートから全削除
 	public int deleteAll(String UserId) {
 		DBConnector dbConnector = new DBConnector();
 		Connection connection = dbConnector.getConnection();
@@ -126,7 +120,7 @@ public class CartInfoDAO {
 		try {
 			PreparedStatement ps = connection.prepareStatement(sql);
 			ps.setString(1, UserId);
-			result=ps.executeUpdate();
+			result = ps.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 			result = 0;
@@ -134,8 +128,9 @@ public class CartInfoDAO {
 		return result;
 	}
 
-	public boolean isExistsCartInfo(String UserId,int ProductId){
-		boolean result=false;
+	// カートに情報が存在するか確認
+	public boolean isExistsCartInfo(String UserId, int ProductId) {
+		boolean result = false;
 		DBConnector dbConnector = new DBConnector();
 		Connection connection = dbConnector.getConnection();
 		String sql = "select * FROM cart_info where user_id=? and product_id=?";
@@ -143,24 +138,26 @@ public class CartInfoDAO {
 			PreparedStatement ps = connection.prepareStatement(sql);
 			ps.setString(1, UserId);
 			ps.setInt(2, ProductId);
-			ResultSet preres=ps.executeQuery();
-			if(preres.next()){
-				result=true;
+			ResultSet preres = ps.executeQuery();
+			if (preres.next()) {
+				result = true;
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return result;
 	}
-	public int updateFromLogin(int TotalCount,String UserId,int ProductId)throws SQLException{
+
+	// ユーザーIDのカートに情報が存在する場合、カウントを更新して登録
+	public int updateFromLogin(int TotalCount, String UserId, int ProductId) throws SQLException {
 		DBConnector dbConnector = new DBConnector();
 		Connection connection = dbConnector.getConnection();
-		int ResourceQuantity=0;
-		int result=0;
-		ArrayList<CartInfoDTO> list=this.getCartContents(UserId);
-		for(CartInfoDTO dto:list){
-			if(ProductId==dto.getProductId()){
-				ResourceQuantity=dto.getProductCount();
+		int ResourceQuantity = 0;
+		int result = 0;
+		ArrayList<CartInfoDTO> list = this.getCartContents(UserId);
+		for (CartInfoDTO dto : list) {
+			if (ProductId == dto.getProductId()) {
+				ResourceQuantity = dto.getProductCount();
 				break;
 			}
 		}
@@ -168,11 +165,11 @@ public class CartInfoDAO {
 		String sql = "update cart_info set product_count=? update_date=now() where user_id=? and product_id=?";
 		try {
 			PreparedStatement ps = connection.prepareStatement(sql);
-			ps.setInt(1,TotalCount+ResourceQuantity);
+			ps.setInt(1, TotalCount + ResourceQuantity);
 			ps.setString(2, LocalDate.now().toString());
 			ps.setString(3, UserId);
 			ps.setInt(4, ProductId);
-			result=ps.executeUpdate();
+			result = ps.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 			result = 0;
@@ -180,23 +177,23 @@ public class CartInfoDAO {
 		return result;
 	}
 
-
-	public int linkToUserId(String TempUserId, String UserId, int ProductId)throws SQLException{
+	// ユーザーのカートに情報が無い場合、一時ユーザーIDに保存されているカート情報をユーザーIDのカート情報に登録
+	public int linkToUserId(String TempUserId, String UserId, int ProductId) throws SQLException {
 		DBConnector dbConnector = new DBConnector();
 		Connection connection = dbConnector.getConnection();
-		int result=0;
-		ArrayList<CartInfoDTO> list=this.getCartContents(TempUserId);
+		int result = 0;
+		ArrayList<CartInfoDTO> list = this.getCartContents(TempUserId);
 
 		try {
-			for(CartInfoDTO dto:list){
-			String sql = "insert into cart_info(user_id,product_id,product_count,price,resist_date) values(?,?,?,?,?,?)";
-			PreparedStatement ps = connection.prepareStatement(sql);
-			ps.setString(1, UserId);
-			ps.setInt(2,dto.getProductId() );
-			ps.setInt(3, dto.getProductCount());
-			ps.setInt(4, dto.getPrice());
-			ps.setString(5,"now()");
-			result=ps.executeUpdate();
+			for (CartInfoDTO dto : list) {
+				String sql = "insert into cart_info(user_id,product_id,product_count,price,resist_date) values(?,?,?,?,?,?)";
+				PreparedStatement ps = connection.prepareStatement(sql);
+				ps.setString(1, UserId);
+				ps.setInt(2, dto.getProductId());
+				ps.setInt(3, dto.getProductCount());
+				ps.setInt(4, dto.getPrice());
+				ps.setString(5, "now()");
+				result = ps.executeUpdate();
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

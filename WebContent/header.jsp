@@ -23,7 +23,7 @@
 </s:form></li>
 
 
-<s:if test="#session.LoginFlg==true">
+<s:if test="#session.logined==true">
 <li>
 <a href='<s:url action="LogoutAction"/>'>ログアウト</a>
 </li>
@@ -43,7 +43,7 @@
 <a href='<s:url action="ProductListAction"/>'>商品一覧</a>
 </li>
 
-<s:if test="session.LoginFlg==true">
+<s:if test="session.logined==true">
 <li>
 <a href='<s:url action="MyPageAction"/>'>マイページ</a>
 </li>
