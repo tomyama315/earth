@@ -10,6 +10,7 @@ public class CreateDestinationAction extends ActionSupport implements SessionAwa
 	private int backFlag;
 	private Map<String, Object> session;
 	public String execute() {
+		//sessionがタイムアウトのチェック
 		if(session.isEmpty()) {
 			return "sessionTimeout";
 		}

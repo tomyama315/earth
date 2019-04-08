@@ -13,7 +13,7 @@ import com.internousdev.earth.util.DBConnector;
 public class DestinationInfoDAO {
 
 	public int insert(String userId, String familyName, String firstName,String familyNameKana, String firstNameKana,
-		String userAddress, String email, String telNumber) throws SQLException{
+		String userAddress, String email, String telNumber) {
 		DBConnector dbConnector = new DBConnector();
 		Connection connection = dbConnector.getConnection();
 		int count = 0;
