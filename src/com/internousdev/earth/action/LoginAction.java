@@ -39,14 +39,14 @@ public class LoginAction extends ActionSupport implements SessionAware{
 		String result = ERROR;
 
 		if(saveduseridflag){
-			//ユーザーIDの保存にチェックを入れたかどうかのフラグだとおもう
+			//[ユーザーIDの保存]にチェックを入れたかどうか
 			session.put("saveduseridflag", true);
 			//保存したユーザーIDと入力されたIDの照合。
-			session.put("seveduserid", userId);
+			session.put("loginuserid", userId);
 		}else{
 			//session内に格納している不要な情報を削除する。
 			session.remove("saveduseridflag");
-			session.remove("saveduserid");
+			session.remove("loginuserid");
 		}
 /**
  * DBの会員情報テーブルにユーザーIDとパスワードが

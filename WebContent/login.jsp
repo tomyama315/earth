@@ -45,7 +45,7 @@
 	<tr>
 		<th scope="row"><s:label value="ユーザーID"/></th>
 		<s:if test="#session.saveduseridflag==true">
-		<td><s:textfield name="userId" class="txt" placeholder="ユーザーID" value='%{#session.saveduserid}' autocomplete="off"/></td>
+		<td><s:textfield name="userId" class="txt" placeholder="ユーザーID" value='%{#session.loginuserid}' autocomplete="off"/></td>
 		</s:if>
 		<s:else>
 		<td><s:textfield name="userId" class="txt" placeholder="ユーザーID" value='%{userId}' autocomplete="off"/></td>
@@ -59,8 +59,8 @@
 	<div class="box">
 
 		<s:if test="#session.saveduseridflag==true
-		&& #session.saveduserid!=null
-		&& !#session.saveduserid.isEmpty()">
+		&& #session.loginuserid!=null
+		&& !#session.loginuserid.isEmpty()">
 		<s:checkbox name="saveduseridflag" checked="checked"/>
 		</s:if>
 		<s:else>
