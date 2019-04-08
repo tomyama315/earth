@@ -13,6 +13,7 @@
 <div class="header">
 <%@include file="header.jsp"%>
 </div>
+
 <div id="contents">
 <h1>宛先情報入力画面</h1>
 <s:if test="familyNameErrorMessageList!=null && familyNameErrorMessageList.size()>0">

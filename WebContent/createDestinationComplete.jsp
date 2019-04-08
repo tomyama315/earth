@@ -10,6 +10,7 @@
 <title>宛先情報入力完了</title>
 </head>
 <body>
+
 <div class="header">
 <%@include file="header.jsp"%>
 </div>
