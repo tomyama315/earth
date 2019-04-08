@@ -186,7 +186,7 @@ public class CreateUserConfirmAction extends ActionSupport implements SessionAwa
 	public List<String> getPasswordErrorMessageList(){
 		return passwordErrorMessageList;
 	}
-	public void setPasswordErrorMessageList(List<String> passwordErrorMessage) {
+	public void setPasswordErrorMessageList(List<String> passwordErrorMessageList) {
 		this.passwordErrorMessageList = passwordErrorMessageList;
 	}
 
