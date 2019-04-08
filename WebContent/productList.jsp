@@ -25,7 +25,7 @@
 		<div class="error">
 		<div class="error-message">
 			<h3>検索結果がありません。</h3>
-			<h3>正しく入力してください。</h3>
+			<h3>正しく入力してください</h3>
 			</div>
 			</div>
 		</s:if>
