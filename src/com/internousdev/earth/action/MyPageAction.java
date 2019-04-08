@@ -25,7 +25,7 @@ public class MyPageAction extends ActionSupport implements SessionAware{
 
 		UserInfoDAO userInfoDAO = new UserInfoDAO();
 		UserInfoDTO userInfoDTO = new UserInfoDTO();
-		userInfoDTO = userInfoDAO.getUserInfo(String.valueOf(session.get("userId")));
+		userInfoDTO = userInfoDAO.getUserInfo(String.valueOf(session.get("userid")));
 		familyName = userInfoDTO.getFamilyName();
 		firstName = userInfoDTO.getFirstName();
 		familyNameKana = userInfoDTO.getFamilyNameKana();

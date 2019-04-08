@@ -21,9 +21,9 @@ public class DeletePurchaseHistoryAction extends ActionSupport implements Sessio
 
 		String result = ERROR;
 		PurchaseHistoryInfoDAO purchaseHistoryInfoDAO = new PurchaseHistoryInfoDAO();
-		int count = purchaseHistoryInfoDAO.deleteAll(String.valueOf(session.get("userId")));
+		int count = purchaseHistoryInfoDAO.deleteAll(String.valueOf(session.get("userid")));
 		if(count > 0){
-			purchaseHistoryInfoDTOList = purchaseHistoryInfoDAO.getPurchaseHistoryList(String.valueOf(session.get("userId")));
+			purchaseHistoryInfoDTOList = purchaseHistoryInfoDAO.getPurchaseHistoryList(String.valueOf(session.get("userid")));
 			result = SUCCESS;
 		}
 		return result;

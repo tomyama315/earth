@@ -17,14 +17,14 @@
        <s:if test="purchaseHistoryInfoDTOList!=null && purchaseHistoryInfoDTOList.size()>0">
        <table>
        <tr>
-         <th>商品名</th>
-         <th>ふりがな</th>
-         <th>商品画像</th>
-         <th>発売会社名</th>
-         <th>発売年月日</th>
-         <th>値段</th>
-         <th>個数</th>
-         <th>合計金額</th>
+         <td><label>商品名</label></td>
+         <td><label>ふりがな</label></td>
+         <td><label>商品画像</label></td>
+         <td><label>発売会社名</label></td>
+         <td><label>発売年月日</label></td>
+         <td><label>値段</label></td>
+         <td><label>個数</label></td>
+         <td><label>合計金額</label></td>
        </tr>
      <s:iterator value ="purchaseHistoryInfoDTOList">
        <tr>
