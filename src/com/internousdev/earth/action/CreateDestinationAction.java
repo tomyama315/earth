@@ -15,7 +15,7 @@ public class CreateDestinationAction extends ActionSupport implements SessionAwa
 			return "sessionTimeout";
 		}
 		if (backFlag != 1) {
-		//セッション情報の削除
+		//session情報の削除
 			session.remove("familyName");
 			session.remove("firstName");
 			session.remove("familyNameKana");
