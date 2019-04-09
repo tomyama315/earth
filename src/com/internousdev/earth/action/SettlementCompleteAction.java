@@ -48,9 +48,6 @@ public class SettlementCompleteAction extends ActionSupport implements SessionAw
 		int insertcount = 0;
 		// 拡張for文でsessiongetしてきたListを取り出し
 		// 登録したい情報を引数に渡す
-		for(CartInfoDTO dto:cartInfoDTOList){
-			System.out.println(dto.getImageName());
-		}
 		for (CartInfoDTO dto : cartInfoDTOList) {
 			// 戻り値をinsertcountに入れる
 			insertcount += purchaseHistoryInfoDAO.regist(
