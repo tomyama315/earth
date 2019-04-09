@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" href="./css/earth.css">
+<link rel="stylesheet" href="./css/settlement.css">
 <title>settlementConfirm</title>
 </head>
 <body>
@@ -13,50 +13,57 @@
 		<%@include file="header.jsp"%>
 	</div>
 
-	<div class="maincontainer"></div>
-	<s:if test="destinationInfoDTO.size() == 0">
-		<h3>宛先情報がありません。</h3>
-	</s:if>
-	<s:else>
-		<s:form action="SettlementCompleteAction">
-			<h3>宛先情報を選択してください。</h3>
-			<table>
-				<tr>
-					<th></th>
-					<th>姓</th>
-					<th>名</th>
-					<th>ふりがな</th>
-					<th>住所</th>
-					<th>電話番号</th>
-					<th>メールアドレス</th>
-				</tr>
-				<s:iterator value="destinationInfoDTO">
-					<tr>
-						<s:if test="id == 1">
-							<th><input type="radio" name="id" checked="checked"
-								value="<s:property value="id" />"></th>
-						</s:if>
-						<s:else>
-							<th><input type="radio" name="id"
-								value="<s:property value="id" />"></th>
-						</s:else>
-						<th><s:property value="familyName" /></th>
-						<th><s:property value="firstName" /></th>
-						<th><s:property value="familyNameKana" /><span> </span> <s:property
-								value="firstNameKana" /><br></th>
-						<th><s:property value="userAddress" /></th>
-						<th><s:property value="telNumber" /></th>
-						<th><s:property value="email" /></th>
 
+	<div class="main">
+		<h1>決済確認画面</h1>
+		<s:if test="destinationInfoDTO.size() == 0">
+			<h3>宛先情報がありません。</h3>
+		</s:if>
+		<s:else>
+			<s:form action="SettlementCompleteAction">
+				<h3>宛先情報を選択してください。</h3>
+				<table>
+					<tr class = "midashi" align="center">
+						<th>#</th>
+						<th>姓</th>
+						<th>名</th>
+						<th>ふりがな</th>
+						<th>住所</th>
+						<th>電話番号</th>
+						<th>メールアドレス</th>
 					</tr>
-				</s:iterator>
-			</table>
-			<s:submit value="決済" />
-		</s:form>
+					<s:iterator value="destinationInfoDTO">
+						<tr>
+							<s:if test="id == 1">
+								<td><input type="radio" name="id" checked="checked"
+									value="<s:property value="id" />"></td>
+							</s:if>
+							<s:else>
+								<td><input type="radio" name="id"
+									value="<s:property value="id" />"></td>
+							</s:else>
+							<td><s:property value="familyName" /></td>
+							<td><s:property value="firstName" /></td>
+							<td><s:property value="familyNameKana" /><span> </span> <s:property
+									value="firstNameKana" /><br></td>
+							<td><s:property value="userAddress" /></td>
+							<td><s:property value="telNumber" /></td>
+							<td><s:property value="email" /></td>
 
-	</s:else>
-	<s:form action="CreateDestinationAction">
-		<s:submit value="新規宛先登録" />
-	</s:form>
+						</tr>
+					</s:iterator>
+				</table>
+				<div class="submit">
+					<s:submit value="決済" class ="submit_btn_box" theme = "simple"/>
+				</div>
+			</s:form>
+
+		</s:else>
+		<s:form action="CreateDestinationAction">
+			<div class="submit">
+				<s:submit value="新規宛先登録" class ="submit_btn_box" theme = "simple"/>
+			</div>
+		</s:form>
+	</div>
 </body>
 </html>
