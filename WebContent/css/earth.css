@@ -1,9 +1,14 @@
 body{
 	background-color:gray;
+	  min-width: 1550px;
+}
+.main{
+    width:90%;
+	margin:0 auto;
 }
 .header{
 	min-height:40px;
-	width:100%;
+	width:100%;;
 	background-color:black;
 	line-height:40px;
 	font-size:10px;
@@ -19,26 +24,7 @@ img{
 	border:0px;
 	padding:0px;
 }
-.carttable{
-	margin-bottom:30px;
-	margin-top:10px;
-	width:100%;
-}
-.carttable td{
-	width:100px;
-	text-align:center;
-}
-.index{
-	margin-bottom:30px;
-	margin-top:10px;
-	width:100%;
-}
-.index th{
-	width:100px;
-}
-div{
-	text-align:center;
-}
+
 
 
 
