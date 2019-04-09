@@ -25,7 +25,7 @@ public class MyPageAction extends ActionSupport implements SessionAware{
 
 		UserInfoDAO userInfoDAO = new UserInfoDAO();
 		UserInfoDTO userInfoDTO = new UserInfoDTO();
-		userInfoDTO = userInfoDAO.getUserInfo(String.valueOf(session.get("userid")));
+		userInfoDTO = userInfoDAO.getUserInfo((session.get("loginuserid").toString()));
 		familyName = userInfoDTO.getFamilyName();
 		firstName = userInfoDTO.getFirstName();
 		familyNameKana = userInfoDTO.getFamilyNameKana();
@@ -39,7 +39,7 @@ public class MyPageAction extends ActionSupport implements SessionAware{
 		return familyName;
 	}
 	public void setFamilyName(String familyName){
-		this.familyNameKana=familyName;
+		this.familyName=familyName;
 	}
 
 	public String getFirstname(){

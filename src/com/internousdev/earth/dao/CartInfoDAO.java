@@ -111,7 +111,7 @@ public class CartInfoDAO {
 		DBConnector dbConnector = new DBConnector();
 		Connection connection = dbConnector.getConnection();
 		int result;
-		String sql = "delete * FROM cart_info where user_id=?";
+		String sql = "delete FROM cart_info where user_id=?";
 		try {
 			PreparedStatement ps = connection.prepareStatement(sql);
 			ps.setString(1, UserId);

@@ -18,7 +18,11 @@ public class CartAction extends ActionSupport implements SessionAware {
 
 	public String execute() throws SQLException {
 		CartInfoDAO dao = new CartInfoDAO();
+		if(session.containsKey("loginuserid")){
 		cartlist = dao.getCartContents(session.get("loginuserid").toString());
+		}else{
+			cartlist = dao.getCartContents(session.get("tempuserid").toString());
+		}
 		if (cartlist.size()!=0) {  //カートが空ではない場合読み込み
 			session.put("cartinfo", cartlist);  //To Settlement
 			for(CartInfoDTO dto:cartlist){ //合計値の更新

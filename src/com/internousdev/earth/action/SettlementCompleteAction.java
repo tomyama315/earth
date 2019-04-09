@@ -16,7 +16,7 @@ import com.opensymphony.xwork2.ActionSupport;
 public class SettlementCompleteAction extends ActionSupport implements SessionAware {
 	private List<PurchaseHistoryInfoDTO> purchaseHistoryInfoDTO = new ArrayList<PurchaseHistoryInfoDTO>();
 	private Map<String, Object> session;
-	private String destinationid;
+	private int destinationid;
 
 	/**
 	 * 宛先情報確認画面で決済ボタンを押す
@@ -48,6 +48,9 @@ public class SettlementCompleteAction extends ActionSupport implements SessionAw
 		int insertcount = 0;
 		// 拡張for文でsessiongetしてきたListを取り出し
 		// 登録したい情報を引数に渡す
+		for(CartInfoDTO dto:cartInfoDTOList){
+			System.out.println(dto.getImageName());
+		}
 		for (CartInfoDTO dto : cartInfoDTOList) {
 			// 戻り値をinsertcountに入れる
 			insertcount += purchaseHistoryInfoDAO.regist(
@@ -58,7 +61,7 @@ public class SettlementCompleteAction extends ActionSupport implements SessionAw
 					// 購入個数
 					dto.getProductCount(),
 					// 宛先情報ID(ラジオボタンでIDが飛んでくるのでvaluestackで受け取る)
-					Integer.parseInt(destinationid),
+					destinationid,
 					// 金額
 					dto.getPrice());
 		}
@@ -95,11 +98,11 @@ public class SettlementCompleteAction extends ActionSupport implements SessionAw
 		this.session = session;
 	}
 
-	public String getDestinationid() {
+	public int getDestinationid() {
 		return destinationid;
 	}
 
-	public void setDestinationid(String destinationid) {
+	public void setDestinationid(int destinationid) {
 		this.destinationid = destinationid;
 	}
 
