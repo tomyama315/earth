@@ -77,6 +77,7 @@ public class LoginAction extends ActionSupport implements SessionAware {
 					boolean cartresult = changeCartInfo(cartlistBySession);
 
 					if (!cartresult) {
+						System.out.println("cartlistresultERROR");
 						return result;
 					}
 				}
@@ -141,6 +142,7 @@ public class LoginAction extends ActionSupport implements SessionAware {
 		if (count == cartlistBySession.size()) {
 			try {
 				cartlist = cartInfoDAO.getCartContents(userId);
+				System.out.println("cf userid:"+userId);
 				session.put("cartinfo", cartlist);
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -148,6 +150,7 @@ public class LoginAction extends ActionSupport implements SessionAware {
 			}
 			result = true;
 		}
+		System.out.println("changecartmethod/"+"result:"+result+" count:"+count+" size:"+cartlistBySession.size());
 		return result;
 	}
 

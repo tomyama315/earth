@@ -16,9 +16,10 @@ public class CreateDestinationCompleteAction extends ActionSupport implements Se
 		}
 		String result = ERROR;
 		DestinationInfoDAO destinationInfoDAO = new DestinationInfoDAO();
+
 		int count = destinationInfoDAO.insert(
 //				String型に変換する
-				String.valueOf(session.get("userId")),
+				String.valueOf(session.get("loginuserid")),
 				String.valueOf(session.get("familyName")),
 				String.valueOf(session.get("firstName")),
 				String.valueOf(session.get("familyNameKana")),
