@@ -10,17 +10,14 @@
 </head>
 <body>
 <div class="header">
+<%@include file="header.jsp" %>
 </div>
 
 <div class="header">
 </div>
 
 <div id="main">
-		<div class="pageback">
-		<a href='<s:url action="GoHomeAction"/>'>TOP</a> &nbsp;>&nbsp; <a>商品一覧</a>
-		</div>
-		<h2 class="title">商品一覧</h2>
-		<br>
+
 <s:if test="productInfoDTOList==null || productInfoDTOList.isEmpty()">
 		<div class="error">
 		<div class="error-message">
