@@ -47,6 +47,7 @@ public class DestinationInfoDAO {
 		return count;
 	}
 
+
 	public List<DestinationInfoDTO> destinationInfo(String userId) throws SQLException {
 		DBConnector db = new DBConnector();
 		Connection con = db.getConnection();

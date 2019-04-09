@@ -42,8 +42,6 @@ public class CreateDestinationConfirmAction extends ActionSupport implements Ses
 		session.put("telNumber", telNumber);
 		session.put("userAddress", userAddress);
 
-		System.out.println(session.get("familyName"));
-
 
 		InputChecker inputChecker = new InputChecker();
 //		フォームの入力内容をinputCheckerを使用しチェックする。-----------------------------------------------
