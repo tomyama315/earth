@@ -44,7 +44,9 @@
 <tr>
 </table>
 </s:iterator>
+<s:if test="totalprice!=0">
 <div>カート内合計:<s:property value="totalprice"/>円</div>
+</s:if>
 <div><s:if test="!cartlist.isEmpty()"><s:submit value="削除" id="deleteButton" disabled="true"/></s:if></div>
 </s:form>
 <s:form action="SettlementConfirmAction" id="cartForm">
