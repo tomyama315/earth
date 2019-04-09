@@ -73,19 +73,19 @@
 	<table class="vertical-list-table">
 		<tr>
 			<th scope="row"><s:label value="ユーザーID"/></th>
-			<td><s:textfield name="userId" value="%{#session.userIdForResetPassword}" placeholder="ユーザーID" class="txt" /></td>
+			<td><s:textfield name="userId" value="%{#session.userIdForResetPassword}" placeholder="ユーザーID" class="txt" style="width:500px; height:25px; margin:5px;"/></td>
 		</tr>
 		<tr>
 			<th scope="row"><s:label value="現在のパスワード"/></th>
-			<td><s:password name="password" value="" placeholder="現在のパスワード" class="txt" /></td>
+			<td><s:password name="password" value="" placeholder="現在のパスワード" class="txt" style="width:500px; height:25px; margin:5px;"/></td>
 		</tr>
 
 		<tr>
 			<th scope="row"><s:label value="新しいパスワード"/></th>
-			<td><s:password name="newPassword" value="" placeholder="新しいパスワード" class="txt" /></td>
+			<td><s:password name="newPassword" value="" placeholder="新しいパスワード" class="txt" style="width:500px; height:25px; margin:5px;"/></td>
 		<tr>
 			<th scope="row"><s:label value="新しいパスワード（再確認）"/></th>
-			<td><s:password name="reConfirmationPassword" value="" placeholder="新しいパスワード（再確認）" class="txt" /></td>
+			<td><s:password name="reConfirmationPassword" value="" placeholder="新しいパスワード（再確認）" class="txt" style="width:500px; height:25px; margin:5px;"/></td>
 		</tr>
 	</table>
 	<div class="submit_btn_box">
