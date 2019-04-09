@@ -28,8 +28,13 @@
              </tr>
 
              <tr>
-               <th><label>ふりがな</label></th>
+               <th><label>姓ふりがな</label></th>
                <td><s:property value="familyNameKana"/><span>　</span><s:property value="firstNamaKana"/></td>
+             </tr>
+
+             <tr>
+               <th><label>名ふりがな</label></th>
+               <td><s:property value="firstNameKana"/><span>　</span><s:property value="firstNamaKana"/></td>
              </tr>
 
              <tr>
