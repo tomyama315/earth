@@ -13,9 +13,9 @@ public class ResetPasswordAction extends ActionSupport implements SessionAware{
 
 	public String execute() {
 //タイムアウトのチェック
-		if(session.isEmpty()) {
-			return "sessionTimeout";
-		}
+//		if(session.isEmpty()) {
+//			return "sessionTimeout";
+//		}
 
 //もしbackFlagが１じゃなかったら・・・
 		if (backFlag != 1) {

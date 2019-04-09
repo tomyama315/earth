@@ -14,9 +14,9 @@ public class CreateUserAction extends ActionSupport implements SessionAware{
 
 	public String execute() {
 //sessionがタイムアウトのチェック
-		if(session.isEmpty()) {
-			return "sessionTimeout";
-		}
+//		if(session.isEmpty()) {
+//			return "sessionTimeout";
+//		}
 //１じゃなかったら削除する
 		if (backFlag != 1) {
 			session.remove("familyName");
