@@ -1,4 +1,4 @@
-package com.internousdev.earth.action;a
+package com.internousdev.earth.action;
 
 import java.util.ArrayList;
 import java.util.Map;
