@@ -17,7 +17,7 @@
 		<s:iterator value="productInfoDTO">
 			<tr>
 				<td>
-				<img src='<s:property value="ImagePath"/>/<s:property value="ImageName"/>'width="300px" height="300px" />
+				<img src='<s:property value="productInfoDTO.ImageFilePath"/>/<s:property value="ImageFileName"/>' width="300px" height="300px"/>
 				</td>
 			</tr>
 			<tr>
@@ -63,13 +63,16 @@
 				</tr>
 			</table>
 			</s:iterator>
+			<div class="submit_btn_box">
+	<s:submit value="カートに追加" class="submit_btn" />
+	</div>
 		</s:form>
 	</div>
 	<div id = "sub">
 	<h2>関連商品</h2>
 		<s:iterator value = "selectRelativeList">
 		<a href='<s:url action="ProductDetailsAction"><s:param name="productId" value="%{productId}"/>
-					</s:url>'><img src='<s:property value="imageFilePath"/>/<s:property value="imageFileName"/>' class="item-image-box-100"/></a>
+					</s:url>'><img src='<s:property value="imageFilePath"/>/<s:property value="imageFileName"/>' width="200px" height="200px"/></a>
 					<s:property value="productName"/><br>
 			</s:iterator>
 		</div>

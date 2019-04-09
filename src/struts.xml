@@ -4,7 +4,7 @@
 "http://struts.apache.org/dtds/struts-2.3.dtd">
 <struts>
 	<!-- 開発者モード(デバッグしたい時にはコメント外してください。ユーザーのエラーページが無効にできます) -->
-	<constant name="struts.devMode" value="true" />
+<!-- 	<constant name="struts.devMode" value="true" /> -->
 	<constant name="struts.ui.theme" value="simple" />
 	<package name="com.internousdev.earth.action" extends="struts-default">
 
@@ -48,13 +48,13 @@
 </action>
 
 
-<!-- <action name="ProductListAction" class="com.internousdev.earth.action.ProductListAction" method="execute"> -->
-<!-- <result name="success">productList.jsp</result> -->
-<!-- </action> -->
+<action name="ProductListAction" class="com.internousdev.earth.action.ProductListAction" method="execute">
+<result name="success">productList.jsp</result>
+</action>
 
-<!-- <action name="ProductDetailsAction" class="com.internousdev.earth.action.ProductDetailsAction" method="execute"> -->
-<!-- <result name="success">productDetails.jsp</result> -->
-<!-- </action> -->
+<action name="ProductDetailsAction" class="com.internousdev.earth.action.ProductDetailsAction" method="execute">
+<result name="success">productDetails.jsp</result>
+</action>
 
 
 
@@ -81,45 +81,45 @@
 </action>
 
 
-<!-- <action name="SettlementConfirmAction" class="com.internousdev.earth.action.SettlementConfirmAction" method="execute"> -->
-<!-- <result name="success">settlementConfirm.jsp</result> -->
-<!-- <result name="error">error.jsp</result> -->
-<!-- <result name="login">login.jsp</result> -->
-<!-- </action> -->
+<action name="SettlementConfirmAction" class="com.internousdev.earth.action.SettlementConfirmAction" method="execute">
+<result name="success">settlementConfirm.jsp</result>
+<result name="error">error.jsp</result>
+<result name="login">login.jsp</result>
+</action>
 
-<!-- <action name="CreateDestinationAction" class="com.internousdev.earth.action.CreateDestinationAction" method="execute"> -->
-<!-- <result name="success">createDestination.jsp</result> -->
-<!-- </action> -->
+<action name="CreateDestinationAction" class="com.internousdev.earth.action.CreateDestinationAction" method="execute">
+<result name="success">createDestination.jsp</result>
+</action>
 
-<!-- <action name="CreateDestinationConfirmAction" class="com.internousdev.earth.action.CreateDestinationConfirmAction" method="execute"> -->
-<!-- <result name="success">createDestinationConfirm.jsp</result> -->
-<!-- <result name="error">createDestination.jsp</result> -->
-<!-- </action> -->
+<action name="CreateDestinationConfirmAction" class="com.internousdev.earth.action.CreateDestinationConfirmAction" method="execute">
+<result name="success">createDestinationConfirm.jsp</result>
+<result name="error">createDestination.jsp</result>
+</action>
 
-<!-- <action name="CreateDestinationCompleteAction" class="com.internousdev.earth.action.CreateDestinationCompleteAction" method="execute"> -->
-<!-- <result name="success">createDestinationComplete.jsp</result> -->
-<!-- <result name="error">error.jsp</result> -->
-<!-- </action> -->
+<action name="CreateDestinationCompleteAction" class="com.internousdev.earth.action.CreateDestinationCompleteAction" method="execute">
+<result name="success">createDestinationComplete.jsp</result>
+<result name="error">error.jsp</result>
+</action>
 
 
-<!-- <action name="SettlementCompleteAction" class="com.internousdev.earth.action.SettlementCompleteAction" method="execute"> -->
-<!-- <result name="success">settlementComplete.jsp</result> -->
-<!-- <result name="error">error.jsp</result> -->
-<!-- </action> -->
+<action name="SettlementCompleteAction" class="com.internousdev.earth.action.SettlementCompleteAction" method="execute">
+<result name="success">settlementComplete.jsp</result>
+<result name="error">error.jsp</result>
+</action>
 
 
 <action name="MyPageAction" class="com.internousdev.earth.action.MyPageAction" method="execute">
 <result name="success">mypage.jsp</result>
 </action>
 
-<!-- <action name="PurchaseHistoryAction" class="com.internousdev.earth.action.PurchaseHistoryAction" method="execute"> -->
-<!-- <result name="success">purchaseHistory.jsp</result> -->
-<!-- </action> -->
+<action name="PurchaseHistoryAction" class="com.internousdev.earth.action.PurchaseHistoryAction" method="execute">
+<result name="success">purchaseHistory.jsp</result>
+</action>
 
-<!-- <action name="DeletePurchaseHistoryAction" class="com.internousdev.earth.action.DeletePurchaseHistoryAction" method="execute"> -->
-<!-- <result name="success">purchaseHistory.jsp</result> -->
-<!-- <result name="error">error.jsp</result> -->
-<!-- </action> -->
+<action name="DeletePurchaseHistoryAction" class="com.internousdev.earth.action.DeletePurchaseHistoryAction" method="execute">
+<result name="success">purchaseHistory.jsp</result>
+<result name="error">error.jsp</result>
+</action>
 
 <action name="LogoutAction" class="com.internousdev.earth.action.LogoutAction" method="execute">
 <result name="success">index.jsp</result>

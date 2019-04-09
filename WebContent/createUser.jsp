@@ -5,7 +5,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="./css/style.css">
 <title>ユーザ情報入力</title>
 <link rel="stylesheet" type="text/css" href="./css/style.css"/>
 </head>

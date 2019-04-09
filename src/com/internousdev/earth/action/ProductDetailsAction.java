@@ -21,6 +21,7 @@ public class ProductDetailsAction extends ActionSupport implements SessionAware 
 	// private String productDescription;
 	private Map<String, Object> session;
 	private List<ProductInfoDTO> selectRelativeList;
+	ProductInfoDTO productInfoDTO = new ProductInfoDTO();
 
 	public String execute() {
 		if (session.isEmpty()) {
@@ -30,10 +31,10 @@ public class ProductDetailsAction extends ActionSupport implements SessionAware 
 		// 商品情報取得
 		// DAO,DTOの実体化
 		ProductInfoDAO productInfoDAO = new ProductInfoDAO();
-		ProductInfoDTO productInfoDTO = new ProductInfoDTO();
 		// selectByProductIdメソッド呼び出し、引数int productId
 		// 戻り値をproductInfoDTOに格納
 		productInfoDTO = productInfoDAO.selectByProductId(productId);
+		session.put("additem",productInfoDTO);
 
 		// SELECT結果がDTOに格納(set)されるので呼び出し(get)→jspで出来れば無駄なコードは要らない
 		// 商品情報ごとに分ける
@@ -58,7 +59,7 @@ public class ProductDetailsAction extends ActionSupport implements SessionAware 
 
 		// 関連情報の取得、引数にint categoryIdを渡す
 		// 戻り値をselectRelativeListに格納→jspでiterator
-		selectRelativeList = productInfoDAO.selectRelative(productInfoDTO.getCategoryId());
+		selectRelativeList = productInfoDAO.selectRelative(productInfoDTO.getProductId(),productInfoDTO.getCategoryId());
 
 		return SUCCESS;
 	}
@@ -150,5 +151,14 @@ public class ProductDetailsAction extends ActionSupport implements SessionAware 
 	public void setSelectRelativeList(List<ProductInfoDTO> selectRelativeList) {
 		this.selectRelativeList = selectRelativeList;
 	}
+
+	public ProductInfoDTO getProductInfoDTO() {
+		return productInfoDTO;
+	}
+
+	public void setProductInfoDTO(ProductInfoDTO productInfoDTO) {
+		this.productInfoDTO = productInfoDTO;
+	}
+
 
 }

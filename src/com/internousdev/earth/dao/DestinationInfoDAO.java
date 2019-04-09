@@ -21,7 +21,7 @@ public class DestinationInfoDAO {
 		String sql = "INSERT INTO destination_info "
 				+	 "(user_id, family_name, first_name, family_name_kana, first_name_kana, "
 				+	 "user_address, email, tel_number, regist_date, update_date)"
-				+ "VALUES(?,?,?,?,?,?,?,?now(),now())";
+				+ "VALUES(?,?,?,?,?,?,?,?,now(),now())";
 
 		try{
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -46,6 +46,7 @@ public class DestinationInfoDAO {
 		}
 		return count;
 	}
+
 
 	public List<DestinationInfoDTO> destinationInfo(String userId) throws SQLException {
 		DBConnector db = new DBConnector();

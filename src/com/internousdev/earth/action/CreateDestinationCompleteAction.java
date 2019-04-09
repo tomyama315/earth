@@ -10,14 +10,16 @@ import com.opensymphony.xwork2.ActionSupport;
 public class CreateDestinationCompleteAction extends ActionSupport implements SessionAware{
 	private Map<String, Object> session;
 	public String execute() {
-		//sessionがタイムアウトのチェック
+//		sessionがタイムアウトのチェック
 		if(session.isEmpty()) {
 			return "sessionTimeout";
 		}
 		String result = ERROR;
 		DestinationInfoDAO destinationInfoDAO = new DestinationInfoDAO();
+
 		int count = destinationInfoDAO.insert(
-				String.valueOf(session.get("userId")),
+//				String型に変換する
+				String.valueOf(session.get("loginuserid")),
 				String.valueOf(session.get("familyName")),
 				String.valueOf(session.get("firstName")),
 				String.valueOf(session.get("familyNameKana")),

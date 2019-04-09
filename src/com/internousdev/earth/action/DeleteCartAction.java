@@ -19,18 +19,25 @@ public class DeleteCartAction extends ActionSupport implements SessionAware {
 
 	public String execute() throws SQLException {
 		int result = 0;
-		System.out.println("ID:"+ProductId);
 		if (ProductId.length != 0) { //チェックされたものがある場合true
 			for (int i : ProductId) {  //配列から取り出して削除
 				CartInfoDAO dao = new CartInfoDAO();
+				if(session.containsKey("loginuserid")){
 				result += dao.delete(session.get("loginuserid").toString(), i); //成功∨失敗の場合判別できない
+			}else{
+				result += dao.delete(session.get("tempuserid").toString(), i);
+			}
 			}
 		}
 		if (result == 0) {
 			message = "カートから削除できませんでした";
 		} else {
 			CartInfoDAO initializedao = new CartInfoDAO();
+			if(session.containsKey("loginuserid")){
 			cartlist = initializedao.getCartContents(session.get("loginuserid").toString());
+			}else{
+				cartlist = initializedao.getCartContents(session.get("tempuserid").toString());
+			}
 			if(cartlist.isEmpty()){
 				message = "カート情報がありません";
 			}

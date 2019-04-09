@@ -16,121 +16,141 @@ import com.internousdev.earth.dto.UserInfoDTO;
 import com.internousdev.earth.util.InputChecker;
 import com.opensymphony.xwork2.ActionSupport;
 
-
-public class LoginAction extends ActionSupport implements SessionAware{
+public class LoginAction extends ActionSupport implements SessionAware {
 	private String userId;
 	private String password;
-	private List<CartInfoDTO> cartInfoDTOList;
+	private List<CartInfoDTO> cartlist;
 	private boolean saveduseridflag;
 	private List<String> userIdErrorMessageList;
 	private List<String> passwordErrorMessageList;
 	private String isNotUserInfoMessage;
 	private Map<String, Object> session;
 
+	public String execute() throws SQLException {
 
-	public String execute()throws SQLException{
-
-		//session内に何も情報が入っていない場合、タイムアウト（接続不可）と扱う。
-		if(session.isEmpty()) {
+		// session内に何も情報が入っていない場合、タイムアウト（接続不可）と扱う。
+		if (session.isEmpty()) {
 			return "sessionTimeout";
 		}
 
-		//strutsにresultを渡して画面推移を行う。ひとまずエラー扱いとする。
+		// strutsにresultを渡して画面推移を行う。ひとまずエラー扱いとする。
 		String result = ERROR;
 
-		if(saveduseridflag){
-			//[ユーザーIDの保存]にチェックを入れたかどうか
+		if (saveduseridflag) {
+			// [ユーザーIDの保存]にチェックを入れたかどうか
 			session.put("saveduseridflag", true);
-			//保存したユーザーIDと入力されたIDの照合。
+			// 保存したユーザーIDと入力されたIDの照合。
 			session.put("loginuserid", userId);
-		}else{
-			//session内に格納している不要な情報を削除する。
+		} else {
+			// session内に格納している不要な情報を削除する。
 			session.remove("saveduseridflag");
 			session.remove("loginuserid");
 		}
-/**
- * DBの会員情報テーブルにユーザーIDとパスワードが
- * 一致するユーザーが存在しているかを確認する。
- */
+		/**
+		 * DBの会員情報テーブルにユーザーIDとパスワードが 一致するユーザーが存在しているかを確認する。
+		 */
 		InputChecker inputChecker = new InputChecker();
-		userIdErrorMessageList = inputChecker.doCheck("ユーザーID", userId, 1, 8, true, false, false, true, false, false, false);
-		passwordErrorMessageList = inputChecker.doCheck("パスワード", password, 1, 16, true, false, false, true, false, false, false);
+		userIdErrorMessageList = inputChecker.doCheck("ユーザーID", userId, 1, 8, true, false, false, true, false, false,
+				false);
+		passwordErrorMessageList = inputChecker.doCheck("パスワード", password, 1, 16, true, false, false, true, false,
+				false, false);
 
-		//エラー処理
-		if(userIdErrorMessageList.size() > 0
-		|| passwordErrorMessageList.size() > 0) {
-			//ログインフラグを折る
+		// エラー処理
+		if (userIdErrorMessageList.size() > 0 || passwordErrorMessageList.size() > 0) {
+			// ログインフラグを折る
 			session.put("logined", 0);
 			return result;
 		}
 
 		UserInfoDAO userInfoDAO = new UserInfoDAO();
 
-		if(userInfoDAO.isExistsUserInfo(userId, password)) {
+		if (userInfoDAO.isExistsUserInfo(userId, password)) {
 
-			if(userInfoDAO.login(userId,password) > 0) {
-				//カートの情報をユーザーに紐付ける。
-				//sessionからカート情報を取得
+			if (userInfoDAO.login(userId, password) > 0) {
+				// カートの情報をユーザーに紐付ける。
+				// sessionからカート情報を取得
 				@SuppressWarnings("unchecked")
-				List<CartInfoDTO> cartInfoDTOListBySession = (List<CartInfoDTO>) session.get("cartinfo");
+				List<CartInfoDTO> cartlistBySession = (List<CartInfoDTO>) session.get("cartinfo");
+				System.out.println("Exist"+cartlistBySession);
 
-				if(cartInfoDTOListBySession != null) {
-					boolean cartresult = changeCartInfo(cartInfoDTOListBySession);
+				if (cartlistBySession != null) {
+					boolean cartresult = changeCartInfo(cartlistBySession);
 
-					if(!cartresult) {
+					if (!cartresult) {
+						System.out.println("cartlistresultERROR");
 						return result;
 					}
 				}
 
-// 				カート画面から推移してきた場合は、カート画面に推移する。
-				if(session.containsKey("cartflg")) {
+				// カート画面から推移してきた場合は、カート画面に推移する。
+				if (session.containsKey("cartflg")) {
 					session.remove("cartflg");
 					result = "cart";
 				} else {
-//					ログインボタンを押下した場合は、自画面に推移。
+					// ログインボタンを押下した場合は、自画面に推移。
 					result = SUCCESS;
 				}
 
-				//ユーザー情報をsessionに登録し、ログイン可能にする。
+				// ユーザー情報をsessionに登録し、ログイン可能にする。
 				UserInfoDTO userInfoDTO = userInfoDAO.getUserInfo(userId, password);
-				session.put("userId", userInfoDTO.getUserId());
+				session.put("loginuserid", userInfoDTO.getUserId());
 				session.put("logined", 1);
 			}
 		} else {
 			isNotUserInfoMessage = "ユーザーIDまたはパスワードが異なります。";
 		}
 		return result;
-		}
+	}
+
 	/**
 	 * DBのカート情報を更新/作成する。
-	 * @param cartInfoDTOListBySession
+	 *
+	 * @param cartlistBySession
 	 */
-	private boolean changeCartInfo(List<CartInfoDTO> cartInfoDTOListBySession)throws SQLException {
-		int count=0;
+	private boolean changeCartInfo(List<CartInfoDTO> cartlistBySession) {
+		int count = 0;
 		boolean result = false;
 		String tempUserId = session.get("tempuserid").toString();
 		CartInfoDAO cartInfoDAO = new CartInfoDAO();
 
-		for(CartInfoDTO dto : cartInfoDTOListBySession) {
-			//sessionに入っている（画面に表示されている）
-			//カート情報と同じ商品のデータが
-			//すでにDBに存在するかをチェックする。
+		for (CartInfoDTO dto : cartlistBySession) {
+			// sessionに入っている（画面に表示されている）
+			// カート情報と同じ商品のデータが
+			// すでにDBに存在するかをチェックする。
 
-			if(cartInfoDAO.isExistsCartInfo(userId, dto.getProductId())) {
-				//存在する場合は、カート情報テーブルの購入個数を更新し、tempUserIdのデータは削除する。
-				count += cartInfoDAO.updateFromLogin(dto.getProductCount(),userId, dto.getProductId());
-				cartInfoDAO.delete(tempUserId,dto.getProductId());
+			if (cartInfoDAO.isExistsCartInfo(userId, dto.getProductId())) {
+				// 存在する場合は、カート情報テーブルの購入個数を更新し、tempUserIdのデータは削除する。
+				try {
+					count += cartInfoDAO.updateFromLogin(dto.getProductCount(), userId, dto.getProductId());
+				} catch (SQLException e) {
+					e.printStackTrace();
+					System.out.println("ERROR at update");
+				}
+				cartInfoDAO.delete(tempUserId, dto.getProductId());
 
 			} else {
-				//存在しない場合は、ユーザーIDをtempUserIdからuserIdに変更する。
-				count += cartInfoDAO.linkToUserId(tempUserId, userId, dto.getProductId());
+				// 存在しない場合は、ユーザーIDをtempUserIdからuserIdに変更する。
+				try {
+					count += cartInfoDAO.linkToUserId(tempUserId, userId, dto.getProductId());
+				} catch (SQLException e) {
+					e.printStackTrace();
+					System.out.println("ERROR at link");
+				}
 			}
 		}
 
-		if(count == cartInfoDTOListBySession.size()) {
-			cartInfoDTOList = cartInfoDAO.getCartContents(userId);
+		if (count == cartlistBySession.size()) {
+			try {
+				cartlist = cartInfoDAO.getCartContents(userId);
+				System.out.println("cf userid:"+userId);
+				session.put("cartinfo", cartlist);
+			} catch (SQLException e) {
+				e.printStackTrace();
+				System.out.println("ERROR at getcartcontents");
+			}
 			result = true;
 		}
+		System.out.println("changecartmethod/"+"result:"+result+" count:"+count+" size:"+cartlistBySession.size());
 		return result;
 	}
 
@@ -182,16 +202,18 @@ public class LoginAction extends ActionSupport implements SessionAware{
 		this.isNotUserInfoMessage = isNotUserInfoMessage;
 	}
 
-	public List<CartInfoDTO> getCartInfoDTOList() {
-		return cartInfoDTOList;
-	}
-
-	public void setCartInfoDTOList(List<CartInfoDTO> cartInfoDTOList) {
-		this.cartInfoDTOList = cartInfoDTOList;
-	}
 
 	public Map<String, Object> getSession() {
 		return session;
+	}
+
+
+	public List<CartInfoDTO> getCartlist() {
+		return cartlist;
+	}
+
+	public void setCartlist(List<CartInfoDTO> cartlist) {
+		this.cartlist = cartlist;
 	}
 
 	@Override

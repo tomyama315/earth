@@ -55,14 +55,19 @@
 	<td><s:property value="email"/></td>
 </tr>
 </table>
+</s:form>
 <div class="submit_btn_box">
-<s:submit value="宛先情報登録" class="submit_btn" onclick="goCreateDestinationCompleteAction()"/>
-</div>
-<div class="submit_btn_box">
-<s:submit value="戻る" class="submit_btn" onclick="goCreateDestinationAction()"/>
-</div>
-<s:hidden id="backFlag" name="backFlag" value=""/>
+<s:form action="CreateDestinationCompleteAction">
+<s:submit value="宛先情報登録" class="submit_btn"/>
 </s:form>
 </div>
+<s:form action="CreateDestinationAction">
+<div class="submit_btn_box">
+<s:submit value="戻る" class="submit_btn"/>
+</div>
+</s:form>
+<s:hidden id="backFlag" name="backFlag" value=""/>
+</div>
 </body>
+
 </html>

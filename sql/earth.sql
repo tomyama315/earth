@@ -44,7 +44,6 @@ drop table if exists cart_info;
 create table cart_info(
 id int primary key not null auto_increment,
 user_id varchar(16) not null,
-temp_user_id varchar(16),
 product_id int not null,
 product_count int not null,
 price int not null,
@@ -119,8 +118,8 @@ insert into product_info values
 ( 5, 5,"中嶋祐介","なかじまゆうすけ","中嶋祐介の商品詳細",5,200,"./images","sample.jpg",now(),"発売会社",0,now(),now());
 
 insert into cart_info values
-(1,1,1,1,3,100,now(),now()),
-(2,1,1,2,2,200,now(),now()),
-(3,1,1,3,5,300,now(),now()),
-(4,2,2,4,4,100,now(),now()),
-(5,1,2,5,12,200,now(),now());
+(1,1,1,3,100,now(),now()),
+(2,1,2,2,200,now(),now()),
+(3,1,3,5,300,now(),now()),
+(4,2,4,4,100,now(),now()),
+(5,1,5,12,200,now(),now());
