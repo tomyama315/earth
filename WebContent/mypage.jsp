@@ -18,27 +18,27 @@
          <s:form action="PurchaseHistoryAction">
            <table>
              <tr>
-               <td><label>姓</label></td>
+               <th><label>姓</label></th>
                <td><s:property value="familyName"/></td>
              </tr>
 
              <tr>
-               <td><label>名</label></td>
+               <th><label>名</label></th>
                <td><s:property value="firstName"/></td>
              </tr>
 
              <tr>
-               <td><label>ふりがな</label></td>
+               <th><label>ふりがな</label></th>
                <td><s:property value="familyNameKana"/><span>　</span><s:property value="firstNamaKana"/></td>
              </tr>
 
              <tr>
-               <td><label>性別</label></td>
+               <th><label>性別</label></th>
                <td><s:if test="sex==1">女性</s:if><s:else>男性</s:else></td>
              </tr>
 
              <tr>
-               <td><label>メールアドレス</label></td>
+               <th><label>メールアドレス</label></th>
                <td><s:property value="email"/></td>
              </tr>
            </table>
