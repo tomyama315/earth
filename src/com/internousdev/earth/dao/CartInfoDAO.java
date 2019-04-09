@@ -68,8 +68,6 @@ public class CartInfoDAO {
 		return result;
 	}
 
-
-
 	// 重複更新
 	public int update(int TotalCount, String UserId, int ProductId) throws SQLException {
 		DBConnector dbConnector = new DBConnector();
@@ -182,13 +180,15 @@ public class CartInfoDAO {
 
 		try {
 			for (CartInfoDTO dto : list) {
-				String sql = "insert into cart_info(user_id,product_id,product_count,price,regist_date) values(?,?,?,?,now())";
-				PreparedStatement ps = connection.prepareStatement(sql);
-				ps.setString(1, UserId);
-				ps.setInt(2, dto.getProductId());
-				ps.setInt(3, dto.getProductCount());
-				ps.setInt(4, dto.getPrice());
-				result = ps.executeUpdate();
+				if (dto.getProductId() == ProductId) {
+					String sql = "insert into cart_info(user_id,product_id,product_count,price,regist_date) values(?,?,?,?,now())";
+					PreparedStatement ps = connection.prepareStatement(sql);
+					ps.setString(1, UserId);
+					ps.setInt(2, dto.getProductId());
+					ps.setInt(3, dto.getProductCount());
+					ps.setInt(4, dto.getPrice());
+					result = ps.executeUpdate();
+				}
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
