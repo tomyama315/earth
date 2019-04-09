@@ -66,7 +66,6 @@
 <s:submit value="戻る" class="submit_btn"/>
 </div>
 </s:form>
-<s:hidden id="backFlag" name="backFlag" value=""/>
 </div>
 </body>
 

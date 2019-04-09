@@ -14,16 +14,6 @@ public class CreateDestinationAction extends ActionSupport implements SessionAwa
 		if(session.isEmpty()) {
 			return "sessionTimeout";
 		}
-		if (backFlag != 1) {
-		//session情報の削除
-			session.remove("familyName");
-			session.remove("firstName");
-			session.remove("familyNameKana");
-			session.remove("firstNameKana");
-			session.remove("email");
-			session.remove("telNumber");
-			session.remove("userAddress");
-		}
 		return SUCCESS;
 	}
 
