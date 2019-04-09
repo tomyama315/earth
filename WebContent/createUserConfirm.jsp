@@ -22,7 +22,6 @@
 
 <div id="contents">
 <h1>ユーザー情報入力確認画面</h1>
-<s:form id="createUserForm">
 <table class="vertical-list-table">
 <tr>
 	<th scope="row"><s:label value="姓"/></th>
@@ -57,14 +56,17 @@
 	<td><s:property value="password"/>
 </tr>
 </table>
+<s:form action="CreateUserCompleteAction">
 <div class="submit_btn_box">
-<s:submit value="登録" class="submit_btn" onclick="goCreateUserCompleteAction()"/>
+<s:submit value="登録" class="submit_btn" />
 </div>
+</s:form>
+<s:form action="CreateUserAction">
 <div class="submit_btn_box">
-<s:submit value="戻る" class="submit_btn" onclick="goCreateUserAction()"/>
+<s:submit value="戻る" class="submit_btn" />
 </div>
-<s:hidden id="backFlag" name="backFlag" value=""/>
 </s:form>
 </div>
+<s:hidden id="backFlag" name="backFlag" value=""/>
 </body>
 </html>
