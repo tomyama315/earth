@@ -74,13 +74,17 @@ public class UserInfoDAO {
 		DBConnector dbConnector = new DBConnector();
 		Connection connection = dbConnector.getConnection();
 		boolean result = false;
+//user_infoのuser_idすべての情報を取得するという意味＝select count(*) as count
 		String sql = "select count(*) as count from user_info where user_id=?";
 		try {
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setString(1, userId);
 			ResultSet resultSet = preparedStatement.executeQuery();
 			while(resultSet.next()) {
+//既存のIDが無かった＝("count") > 0
 				if (resultSet.getInt("count") > 0) {
+
+//新規ユーザー登録成功
 					result = true;
 				}
 			}
