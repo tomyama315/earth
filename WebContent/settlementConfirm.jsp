@@ -9,9 +9,9 @@
 <title>settlementConfirm</title>
 </head>
 <body>
-<div class="header">
-<%@include file="header.jsp"%>
-</div>
+	<div class="header">
+		<%@include file="header.jsp"%>
+	</div>
 
 	<div class="maincontainer"></div>
 	<s:if test="destinationInfoDTO.size() == 0">
@@ -30,17 +30,26 @@
 					<th>電話番号</th>
 					<th>メールアドレス</th>
 				</tr>
-				<tr>
-					<s:iterator value="destinationInfoDTO">
-						<th><input type="radio" name="id" checked="checked" value="<s:property value="id" />"></th>
+				<s:iterator value="destinationInfoDTO">
+					<tr>
+						<s:if test="id == 1">
+							<th><input type="radio" name="id" checked="checked"
+								value="<s:property value="id" />"></th>
+						</s:if>
+						<s:else>
+							<th><input type="radio" name="id"
+								value="<s:property value="id" />"></th>
+						</s:else>
 						<th><s:property value="familyName" /></th>
 						<th><s:property value="firstName" /></th>
-						<th><s:property value="familyNameKana" /><span>　</span><s:property value="firstNameKana" /><br></th>
+						<th><s:property value="familyNameKana" /><span> </span> <s:property
+								value="firstNameKana" /><br></th>
 						<th><s:property value="userAddress" /></th>
 						<th><s:property value="telNumber" /></th>
 						<th><s:property value="email" /></th>
-					</s:iterator>
-				</tr>
+
+					</tr>
+				</s:iterator>
 			</table>
 			<s:submit value="決済" />
 		</s:form>
