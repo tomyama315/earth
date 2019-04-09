@@ -7,7 +7,9 @@ import java.util.Map;
 
 import org.apache.struts2.interceptor.SessionAware;
 
+import com.internousdev.earth.dao.CartInfoDAO;
 import com.internousdev.earth.dao.DestinationInfoDAO;
+import com.internousdev.earth.dto.CartInfoDTO;
 import com.internousdev.earth.dto.DestinationInfoDTO;
 //import com.internousdev.earth.dao.CartInfoDAO;
 //import com.internousdev.earth.dto.CartInfoDTO;
@@ -17,12 +19,16 @@ public class SettlementConfirmAction extends ActionSupport implements SessionAwa
 	// private List<CartInfoDTO> cartInfoDTO = new ArrayList<CartInfoDTO>();
 	private List<DestinationInfoDTO> destinationInfoDTO = new ArrayList<DestinationInfoDTO>();
 	private Map<String, Object> session;
+	private List<CartInfoDTO> cartInfoDTO;
 
 	@Override
 	public String execute() throws SQLException {
 		if (session.isEmpty()) {
 			return "sessionTimeout";
 		}
+		CartInfoDAO dao = new CartInfoDAO();
+		session.put("cartinfo", cartInfoDTO);
+
 
 		String result;
 
@@ -62,13 +68,13 @@ public class SettlementConfirmAction extends ActionSupport implements SessionAwa
 		return result;
 	}
 
-	// public List<CartInfoDTO> getCartInfoDTO() {
-	// return cartInfoDTO;
-	// }
-	//
-	// public void setCartInfoDTO(List<CartInfoDTO> cartInfoDTO) {
-	// this.cartInfoDTO = cartInfoDTO;
-	// }
+	 public List<CartInfoDTO> getCartInfoDTO() {
+	 return cartInfoDTO;
+	 }
+
+	 public void setCartInfoDTO(List<CartInfoDTO> cartInfoDTO) {
+	 this.cartInfoDTO = cartInfoDTO;
+	 }
 
 	public List<DestinationInfoDTO> getDestinationInfoDTO() {
 		return destinationInfoDTO;

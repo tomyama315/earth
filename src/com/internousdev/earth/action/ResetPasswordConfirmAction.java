@@ -30,7 +30,9 @@ public class ResetPasswordConfirmAction extends ActionSupport implements Session
 		if(session.isEmpty()) {
 			return "sessionTimeout";
 		}
-
+		if(session.containsKey("cartflg")){
+		session.remove("cartflg");
+		}
 		String result = ERROR;
 //インスタンス化
 		InputChecker inputChecker = new InputChecker();

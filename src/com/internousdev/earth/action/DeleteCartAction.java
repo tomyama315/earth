@@ -37,6 +37,7 @@ public class DeleteCartAction extends ActionSupport implements SessionAware {
 			cartlist = initializedao.getCartContents(session.get("loginuserid").toString());
 			}else{
 				cartlist = initializedao.getCartContents(session.get("tempuserid").toString());
+				session.put("cartinfo", cartlist);
 			}
 			if(cartlist.isEmpty()){
 				message = "カート情報がありません";

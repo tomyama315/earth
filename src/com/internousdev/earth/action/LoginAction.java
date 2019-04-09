@@ -75,6 +75,9 @@ public class LoginAction extends ActionSupport implements SessionAware {
 				System.out.println("Exist"+cartlistBySession);
 
 				if (cartlistBySession != null) {
+					for(CartInfoDTO dto:cartlistBySession){
+						System.out.println("cartlistBySession"+dto.getProductName());
+					}
 					boolean cartresult = changeCartInfo(cartlistBySession);
 
 					if (!cartresult) {
