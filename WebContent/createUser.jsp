@@ -112,8 +112,8 @@
 </tr>
 <tr>
 	<th scope="row">性別</th>
-	<td><input type="radio" name="sex" list="" value="" placeholder="性別"/>男性
-	    <input type="radio" name="sex" list="" value="" placeholder="性別"/>女性</td>
+	<td><input type="radio" name="sex" list="" value="男性" placeholder="性別"/>男性
+	    <input type="radio" name="sex" list="" value="女性" placeholder="性別"/>女性</td>
 </tr>
 <tr>
 	<th scope="row">メールアドレス</th>
