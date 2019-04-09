@@ -7,7 +7,6 @@ import java.util.Map;
 
 import org.apache.struts2.interceptor.SessionAware;
 
-import com.internousdev.earth.dao.CartInfoDAO;
 import com.internousdev.earth.dao.DestinationInfoDAO;
 import com.internousdev.earth.dto.CartInfoDTO;
 import com.internousdev.earth.dto.DestinationInfoDTO;
@@ -26,10 +25,6 @@ public class SettlementConfirmAction extends ActionSupport implements SessionAwa
 		if (session.isEmpty()) {
 			return "sessionTimeout";
 		}
-		CartInfoDAO dao = new CartInfoDAO();
-		session.put("cartinfo", cartInfoDTO);
-
-
 		String result;
 
 		// 動作確認用

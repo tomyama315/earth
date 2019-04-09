@@ -62,14 +62,15 @@ public class AddCartAction extends ActionSupport implements SessionAware {
 			CartInfoDAO initializedao = new CartInfoDAO();
 			if(session.containsKey("loginuserid")){
 				cartlist = initializedao.getCartContents(session.get("loginuserid").toString()); //表示するカート内容の更新
+				session.put("cartinfo", cartlist);  //To Settlement
 			}else{
 				cartlist = initializedao.getCartContents(session.get("tempuserid").toString()); //表示するカート内容の更新
+				session.put("cartinfo", cartlist);  //To Settlement
 			}
 			for (CartInfoDTO dto : cartlist) {  //合計金額の更新
 				totalprice += dto.getSum();
 			}
 		}
-		session.put("cartinfo", cartlist);  //To Settlement
 		return result == 0 ? ERROR : SUCCESS;  //resultが0ならERROR、それ以外ならSUCCESS
 
 	}
