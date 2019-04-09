@@ -17,30 +17,30 @@
 </s:if>
 <s:else><table class="index" border="1">
 <tr>
-<th>Image</th>
+<th></th>
 <th>名前</th>
 <th>名前かな</th>
+<th>Image</th>
 <th>価格</th>
 <th>発売会社</th>
 <th>発売日</th>
 <th>個数</th>
 <th>小計</th>
-<th>削除</th>
 </tr>
 </table>
 </s:else>
 <s:form action="DeleteCartAction" id="cartForm">
 <s:iterator value="cartlist">
 <table class="carttable" border="1">
-<tr><td><img src='<s:property value="ImagePath"/>/<s:property value="ImageName"/>' width="100px" height="50px" /></td>
+<tr><td><input type="checkbox" name="ProductId" value="<s:property value="ProductId"/>" class="checkbox" onchange="checkValue(this)"/></td>
 <td><s:property value="ProductName"/></td>
 <td><s:property value="ProductNameKana"/></td>
+<td><img src='<s:property value="ImagePath"/>/<s:property value="ImageName"/>' width="100px" height="50px" /></td>
 <td><s:property value="Price"/>円</td>
 <td><s:property value="ReleaseComp"/></td>
 <td><s:property value="ReleaseDate"/></td>
 <td><s:property value="ProductCount"/>個</td>
 <td><s:property value="sum"/></td>
-<td><input type="checkbox" name="ProductId" value="<s:property value="ProductId"/>" class="checkbox" onchange="checkValue(this)"/></td>
 <tr>
 </table>
 </s:iterator>
