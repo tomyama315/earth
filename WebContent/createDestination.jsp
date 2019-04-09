@@ -4,9 +4,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
 <link rel="stylesheet" href="./css/style.css">
-<title>宛先情報入力画面</title>
+<title>宛先情報入力</title>
 </head>
 <body>
 
@@ -41,26 +41,10 @@
 	</div>
 </s:if>
 <!-- 名ふりがなのエラーメッセージ表示 -->
-<s:if test="firetNameKanaErrorMessageList!=null && firstNameKanaErrorMessageList.size()>0">
+<s:if test="firstNameKanaErrorMessageList!=null && firstNameKanaErrorMessageList.size()>0">
 	<div class="error">
 		<div class="error-message">
 			<s:iterator value="firstNameKanaErrorMessageList"><s:property /><br></s:iterator>
-		</div>
-	</div>
-</s:if>
-<!-- メールアドレスのエラーメッセージ表示 -->
-<s:if test="emailErrorMessageList!=null && emailErrorMessageList.size()>0">
-	<div class="error">
-		<div class="error-message">
-			<s:iterator value="firstNameErrorMessageList"><s:property /><br></s:iterator>
-		</div>
-	</div>
-</s:if>
-<!-- 電話番号のエラーメッセージ表示 -->
-<s:if test="telNumberErrorMessageList!=null && telNumberErrorMessageList.size()>0">
-	<div class="error">
-		<div class="error-message">
-			<s:iterator value="telNumberErrorMessageList"><s:property /><br></s:iterator>
 		</div>
 	</div>
 </s:if>
@@ -72,6 +56,23 @@
 		</div>
 	</div>
 </s:if>
+<!-- 電話番号のエラーメッセージ表示 -->
+<s:if test="telNumberErrorMessageList!=null && telNumberErrorMessageList.size()>0">
+	<div class="error">
+		<div class="error-message">
+			<s:iterator value="telNumberErrorMessageList"><s:property /><br></s:iterator>
+		</div>
+	</div>
+</s:if>
+<!-- メールアドレスのエラーメッセージ表示 -->
+<s:if test="emailErrorMessageList!=null && emailErrorMessageList.size()>0">
+	<div class="error">
+		<div class="error-message">
+			<s:iterator value="emailErrorMessageList"><s:property /><br></s:iterator>
+		</div>
+	</div>
+</s:if>
+
 
 <s:form action="CreateDestinationConfirmAction">
 <table class="vertical-list-table">
