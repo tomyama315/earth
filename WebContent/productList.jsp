@@ -13,9 +13,6 @@
 <%@include file="header.jsp" %>
 </div>
 
-<div class="header">
-</div>
-
 <div id="main">
 
 <s:if test="productInfoDTOList==null || productInfoDTOList.isEmpty()">
