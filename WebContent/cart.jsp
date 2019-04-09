@@ -45,11 +45,10 @@
 </table>
 </s:iterator>
 <div>カート内合計:<s:property value="totalprice"/>円</div>
-<div><s:submit value="削除" id="deleteButton" disabled="true"/></div>
+<div><s:if test="!cartlist.isEmpty()"><s:submit value="削除" id="deleteButton" disabled="true"/></s:if></div>
 </s:form>
-
 <s:form action="SettlementConfirmAction" id="cartForm">
-<div><input type="submit" value="決済" class="cartForm"/></div>
+<div><s:if test="!cartlist.isEmpty()"><input type="submit" value="決済" class="cartForm"/></s:if></div>
 </s:form>
 </body>
 </html>

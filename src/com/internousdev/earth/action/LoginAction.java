@@ -25,6 +25,7 @@ public class LoginAction extends ActionSupport implements SessionAware {
 	private List<String> passwordErrorMessageList;
 	private String isNotUserInfoMessage;
 	private Map<String, Object> session;
+	private int totalprice;
 
 	public String execute() throws SQLException {
 
@@ -143,6 +144,9 @@ public class LoginAction extends ActionSupport implements SessionAware {
 			try {
 				cartlist = cartInfoDAO.getCartContents(userId);
 				System.out.println("cf userid:"+userId);
+				for(CartInfoDTO dto:cartlist){ //合計値の更新
+					totalprice+=dto.getSum();
+				}
 				session.put("cartinfo", cartlist);
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -214,6 +218,15 @@ public class LoginAction extends ActionSupport implements SessionAware {
 
 	public void setCartlist(List<CartInfoDTO> cartlist) {
 		this.cartlist = cartlist;
+	}
+
+
+	public int getTotalprice() {
+		return totalprice;
+	}
+
+	public void setTotalprice(int totalprice) {
+		this.totalprice = totalprice;
 	}
 
 	@Override
