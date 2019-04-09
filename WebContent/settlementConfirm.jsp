@@ -31,7 +31,7 @@
 					<th>メールアドレス</th>
 				</tr>
 				<tr>
-					<s:iterator value="destinationInfoDTOList">
+					<s:iterator value="destinationInfoDTO">
 						<th><input type="radio" name="id" checked="checked" value="<s:property value="id" />"></th>
 						<th><s:property value="family_name" /></th>
 						<th><s:property value="first_name" /></th>
