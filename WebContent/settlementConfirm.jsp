@@ -33,12 +33,12 @@
 				<tr>
 					<s:iterator value="destinationInfoDTO">
 						<th><input type="radio" name="id" checked="checked" value="<s:property value="id" />"></th>
-						<th><s:property value="family_name" /></th>
-						<th><s:property value="first_name" /></th>
-						<th><s:property value="family_name_kana + first_name_kana" /></th>
-						<th><s:property value="user_address" /></th>
+						<th><s:property value="familyName" /></th>
+						<th><s:property value="firstName" /></th>
+						<th><s:property value="familyNameKana" /><span>　</span><s:property value="firstNameKana" /><br></th>
+						<th><s:property value="userAddress" /></th>
+						<th><s:property value="telNumber" /></th>
 						<th><s:property value="email" /></th>
-						<th><s:property value="tel_number" /></th>
 					</s:iterator>
 				</tr>
 			</table>
