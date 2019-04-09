@@ -81,7 +81,6 @@ public class CreateUserConfirmAction extends ActionSupport implements SessionAwa
 //もし存在するユーザーIDだったらエラーメッセージを表示する。
 		if(userInfoDAO.isExistsUserInfo(userId)) {
 			isExistsUserErrorMessage="使用できないユーザーIDです。";
-			System.out.println(isExistsUserErrorMessage);
 //それ以外ならサクセス
 		}else {
 			result=SUCCESS;

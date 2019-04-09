@@ -72,16 +72,13 @@ public class LoginAction extends ActionSupport implements SessionAware {
 				// sessionからカート情報を取得
 				@SuppressWarnings("unchecked")
 				List<CartInfoDTO> cartlistBySession = (List<CartInfoDTO>) session.get("cartinfo");
-				System.out.println("Exist"+cartlistBySession);
 
 				if (cartlistBySession != null) {
 					for(CartInfoDTO dto:cartlistBySession){
-						System.out.println("cartlistBySession"+dto.getProductName());
 					}
 					boolean cartresult = changeCartInfo(cartlistBySession);
 
 					if (!cartresult) {
-						System.out.println("cartlistresultERROR");
 						return result;
 					}
 				}
@@ -128,7 +125,6 @@ public class LoginAction extends ActionSupport implements SessionAware {
 					count += cartInfoDAO.updateFromLogin(dto.getProductCount(), userId, dto.getProductId());
 				} catch (SQLException e) {
 					e.printStackTrace();
-					System.out.println("ERROR at update");
 				}
 				cartInfoDAO.delete(tempUserId, dto.getProductId());
 
@@ -138,7 +134,6 @@ public class LoginAction extends ActionSupport implements SessionAware {
 					count += cartInfoDAO.linkToUserId(tempUserId, userId, dto.getProductId());
 				} catch (SQLException e) {
 					e.printStackTrace();
-					System.out.println("ERROR at link");
 				}
 			}
 		}
@@ -146,18 +141,15 @@ public class LoginAction extends ActionSupport implements SessionAware {
 		if (count == cartlistBySession.size()) {
 			try {
 				cartlist = cartInfoDAO.getCartContents(userId);
-				System.out.println("cf userid:"+userId);
 				for(CartInfoDTO dto:cartlist){ //合計値の更新
 					totalprice+=dto.getSum();
 				}
 				session.put("cartinfo", cartlist);
 			} catch (SQLException e) {
 				e.printStackTrace();
-				System.out.println("ERROR at getcartcontents");
 			}
 			result = true;
 		}
-		System.out.println("changecartmethod/"+"result:"+result+" count:"+count+" size:"+cartlistBySession.size());
 		return result;
 	}
 

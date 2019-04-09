@@ -47,14 +47,13 @@ public class SettlementConfirmAction extends ActionSupport implements SessionAwa
 		}
 		// ログインしてたら宛先情報確認
 		else {
-			System.out.println("else");
+
 			DestinationInfoDAO destinationInfoDAO = new DestinationInfoDAO();
 			// getDestinationInfoメソッドを呼び出し、引数にString型のuserIdを渡す
 			// ユーザーIDごとの宛先情報をselectしてdestinationInfoDTOに格納
 			// jsp側でdestinationInfoDTOのnull判定をする(宛先情報判定)
 			// null:宛先情報はありません。
 			// !null:宛先情報を選択して下さい。
-			System.out.println(session.get("loginuserid"));
 			destinationInfoDTO = destinationInfoDAO.destinationInfo(session.get("loginuserid").toString());
 
 			// 動作確認用
@@ -64,7 +63,6 @@ public class SettlementConfirmAction extends ActionSupport implements SessionAwa
 			// System.out.println(destinationInfoDTO.isEmpty());
 			result = SUCCESS;
 		}
-		System.out.println(result);
 		return result;
 	}
 
