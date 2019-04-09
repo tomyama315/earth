@@ -29,7 +29,7 @@ public class PurchaseHistoryInfoDAO {
 				+ " phi.price as price," /* 金額 */
 				+ " phi.product_count as product_count," /* 個数 */
 				+ " phi.price * phi.product_count as subtotal," /* 合計金額 */
-				+ " phi.regist_date as regist_date," /* 登録日 */
+				+ " phi.regist_date as regist_date" /* 登録日 */
 				+ " FROM purchase_history_info as phi" /* 購入履歴情報を phiカラムとして取得 */
 				+ " LEFT JOIN product_info as pi" /* 商品情報を piカラムとして取得。 */
 				+ " ON phi.product_id = pi.product_id" /* phiの商品IDとpiの商品IDを結合 */
