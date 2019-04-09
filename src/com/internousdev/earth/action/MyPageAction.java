@@ -42,7 +42,7 @@ public class MyPageAction extends ActionSupport implements SessionAware{
 		this.familyName=familyName;
 	}
 
-	public String getFirstname(){
+	public String getFirstName(){
 		return firstName;
 	}
 	public void setFirstName(String firstName){
