@@ -141,6 +141,7 @@ public class LoginAction extends ActionSupport implements SessionAware {
 		if (count == cartlistBySession.size()) {
 			try {
 				cartlist = cartInfoDAO.getCartContents(userId);
+				session.put("cartinfo", cartlist);
 			} catch (SQLException e) {
 				e.printStackTrace();
 				System.out.println("ERROR at getcartcontents");
