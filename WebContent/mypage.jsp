@@ -14,7 +14,7 @@
 </div>
      <div id ="main">
        <h1>マイページ画面</h1>
-         <s:if test="familyName!=null && !famiryName.isEmpty()">
+        <s:if test="familyName!=null && !familyName.isEmpty()">
          <s:form action="PurchaseHistoryAction">
            <table>
              <tr>
@@ -45,7 +45,7 @@
 
                <s:submit value="購入履歴"/>
           </s:form>
-          </s:if>
+         </s:if>
 
            <s:else>
            <h3>ユーザー情報がありません。</h3>
